@@ -64,7 +64,7 @@ public class Lesson4_2 {
         continueButton.click();
         pause(2);
         WebElement updatedZipCode = getWebDriver().findElement(By.name("zip_code"));
-        Assert.assertFalse(updatedZipCode.isDisplayed()); //проверка отображения;
+        Assert.assertTrue(updatedZipCode.isDisplayed()); //проверка отображения;
     }
 
     @AfterTest
