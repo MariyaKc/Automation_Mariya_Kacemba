@@ -58,8 +58,6 @@ public class Task_5 {
             add("Отрезки: 50 шт.");
         }};
 
-        System.out.println(actualData);
-
         Assert.assertEquals(actualData, expectedData);
     }
 
@@ -90,8 +88,6 @@ public class Task_5 {
            add("Отрезки: 4 шт.");
        }};
 
-       System.out.println(actualData);
-
        Assert.assertEquals(actualData, expectedData);
    }
 
@@ -114,15 +110,13 @@ public class Task_5 {
         List<String> actualData = getActualData();
 
         List<String> expectedData = new ArrayList<>() {{
-            add("Площадь укладки: 145.04 м2.");
-            add("Кол-во панелей: 31 шт.");
+            add("Площадь укладки: 149.00 м2.");
+            add("Кол-во панелей: 32 шт.");
             add("Кол-во упаковок: 1 шт.");
-            add("Стоимость: 50000000 руб.");
-            add("Остатки: 69 шт.");
-            add("Отрезки: 10 шт.");
+            add("Стоимость: 500000 руб.");
+            add("Остатки: 68 шт.");
+            add("Отрезки: 6 шт.");
         }};
-
-        System.out.println(actualData);
 
         Assert.assertEquals(actualData, expectedData);
     }
@@ -135,9 +129,9 @@ public class Task_5 {
     private void enter(String name, String value) {
         WebElement element = getWebDriver().findElement(By.name(name));
         element.sendKeys(Keys.chord(Keys.COMMAND, "a")); // выделяем значение в поле
-        pause(2);
+        pause(1);
         element.sendKeys(Keys.DELETE); // удаляем
-        pause(2);
+        pause(1);
         element.sendKeys(value); // записываем свое значение
     }
 
