@@ -21,6 +21,11 @@ public class SimpleDriver {
         }
     }
 
+    public static void closeWebDriver(){
+        //webDriver.close(); // закрыть текущее окно
+        webDriver.quit(); //выйти из драйвера и закрыть все окна (напрямую закрывает браузер)
+    }
+
     public static WebDriver getWebDriver() {// получение
         return webDriver;
     }
