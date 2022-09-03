@@ -11,6 +11,7 @@ import org.testng.annotations.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static driver.SimpleDriver.closeWebDriver;
 import static driver.SimpleDriver.getWebDriver;
 import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
@@ -22,13 +23,11 @@ import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
  public class Task_6 {
 
-     @BeforeTest
+     @BeforeMethod
     public void preconditions(){
          SimpleDriver simpleDriver = new SimpleDriver();
          getWebDriver().get("https://www.saucedemo.com/");
-
      }
-
 
      @Test (enabled = false)
     public void test(){
@@ -138,9 +137,8 @@ import static org.openqa.selenium.support.locators.RelativeLocator.with;
         Assert.assertEquals(actualData, expectedData);
     }
 
-    @AfterTest
+    @AfterMethod
     public void postconditions(){
-         getWebDriver().close();
+         closeWebDriver();
      }
-
 }

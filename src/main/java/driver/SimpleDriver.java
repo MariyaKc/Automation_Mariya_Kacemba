@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.time.Duration;
+
 public class SimpleDriver {
     // static - позволяет обратиться к элементу без создания объекта; означает принадлежность к классу
     // WebDriverManager позволяет создать драйвер без локально хранящегося драйвера, библиотека подтягивает необходимый драйвер
@@ -17,13 +19,13 @@ public class SimpleDriver {
         if (webDriver == null) {
             WebDriverManager.chromedriver().setup();//создание chromedriver
             webDriver = new ChromeDriver(getChromeOptions());// сетапим в chromedriver параметры запуска браузера сюда
-
         }
     }
 
     public static void closeWebDriver(){
-        //webDriver.close(); // закрыть текущее окно
+        webDriver.close(); // закрыть текущее окно
         webDriver.quit(); //выйти из драйвера и закрыть все окна (напрямую закрывает браузер)
+        webDriver = null; // обнуляет созданный элемент
     }
 
     public static WebDriver getWebDriver() {// получение
