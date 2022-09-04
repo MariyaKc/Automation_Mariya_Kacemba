@@ -13,12 +13,14 @@ public class SimpleDriver {
 
     private static WebDriver webDriver; //создали переменную webDriver по умолчанию 0
 
-
     //Блок инициализации - код, который будет выполнен при вызове данного класса
     {
         if (webDriver == null) {
             WebDriverManager.chromedriver().setup();//создание chromedriver
             webDriver = new ChromeDriver(getChromeOptions());// сетапим в chromedriver параметры запуска браузера сюда
+            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+            webDriver.manage().timeouts().scriptTimeout(Duration.ofSeconds(20));
+            webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         }
     }
 

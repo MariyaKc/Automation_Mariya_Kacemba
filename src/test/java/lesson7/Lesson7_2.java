@@ -1,6 +1,5 @@
 package lesson7;
 
-import com.fasterxml.jackson.databind.JsonSerializable;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -8,7 +7,7 @@ import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.BasketPage;
 import pageObjects.saucedemo.HeaderPage;
 import pageObjects.saucedemo.LoginPage;
-import pageObjects.saucedemo.ProductsPage;
+import pageObjects.saucedemo.ProductPage;
 
 public class Lesson7_2 extends BaseTest {
 
@@ -25,7 +24,7 @@ public class Lesson7_2 extends BaseTest {
          @Test
     public void productTest() {
          String productName = "Sauce Labs Backpack";
-         ProductsPage productPage = new ProductsPage();
+         ProductPage productPage = new ProductPage();
          productPage.verifyPageTitle();
          String productCost = productPage.getProductCost(productName);
          productPage.addProductToBasket(productName);

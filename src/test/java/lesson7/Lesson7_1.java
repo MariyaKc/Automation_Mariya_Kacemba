@@ -1,11 +1,9 @@
 package lesson7;
 
-import driver.SimpleDriver;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.LoginPage;
-import pageObjects.saucedemo.ProductsPage;
+import pageObjects.saucedemo.ProductPage;
 
 public class Lesson7_1 extends BaseTest {
 
@@ -18,8 +16,8 @@ public class Lesson7_1 extends BaseTest {
         loginPage.enterPassword("secret_sauce");
         loginPage.clickLoginBtn();
         // проверка, что мы попали на страницу с продуктами
-        ProductsPage productsPage = new ProductsPage();
-        productsPage.verifyPageTitle();
+        ProductPage productPage = new ProductPage();
+        productPage.verifyPageTitle();
     }
 
 

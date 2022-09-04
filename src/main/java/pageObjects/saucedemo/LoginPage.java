@@ -1,7 +1,11 @@
 package pageObjects.saucedemo;
 
 import org.openqa.selenium.By;
-import static driver.SimpleDriver.getWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
 
 public class LoginPage extends BasketPage {
     private final By username = By.id("user-name");
@@ -10,7 +14,7 @@ public class LoginPage extends BasketPage {
 
    //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
     public LoginPage open() {
-        getWebDriver().get("https://www.saucedemo.com/");
+        driver.get("https://www.saucedemo.com/");
         return this; //this- каждый из методов возвращает ссылку на данный объект
     }
 
@@ -24,9 +28,13 @@ public class LoginPage extends BasketPage {
         return this;
     }
 
+    public LoginPage verifyThatLoginPageIsClosed(){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn));
+        return this;
+    }
+
     public LoginPage clickLoginBtn() {
         click(loginBtn);
         return this;
     }
-
 }

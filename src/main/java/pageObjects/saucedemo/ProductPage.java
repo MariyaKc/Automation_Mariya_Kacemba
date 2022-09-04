@@ -7,7 +7,7 @@ import pageObjects.baseObjects.BasePage;
 
 import static driver.SimpleDriver.getWebDriver;
    //описываем страницу с товарами
-public class ProductsPage extends BasePage {
+public class ProductPage extends BasePage {
     private final By title = By.xpath("//span[@class='title']"); //значение доступно только в данном классе не может быть изменено в будущем
 
        //метод, который позволяет обратиться к форме товара
@@ -25,7 +25,7 @@ public class ProductsPage extends BasePage {
 
 
        //тк uri уникальна для данной страницы, проверку можно вызвать при создании сущности
-       public ProductsPage() {
+       public ProductPage() {
            verifyPageUri();
        }
 
