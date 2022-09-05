@@ -3,11 +3,13 @@ package pageObjects.saucedemo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import pageObjects.baseObjects.BasePage;
 
 import java.time.Duration;
 
 
-public class LoginPage extends BasketPage {
+public class LoginPage extends BasePage {
     private final By username = By.id("user-name");
     private final By password = By.id("password");
     private final By loginBtn = By.id("login-button");
@@ -35,6 +37,11 @@ public class LoginPage extends BasketPage {
 
     public LoginPage clickLoginBtn() {
         click(loginBtn);
+        return this;
+    }
+
+    public LoginPage verifyErrorMessage(){
+        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")),"Epic sadface: Sorry, this user has been locked out.");
         return this;
     }
 }
