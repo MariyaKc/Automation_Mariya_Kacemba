@@ -6,12 +6,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
+import java.util.HashMap;
 
 public class SimpleDriver {
-    // static - позволяет обратиться к элементу без создания объекта; означает принадлежность к классу
-    // WebDriverManager позволяет создать драйвер без локально хранящегося драйвера, библиотека подтягивает необходимый драйвер
 
-    private static WebDriver webDriver; //создали переменную webDriver по умолчанию 0
+    private static WebDriver webDriver;
 
     //Блок инициализации - код, который будет выполнен при вызове данного класса
     {
@@ -21,6 +20,12 @@ public class SimpleDriver {
             webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
             webDriver.manage().timeouts().scriptTimeout(Duration.ofSeconds(20));
             webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+
+            HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+            chromePrefs.put("profile.default_content_settings.popups", 0);
+            chromePrefs.put("download.default_directory", System.getProperty("user.dir"));
+            ChromeOptions options = new ChromeOptions();
+            options.setExperimentalOption("prefs", chromePrefs);
         }
     }
 
