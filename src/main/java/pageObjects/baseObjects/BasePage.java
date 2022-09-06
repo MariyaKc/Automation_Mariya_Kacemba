@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 import static driver.SimpleDriver.getWebDriver;
 
@@ -62,6 +64,15 @@ public class BasePage {
     protected String getText(WebElement webElement) {
         System.out.println("I'm get text by  :: " + webElement);
         return webElement.getText();
+    }
+
+    protected List<String> getText (List<WebElement> elements) {
+        System.out.println("I'm get text by  :: " + elements);
+        List<String> actualData = new ArrayList<>();
+        elements.forEach(webElement -> {
+            actualData.add(webElement.getText());
+        });
+        return actualData;
     }
 }
 
