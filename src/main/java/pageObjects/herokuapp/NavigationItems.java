@@ -7,7 +7,12 @@ public enum NavigationItems {
     FRAMES("Frames"),
     DYNAMIC_CONTROLS("Dynamic Controls"),
     FILE_UPLOAD("File Upload"),
-    FILE_DOWNLOAD("File Download");
+    FILE_DOWNLOAD("File Download"),
+    ADD_REMOVE_ELEMENTS("Add/Remove Elements"),
+    INPUTS("Inputs"),
+    DROPDOWN_LIST("Dropdown"),
+    DRAG_AND_DROP("Drag and Drop"),
+    MULTIPLE_WINDOWS("Multiple Windows");
 
     private String item;
 
