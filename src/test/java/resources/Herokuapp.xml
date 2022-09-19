@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Herokuapp all tests" thread-count="3" parallel="tests">
+
+    <test name="Herokuapp class work test set 1.1">
+        <classes>
+            <class name="lesson8.lesson8_2"></class>
+        </classes>
+    </test>
+
+    <test name="Herokuapp home work test set 2.1">
+        <parameter name="url" value="https://the-internet.herokuapp.com/"></parameter>
+        <classes>
+            <class name="lesson8.FileDownload_test"></class>
+            <class name="lesson8.FileUpload_test"></class>
+            <class name="lesson8.DynamicControls_test"></class>
+        </classes>
+    </test>
+
+    <test name="Herokuapp additional tasks test set 3.1">
+        <parameter name="url" value="https://the-internet.herokuapp.com/"></parameter>
+        <classes>
+            <class name="lesson8.DataTables_test"></class>
+            <class name="lesson8.AddRemove_test"></class>
+            <class name="lesson8.DragAndDropPage_test"></class>
+            <class name="lesson8.DropdownList_test"></class>
+            <class name="lesson8.Inputs_test"></class>
+            <class name="lesson8.MultipleWindows_test"></class>
+        </classes>
+    </test>
+
+</suite>

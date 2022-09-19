@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static driver.SimpleDriver.getWebDriver;
@@ -94,6 +96,72 @@ public class BasePage {
             actualData.add(webElement.getText());
         });
         return actualData;
+    }
+
+    protected List<String> sortAscending(By element) {
+        List<WebElement> webElementsList = getWebDriver().findElements(element);
+        List<String>sortAscendingList = new ArrayList<>();
+        webElementsList.forEach(elements -> {
+            sortAscendingList.add(elements.getText());
+            Collections.sort(sortAscendingList);
+        });
+        System.out.println("I'm ascending list ::" + sortAscendingList);
+        return sortAscendingList;
+    }
+
+    protected List<String> sortDescending(By element) {
+        List<WebElement> webElementsList = getWebDriver().findElements(element);
+        List<String> sortDescendingList = new ArrayList<>();
+        webElementsList.forEach(elements -> {
+            sortDescendingList.add(elements.getText());
+            Collections.sort(sortDescendingList,Collections.reverseOrder());
+        });
+        System.out.println("I'm descending list ::"+ sortDescendingList);
+        return sortDescendingList;
+    }
+
+    protected List<String> sortAscendingPrice(By element) {
+        List<String> sortAscendingList = getActualList(element);
+        Comparator<String> comparator = new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                // если строки разной длины, то более короткая
+                if (o1.length() != o2.length())
+                    return Integer.compare(o1.length(), o2.length());
+                else
+                    //если длины равны - сравниваем как строки
+                    return o1.compareTo(o2);
+            }
+        };
+        Collections.sort(sortAscendingList, comparator);
+        System.out.println("I'm ascending list ::" + sortAscendingList);
+        return sortAscendingList;
+    }
+
+    protected List<String> sortDescendingPrice(By element) {
+        List<String> sortDescendingList = getActualList(element);
+        Comparator<String> comparator = new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                if (o1.length() != o2.length())
+                    return Integer.compare(o2.length(), o1.length());
+                else
+                    return o2.compareTo(o1);
+            }
+        };
+        Collections.sort(sortDescendingList,comparator);
+        System.out.println("I'm descending list ::"+ sortDescendingList);
+        return sortDescendingList;
+    }
+
+    protected List<String> getActualList(By element) {
+        List<WebElement> webElementsList = getWebDriver().findElements(element);
+        List<String> actualList = new ArrayList<>();
+        webElementsList.forEach(elements -> {
+            actualList.add(elements.getText());
+        });
+        System.out.println("I'm actual List :: " + actualList);
+        return actualList;
     }
 }
 

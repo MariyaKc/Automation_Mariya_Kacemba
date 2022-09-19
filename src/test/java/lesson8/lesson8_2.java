@@ -25,21 +25,21 @@ public class lesson8_2 extends BaseTest {
                 .pageIsLoaded();
     }
 
-    @Test (enabled = false)
+    @Test (priority = 1, description = "scroll test")
     public void scrollPage_Test() {
         new NavigationPage()
                 .navigateTo(INFINITE_SCROLL);
         new InfiniteScrollPage().infiniteScroll(10);
     }
 
-    @Test (enabled = false)
+    @Test (enabled = false) // клик правой кнопкой мыши не работает
     public void contextMenu_Test() {
         new NavigationPage()
                 .navigateTo(CONTEXT_MENU);
         new ContextMenuPage().clickContext().verifyAlert("You selected a context menu");
     }
 
-    @Test
+    @Test (priority = 2, description = "frame test",dependsOnMethods = "scrollPage_Test")
     public void frame_Test() {
         new NavigationPage()
                 .navigateTo(FRAMES);
