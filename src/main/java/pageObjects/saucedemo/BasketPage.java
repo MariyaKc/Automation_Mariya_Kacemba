@@ -17,6 +17,7 @@ public class BasketPage extends BasePage {
     private final By continueShoppingBtn = By.id("continue-shopping");
     private final By title = By.xpath("//span[@class='title']");
     private final By allProductName = By.cssSelector(".inventory_item_name");
+    private final By removeBtn = By.xpath("//button[contains(text(),'Remove')]");
 
     private final List<WebElement> allCostAndNameInCart = getWebDriver().findElements(By.cssSelector(".inventory_item_name, .inventory_item_price"));
     public BasketPage() { verifyPageUri();}
@@ -75,6 +76,11 @@ public class BasketPage extends BasePage {
 
     public BasketPage removeProduct(String productName){
         click(getRemoveInCartBtn(productName));
+        return this;
+    }
+
+    public BasketPage removeAllProduct(){
+        clickAll(removeBtn);
         return this;
     }
 

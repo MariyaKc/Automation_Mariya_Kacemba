@@ -57,6 +57,14 @@ public class BasePage {
         webElement.click();
     }
 
+    protected void clickAll(By locator) {
+        List<WebElement> buttons = driver.findElements(locator);
+        for (WebElement button : buttons) {
+            System.out.println("I'm click by :: " + locator);
+            button.click();
+        }
+    }
+
     protected void selectByText(By locator,String value) {
         Select select = new Select(driver.findElement(locator));
         select.selectByVisibleText(value);

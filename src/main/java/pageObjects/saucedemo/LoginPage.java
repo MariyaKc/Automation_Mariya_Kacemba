@@ -50,4 +50,10 @@ public class LoginPage extends BasePage {
         Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")),"Epic sadface: Sorry, this user has been locked out.");
         return this;
     }
+
+    //для dataProvider
+    public LoginPage verifyErrorMessage(String errorMessage){
+        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")),errorMessage);
+        return this;
+    }
 }
