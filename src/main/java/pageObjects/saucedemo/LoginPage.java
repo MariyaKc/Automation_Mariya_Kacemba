@@ -20,6 +20,12 @@ public class LoginPage extends BasePage {
         return this; //this- каждый из методов возвращает ссылку на данный объект
     }
 
+    //для примера с параметризированными тестами
+    public LoginPage open(String url) {//урл прописываем в xml файле
+        driver.get(url);
+        return this;
+    }
+
     public LoginPage enterUsername(String username) {
         enter(this.username, username);
         return this;

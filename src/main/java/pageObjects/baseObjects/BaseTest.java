@@ -9,13 +9,13 @@ import static driver.SimpleDriver.closeWebDriver;
 public abstract class BaseTest {
 
     @BeforeTest
-    public void preconditions() {
+    public void setUp() {
         System.out.println("I'm started new wed driver!");
         new SimpleDriver(); //instance объекта обращение к конструктору объекта
     }
 
     @AfterTest
-    public void postconditions(){
+    public void stop(){
         System.out.println("I'm close wed driver!");
         closeWebDriver();
     }

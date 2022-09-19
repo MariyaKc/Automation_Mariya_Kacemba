@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Lecture 9" thread-count="4" parallel="tests">
+
+    <test name="Lecture 9 test 1.1">
+        <groups>
+            <run>
+                <include name="test9"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="lesson9.Lesson9_1Test"></class>
+        </classes>
+    </test>
+
+    <test name="Lecture 9 test 1.2">
+        <groups>
+            <run>
+                <include name="test9new"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="lesson9.Lesson9_1Test"></class>
+        </classes>
+    </test>
+
+    <test name="Lecture 9 test set 1.3">
+        <classes>
+            <class name="lesson9.Lesson9_2Test"></class>
+        </classes>
+    </test>
+
+    <test name="Lecture 9 test set 1.4">
+        <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+        <parameter name="user" value="test"></parameter>
+        <classes>
+            <class name="lesson9.Lesson9_3Test"></class>
+        </classes>
+    </test>
+
+</suite>
