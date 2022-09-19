@@ -3,6 +3,7 @@ package pageObjects.baseObjects;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -54,6 +55,18 @@ public class BasePage {
     protected void click(WebElement webElement) {
         System.out.println("I'm click by :: " + webElement);
         webElement.click();
+    }
+
+    protected void selectByText(By locator,String value) {
+        Select select = new Select(driver.findElement(locator));
+        select.selectByVisibleText(value);
+        System.out.println("I'm select by text :: " + value);
+    }
+
+    protected void selectByIndex(By locator,int value) {
+        Select select = new Select(driver.findElement(locator));
+        System.out.println("I'm select by index :: " + value);
+        select.selectByIndex(value);
     }
 
     protected String getText(By locator) {

@@ -13,8 +13,8 @@ public class FileUploadPage extends BasePage {
     private final By nameOfUploadedFile = By.id("uploaded-files");
 
 
-    public FileUploadPage FileUpload(String path){
-        File file= new File(path);
+    public FileUploadPage FileUpload(){
+        File file= new File((System.getProperty("user.dir") + "/files/unnamed.png"));
         driver.findElement(chooseFileBtn).sendKeys(file.getAbsolutePath());
         return this;
     }
