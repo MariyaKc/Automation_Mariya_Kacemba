@@ -1,2 +1,3 @@
-.idea
-target
+/target
+/.idea
+.Automation_Mariya_Kacemba.iml
