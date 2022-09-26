@@ -7,4 +7,10 @@
             <class name="lesson10.Lesson10_Test"></class>
         </classes>
     </test>
+
+    <test name="Lecture 10 saucedemoLogin">
+        <classes>
+            <class name="lesson10.SaucedemoLogin_test"></class>
+        </classes>
+    </test>
 </suite>
