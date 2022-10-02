@@ -30,11 +30,11 @@ public class DropdownList_test extends BaseTest {
     public void test1() {
         new NavigationPage().navigateTo(DROPDOWN_LIST);
         new DropdownListPage()
-                .selectByName("Option 1")
-                .verifyFirstOptionIsSelected()
-                .selectByIndex(2)
-                .verifySecondOptionIsSelected();
-
+                .verifyPageTitle("Dropdown List")
+                .select(1)
+                .verifySelectedValue("Option 1")
+                .select("Option 2")
+                .verifySelectedValue("Option 2");
     }
 }
 

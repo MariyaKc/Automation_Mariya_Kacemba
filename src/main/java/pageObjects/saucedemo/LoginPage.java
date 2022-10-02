@@ -13,13 +13,13 @@ public class LoginPage extends BasePage {
 
     //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
     public LoginPage open() {
-        driver.get("https://www.saucedemo.com/");
+        load("https://www.saucedemo.com/");
         return this; //this- каждый из методов возвращает ссылку на данный объект
     }
 
     //для примера с параметризированными тестами
     public LoginPage open(String url) {//урл прописываем в xml файле
-        driver.get(url);
+        load(url);
         return this;
     }
 
@@ -34,7 +34,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage verifyThatLoginPageIsClosed() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn));
+        Assert.assertTrue(elementNotExist(loginBtn));
         return this;
     }
 

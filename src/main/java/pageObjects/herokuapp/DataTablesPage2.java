@@ -21,13 +21,18 @@ public class DataTablesPage2 extends BasePage {
     }
 
     public DataTablesPage2 clickTableColumn(String columnName) {
-        driver.findElement(headers).findElement(By.xpath(".//span[text() = '" + columnName + "']")).click();
+        driver.findElement(headers).findElement(By.xpath("//span[text() = '" + columnName + "']")).click();
         return this;
     }
 
     //фейл для проверки скриншота (lesson11)
     public DataTablesPage2 checkTableIsDisplayedFallure() {
         Assert.assertTrue(driver.findElement(table).isDisplayed());
+        return this;
+    }
+
+    public DataTablesPage2 checkTableIsDisplayed() {
+        Assert.assertTrue(driver.findElement(table1).isDisplayed());
         return this;
     }
 
