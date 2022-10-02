@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class SimpleDriver {
 
     // для распараллеливания драйвера на несколько потоков, т е для каждого потока создается свой драйвер
-    private static  ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+    private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
     //Блок инициализации - код, который будет выполнен при вызове данного класса
     {
@@ -31,7 +31,7 @@ public class SimpleDriver {
     }
 
     public static void closeWebDriver() {
-        if (webDriver!= null) {
+        if (webDriver != null) {
             webDriver.get().close(); // закрыть текущее окно
             webDriver.get().quit(); //выйти из драйвера и закрыть все окна (напрямую закрывает браузер)
             webDriver.remove();
@@ -39,9 +39,9 @@ public class SimpleDriver {
 
     }
 
-        public static WebDriver getWebDriver() {// получение
-            return webDriver.get();
-        }
+    public static WebDriver getWebDriver() {// получение
+        return webDriver.get();
+    }
 
     private static ChromeOptions getChromeOptions() { //метод, который возвращает опции браузера
         ChromeOptions chromeOptions = new ChromeOptions();

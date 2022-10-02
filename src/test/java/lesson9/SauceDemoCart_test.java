@@ -24,10 +24,12 @@ public class SauceDemoCart_test extends BaseTest {
                 .verifyFilterOptions();
     }
 
-    /** Написать тесты на создание/редактирование и удаление продуктов (invocationCount) */
+    /**
+     * Написать тесты на создание/редактирование и удаление продуктов (invocationCount)
+     */
 
-    @Test(invocationCount = 3, priority = 1,description = "Test add product with invocationCount")
-    public void addProductsTest1(){
+    @Test(invocationCount = 3, priority = 1, description = "Test add product with invocationCount")
+    public void addProductsTest1() {
         new ProductPage()
                 .addAllProductToBasket();
         new HeaderPage()
@@ -39,9 +41,11 @@ public class SauceDemoCart_test extends BaseTest {
                 .clickContinueShopping();
     }
 
-    /** Написать тесты на создание/редактирование и удаление продуктов с использованием DataProvider */
-    @Test(dataProvider = "product data", priority = 2, description = "Test ad product with DataProvider", dependsOnMethods ="addProductsTest1")
-    public void addProductsTest2(String name){
+    /**
+     * Написать тесты на создание/редактирование и удаление продуктов с использованием DataProvider
+     */
+    @Test(dataProvider = "product data", priority = 2, description = "Test ad product with DataProvider", dependsOnMethods = "addProductsTest1")
+    public void addProductsTest2(String name) {
         new ProductPage()
                 .addProductToBasket(name);
         new HeaderPage()
@@ -54,7 +58,7 @@ public class SauceDemoCart_test extends BaseTest {
     }
 
     @DataProvider(name = "product data")
-    public Object[][] getData(){
+    public Object[][] getData() {
         return new Object[][]{
                 {"Sauce Labs Backpack"},
                 {"Sauce Labs Bike Light"},

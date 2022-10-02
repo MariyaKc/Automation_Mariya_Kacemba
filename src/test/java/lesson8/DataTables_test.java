@@ -11,9 +11,12 @@ import testNgUtils.Listener;
 
 import static pageObjects.herokuapp.DataTablesItems.*;
 import static pageObjects.herokuapp.NavigationItems.DATA_TABLES;
-/**  Data Tables
- 1. Реализовать методы по сбору данных из таблиц в формате List или Map
- 2. Реализовать методы по проверке сортировки колонок */
+
+/**
+ * Data Tables
+ * 1. Реализовать методы по сбору данных из таблиц в формате List или Map
+ * 2. Реализовать методы по проверке сортировки колонок
+ */
 @Listeners(Listener.class)
 public class DataTables_test extends BaseTest {
 

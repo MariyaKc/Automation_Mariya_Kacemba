@@ -10,10 +10,12 @@ import pageObjects.herokuapp.DropdownListPage;
 import pageObjects.herokuapp.NavigationPage;
 import testNgUtils.Listener;
 
-import static pageObjects.herokuapp.NavigationItems.*;
+import static pageObjects.herokuapp.NavigationItems.DROPDOWN_LIST;
 
-/** -Выбрать опцию по индексу и проверить что опция выбрана
- -Выбрать опцию по имени и проверить что опция выбрана  */
+/**
+ * -Выбрать опцию по индексу и проверить что опция выбрана
+ * -Выбрать опцию по имени и проверить что опция выбрана
+ */
 @Listeners(Listener.class)
 
 public class DropdownList_test extends BaseTest {
@@ -24,14 +26,14 @@ public class DropdownList_test extends BaseTest {
                 .open(url);
     }
 
-    @Test (priority = 4, description = " drop down list test")
+    @Test(priority = 4, description = " drop down list test")
     public void test1() {
         new NavigationPage().navigateTo(DROPDOWN_LIST);
-       new DropdownListPage()
-               .selectByName("Option 1")
-               .verifyFirstOptionIsSelected()
-               .selectByIndex(2)
-               .verifySecondOptionIsSelected();
+        new DropdownListPage()
+                .selectByName("Option 1")
+                .verifyFirstOptionIsSelected()
+                .selectByIndex(2)
+                .verifySecondOptionIsSelected();
 
     }
 }

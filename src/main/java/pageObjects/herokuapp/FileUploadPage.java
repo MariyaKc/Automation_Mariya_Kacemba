@@ -13,19 +13,19 @@ public class FileUploadPage extends BasePage {
     private final By nameOfUploadedFile = By.id("uploaded-files");
 
 
-    public FileUploadPage FileUpload(){
-        File file= new File((System.getProperty("user.dir") + "/files/unnamed.png"));
+    public FileUploadPage FileUpload() {
+        File file = new File((System.getProperty("user.dir") + "/files/unnamed.png"));
         driver.findElement(chooseFileBtn).sendKeys(file.getAbsolutePath());
         return this;
     }
 
-    public FileUploadPage ClickUpload(){
+    public FileUploadPage ClickUpload() {
         click(uploadBtn);
         return this;
     }
 
-    public FileUploadPage verifyFileName(String fileName){
-        Assert.assertEquals(getText(nameOfUploadedFile),fileName);
+    public FileUploadPage verifyFileName(String fileName) {
+        Assert.assertEquals(getText(nameOfUploadedFile), fileName);
         return this;
     }
 }

@@ -1,11 +1,8 @@
 package lesson9;
 
-import com.sun.net.httpserver.Authenticator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.internal.thread.ThreadTimeoutException;
-import org.testng.util.RetryAnalyzerCount;
 import testNgUtils.Retry;
 
 
@@ -14,24 +11,24 @@ public class Lesson9_2Test {
     int count = 1;
     int timeout = 4;
 
-    @Test(enabled = false, priority = 1)//задизейблен
+    @Test(enabled = false, priority = 1)
     public void test1() {
         System.out.println("Hello i'am test 1");
     }
 
-    @Test(enabled = true, priority = 2) //видимый, необзяательно проставлять тк по умолчанию видим
+    @Test(enabled = true, priority = 2)
     public void test2() {
         System.out.println("Hello i'am test 2");
     }
 
     //тест упадет потому что не выполнится за таймаут из-за паузы
-    //описание теста для отчета
     @Test(timeOut = 1000, description = "Test 3 from lecture 9", priority = 3)
     public void test3() {
         pause(2);
         System.out.println("Hello i'am test 3");
     }
-   //скипнется, потому что зависит от 3 теста, а он падает. Ускоряет процесс падения тестов
+
+    //скипнется, потому что зависит от 3 теста
     @Test(dependsOnMethods = "test3", priority = 4)
     public void test4() {
         System.out.println("Hello i'am test 4");
@@ -56,14 +53,14 @@ public class Lesson9_2Test {
 
     @Test(timeOut = 1000, priority = 6, retryAnalyzer = Retry.class)
     public void test6() {
-        timeout--;//с каждым тестом таймаут будет отниматься, те первый 4, потом 3, потом 2, потом 1 и на нем он пройдет(так пройдет с 5 ой попытки, когла таймаут уйдет в 0, потмоу что бещ паузы он не ждет, пока время отминусуется
-        pause(timeout);//с этой штукой с 4
+        timeout--;
+        pause(timeout);
         System.out.println("Hello i'am test 6 with timeout #" + timeout);
     }
 
-    private void pause(long timeout) { // зыбит поток на определнное время
+    private void pause(long timeout) {
         try {
-            Thread.sleep(timeout * 1000); //чекед исключение.все что связано с этим классом чекед исключение. нужно трай кеч или сигнатура с ошибкой.удобнее трай кеч
+            Thread.sleep(timeout * 1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

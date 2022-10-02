@@ -1,10 +1,9 @@
 package lesson9;
 
+import org.testng.Reporter;
 import org.testng.annotations.*;
 
 public class Lesson9_1Test {
-
-    // посмотреть,что за чем выполняется
 
     @BeforeTest(groups = "test9")
     public void beforeTest() {
@@ -33,7 +32,7 @@ public class Lesson9_1Test {
 
     @Test(groups = "test9")
     public void test1() {
-        System.out.println("Hello i am @Test 1");
+        Reporter.log("Hello i am @Test 1");
     }
 
     @Test(groups = "test9new")

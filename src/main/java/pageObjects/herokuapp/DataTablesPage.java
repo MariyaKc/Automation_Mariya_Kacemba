@@ -5,9 +5,11 @@ import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
 
-/**  Data Tables
- 1. Реализовать методы по сбору данных из таблиц в формате List или Map
- 2. Реализовать методы по проверке сортировки колонок */
+/**
+ * Data Tables
+ * 1. Реализовать методы по сбору данных из таблиц в формате List или Map
+ * 2. Реализовать методы по проверке сортировки колонок
+ */
 public class DataTablesPage extends BasePage {
 
     private final By table1_body = By.xpath("//*[@id='table1']/tbody");
@@ -62,7 +64,7 @@ public class DataTablesPage extends BasePage {
 
 
     private DataTablesPage sortDescendingDue() {
-        Assert.assertEquals(sortDescendingPrice(due),getActualList(due));
+        Assert.assertEquals(sortDescendingPrice(due), getActualList(due));
         return this;
     }
 

@@ -5,7 +5,9 @@ import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.LoginPage;
 import pageObjects.saucedemo.ProductPage;
 
-/** предача параметров через системные переменные */
+/**
+ * предача параметров через системные переменные
+ */
 public class SaucedemoLogin_test extends BaseTest {
     @Test
     public void login() {

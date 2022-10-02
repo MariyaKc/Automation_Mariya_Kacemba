@@ -8,7 +8,9 @@ import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.LoginPage;
 import pageObjects.saucedemo.ProductPage;
 
-/**Написать тесты на Логин страницу - 1 позитивный и 3 негативных (DataProvider)*/
+/**
+ * Написать тесты на Логин страницу - 1 позитивный и 3 негативных (DataProvider)
+ */
 
 public class SauceDemoLogin_test extends BaseTest {
 
@@ -25,11 +27,11 @@ public class SauceDemoLogin_test extends BaseTest {
                 .enterUsername(username)
                 .enterPassword(password)
                 .clickLoginBtn();
-        if(errorMessage.isEmpty()){
+        if (errorMessage.isEmpty()) {
             new ProductPage()
                     .verifyPageTitle()
                     .verifyFilterOptions();
-        }else{
+        } else {
             new LoginPage()
                     .verifyErrorMessage(errorMessage);
         }
@@ -41,7 +43,7 @@ public class SauceDemoLogin_test extends BaseTest {
                 {"standard_user", "secret_sauce", ""},
                 {"standard_user", "12345", "Epic sadface: Username and password do not match any user in this service"},
                 {"", "secret_sauce", "Epic sadface: Username is required"},
-                {"performance_glitch_user","","Epic sadface: Password is required"}
+                {"performance_glitch_user", "", "Epic sadface: Password is required"}
         };
     }
 }

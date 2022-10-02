@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Lecture 10" thread-count="2" parallel="tests">
+<suite name="Lecture 10">
 
     <test name="Lecture 10 dataTable">
         <classes>
@@ -8,9 +8,4 @@
         </classes>
     </test>
 
-    <test name="Lecture 10 saucedemoLogin">
-        <classes>
-            <class name="lesson10.SaucedemoLogin_test"></class>
-        </classes>
-    </test>
 </suite>

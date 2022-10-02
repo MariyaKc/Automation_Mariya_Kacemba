@@ -24,6 +24,6 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.935 sec
 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.796 s - in TestSuite
 
 **Пробросить параметр из mvn command line внутрь теста** (для lesson10.SaucedemoLogin_test)
- **mvn clean test -Dtest=SaucedemoLogin_test -Dusername=standard_user -Dpassword=secret_sauce**
+**mvn clean test -Dtest=SaucedemoLogin_test -Dusername=standard_user -Dpassword=secret_sauce**
 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.689 s - in lesson10.SaucedemoLogin_test
 

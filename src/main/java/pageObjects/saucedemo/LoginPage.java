@@ -2,11 +2,8 @@ package pageObjects.saucedemo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
-
-import java.time.Duration;
 
 
 public class LoginPage extends BasePage {
@@ -14,7 +11,7 @@ public class LoginPage extends BasePage {
     private final By password = By.id("password");
     private final By loginBtn = By.id("login-button");
 
-   //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
+    //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
     public LoginPage open() {
         driver.get("https://www.saucedemo.com/");
         return this; //this- каждый из методов возвращает ссылку на данный объект
@@ -36,7 +33,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage verifyThatLoginPageIsClosed(){
+    public LoginPage verifyThatLoginPageIsClosed() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn));
         return this;
     }
@@ -46,14 +43,14 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage verifyErrorMessage(){
-        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")),"Epic sadface: Sorry, this user has been locked out.");
+    public LoginPage verifyErrorMessage() {
+        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")), "Epic sadface: Sorry, this user has been locked out.");
         return this;
     }
 
     //для dataProvider
-    public LoginPage verifyErrorMessage(String errorMessage){
-        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")),errorMessage);
+    public LoginPage verifyErrorMessage(String errorMessage) {
+        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")), errorMessage);
         return this;
     }
 }

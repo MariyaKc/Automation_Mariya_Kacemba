@@ -17,18 +17,18 @@ import java.util.List;
 import static driver.SimpleDriver.getWebDriver;
 
 public class Lesson5_2 {
-  /**
-    Открыть сайт http://13gp.by/informatsiya/meditsinskie-kalkulyatory/995-raschet-skorosti-klubochkovoj-filtratsii-skf
-    Выбрать пол ‘женский’ из выпадающего списка
-    Ввести ‘Креатинин’ = 75
-    Ввести ‘Возраст’ = 23
-    Ввести ‘Вес’ = 55
-    Ввести ‘Рост’ = 170
-    Нажать на кнопку ‘Рассчитать’
-    Проверить результаты
-    Закрыть окно браузера
-   2 теста  на других входных параметрах
-    */
+    /**
+     * Открыть сайт http://13gp.by/informatsiya/meditsinskie-kalkulyatory/995-raschet-skorosti-klubochkovoj-filtratsii-skf
+     * Выбрать пол ‘женский’ из выпадающего списка
+     * Ввести ‘Креатинин’ = 75
+     * Ввести ‘Возраст’ = 23
+     * Ввести ‘Вес’ = 55
+     * Ввести ‘Рост’ = 170
+     * Нажать на кнопку ‘Рассчитать’
+     * Проверить результаты
+     * Закрыть окно браузера
+     * 2 теста  на других входных параметрах
+     */
 
     @BeforeTest
     public void preconditions() {

@@ -1,6 +1,5 @@
 package lesson8;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
@@ -10,13 +9,15 @@ import pageObjects.herokuapp.AddRemoveElementsPage;
 import pageObjects.herokuapp.NavigationPage;
 import testNgUtils.Listener;
 
-import static pageObjects.herokuapp.NavigationItems.*;
+import static pageObjects.herokuapp.NavigationItems.ADD_REMOVE_ELEMENTS;
 
-/** - Кликнуть один раз Add Element
- - Проверить что кнопка Delete добавилась
- - Кликнуть еще 5 раз Add Element
- - Проверить что отображается верное количество кнопок Delete
- - Очистить окно от кнопок Delete и проверить что эта кнопка не отображается после очистки */
+/**
+ * - Кликнуть один раз Add Element
+ * - Проверить что кнопка Delete добавилась
+ * - Кликнуть еще 5 раз Add Element
+ * - Проверить что отображается верное количество кнопок Delete
+ * - Очистить окно от кнопок Delete и проверить что эта кнопка не отображается после очистки
+ */
 @Listeners(Listener.class)
 
 public class AddRemove_test extends BaseTest {
@@ -27,7 +28,7 @@ public class AddRemove_test extends BaseTest {
                 .open(url);
     }
 
-    @Test (priority = 3, description = "add and remove test", invocationCount = 2)
+    @Test(priority = 3, description = "add and remove test", invocationCount = 2)
     public void test1() {
         new NavigationPage()
                 .navigateTo(ADD_REMOVE_ELEMENTS);

@@ -67,13 +67,13 @@ public class BasePage {
         }
     }
 
-    protected void selectByText(By locator,String value) {
+    protected void selectByText(By locator, String value) {
         Select select = new Select(driver.findElement(locator));
         select.selectByVisibleText(value);
         System.out.println("I'm select by text :: " + value);
     }
 
-    protected void selectByIndex(By locator,int value) {
+    protected void selectByIndex(By locator, int value) {
         Select select = new Select(driver.findElement(locator));
         System.out.println("I'm select by index :: " + value);
         select.selectByIndex(value);
@@ -89,7 +89,7 @@ public class BasePage {
         return webElement.getText();
     }
 
-    protected List<String> getText (List<WebElement> elements) {
+    protected List<String> getText(List<WebElement> elements) {
         System.out.println("I'm get text by  :: " + elements);
         List<String> actualData = new ArrayList<>();
         elements.forEach(webElement -> {
@@ -100,7 +100,7 @@ public class BasePage {
 
     protected List<String> sortAscending(By element) {
         List<WebElement> webElementsList = getWebDriver().findElements(element);
-        List<String>sortAscendingList = new ArrayList<>();
+        List<String> sortAscendingList = new ArrayList<>();
         webElementsList.forEach(elements -> {
             sortAscendingList.add(elements.getText());
             Collections.sort(sortAscendingList);
@@ -114,9 +114,9 @@ public class BasePage {
         List<String> sortDescendingList = new ArrayList<>();
         webElementsList.forEach(elements -> {
             sortDescendingList.add(elements.getText());
-            Collections.sort(sortDescendingList,Collections.reverseOrder());
+            Collections.sort(sortDescendingList, Collections.reverseOrder());
         });
-        System.out.println("I'm descending list ::"+ sortDescendingList);
+        System.out.println("I'm descending list ::" + sortDescendingList);
         return sortDescendingList;
     }
 
@@ -149,8 +149,8 @@ public class BasePage {
                     return o2.compareTo(o1);
             }
         };
-        Collections.sort(sortDescendingList,comparator);
-        System.out.println("I'm descending list ::"+ sortDescendingList);
+        Collections.sort(sortDescendingList, comparator);
+        System.out.println("I'm descending list ::" + sortDescendingList);
         return sortDescendingList;
     }
 

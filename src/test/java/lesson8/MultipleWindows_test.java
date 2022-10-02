@@ -9,11 +9,14 @@ import pageObjects.herokuapp.MultipleWindowsPage;
 import pageObjects.herokuapp.NavigationPage;
 import testNgUtils.Listener;
 
-import static pageObjects.herokuapp.NavigationItems.*;
-/** - Нажать на Click Here
- - Переключиться на новое окно и проверить текст
- - Вернуться на главное окно и закрыть новое окно
- - Проверить что новое окно было закрыто */
+import static pageObjects.herokuapp.NavigationItems.MULTIPLE_WINDOWS;
+
+/**
+ * - Нажать на Click Here
+ * - Переключиться на новое окно и проверить текст
+ * - Вернуться на главное окно и закрыть новое окно
+ * - Проверить что новое окно было закрыто
+ */
 @Listeners(Listener.class)
 
 public class MultipleWindows_test extends BaseTest {
@@ -23,8 +26,9 @@ public class MultipleWindows_test extends BaseTest {
         new NavigationPage()
                 .open(url);
     }
-    @Test (priority = 7, description = "Multiple Windows test")
-    public void test1(){
+
+    @Test(priority = 7, description = "Multiple Windows test")
+    public void test1() {
         new NavigationPage()
                 .navigateTo(MULTIPLE_WINDOWS);
         new MultipleWindowsPage()

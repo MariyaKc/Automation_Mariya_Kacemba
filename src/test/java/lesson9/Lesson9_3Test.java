@@ -5,13 +5,13 @@ import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.LoginPage;
 import testNgUtils.Listener;
 
-@Listeners(Listener.class) // если прописать тут,то будет работать только с указанным классом, если в xml, то там можно для всего сюта
+@Listeners(Listener.class)
 
 public class Lesson9_3Test extends BaseTest {
-    @Parameters("url") //прописываем параметр, котрый пробрасываем
+    @Parameters("url")
 
     @BeforeMethod
-    public void preconditions(@Optional("https://www.google.com/") String url) { //емди значение параметра пустое, то будет использовано опциональное
+    public void preconditions(@Optional("https://www.google.com/") String url) {
         new LoginPage()
                 .open(url);
     }

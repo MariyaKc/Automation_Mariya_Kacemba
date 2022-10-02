@@ -19,17 +19,19 @@ public class Lesson10_Test extends BaseTest {
         new NavigationPage()
                 .open();
     }
+
     @Test
     public void test() {
         new NavigationPage()
                 .navigateTo(DATA_TABLES);
-        new DataTablesPage2().getTableRowsData().forEach(System.out::println);// для записи в столбик
-        Map<String, List<String>> TablesData = new DataTablesPage2().getTableData(); //вызываем всю мапу
-        Map<String, List<String>> mapTableData = new DataTablesPage2().clickTableColumn("Last Name").getTableData(); //сортируем колонку через клик и собираем данные
+        new DataTablesPage2().getTableRowsData().forEach(System.out::println);
+        Map<String, List<String>> TablesData = new DataTablesPage2().getTableData();
+        //Map<String, List<String>> mapTableData = new DataTablesPage2().clickTableColumn("Last Name").getTableData();
+        Map<String, List<String>> mapTableData = new DataTablesPage2().checkTableIsDisplayedFallure().clickTableColumn("Last Name").getTableData(); //фейл(for lesson 11)
         List<List<String>> tableData = new DataTablesPage2().getTableRowsData();
-        Assert.assertTrue(tableData.get(2).contains("$100.00")); //проверяем, что у 3 записи(у джавы 2) есть такая запись
-        List<String> lastNameData = mapTableData.get("Last Name"); // берем данные из мапы для столбца Last Name
-        Assert.assertEquals(lastNameData, lastNameData.stream().sorted().collect(Collectors.toList())); // сравниваем значение из мапы(отсортировано через клик) и этот же список отсортированный через джаву
+        Assert.assertTrue(tableData.get(2).contains("$100.00"));
+        List<String> lastNameData = mapTableData.get("Last Name");
+        Assert.assertEquals(lastNameData, lastNameData.stream().sorted().collect(Collectors.toList()));
     }
 }
 

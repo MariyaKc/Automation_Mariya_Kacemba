@@ -12,9 +12,9 @@
 
     <test name="Cart test set 1.2">
         <parameter name="url" value="https://www.saucedemo.com/"></parameter>
-       <classes>
-           <class name="lesson9.SauceDemoCart_test"></class>
-       </classes>
+        <classes>
+            <class name="lesson9.SauceDemoCart_test"></class>
+        </classes>
     </test>
 
 

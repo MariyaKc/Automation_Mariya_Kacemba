@@ -25,8 +25,8 @@ public class Checkout_test extends BaseTest {
                 .clickBasketBtn();
     }
 
-        @Test
-        public void test1(){
+    @Test
+    public void test1() {
         new BasketPage()
                 .verifyTitle()
                 .clickCheckout();

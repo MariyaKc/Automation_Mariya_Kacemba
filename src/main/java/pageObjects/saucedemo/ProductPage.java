@@ -9,64 +9,65 @@ import java.util.Arrays;
 import java.util.List;
 
 import static driver.SimpleDriver.getWebDriver;
-   //описываем страницу с товарами
+
+//описываем страницу с товарами
 public class ProductPage extends BasePage {
-       private final By title = By.xpath("//span[@class='title']");
-       private final List<WebElement> getFilterOptions = getWebDriver().findElements(By.tagName("option"));
-       private final By addToCartBtn = By.cssSelector("[id|=add-to-cart]");
+    private final By title = By.xpath("//span[@class='title']");
+    private final List<WebElement> getFilterOptions = getWebDriver().findElements(By.tagName("option"));
+    private final By addToCartBtn = By.cssSelector("[id|=add-to-cart]");
 
-       //метод, который позволяет обратиться к форме товара
-       private WebElement getElementProduct(String productName) {
-           return getWebDriver().findElement(By.xpath("//*[@class='inventory_item_name' and text()='" + productName + "']/ancestor::div[@class='inventory_item']"));
-       }
+    //тк uri уникальна для данной страницы, проверку можно вызвать при создании сущности
+    public ProductPage() {
+        verifyPageUri();
+    }
 
-       private WebElement getProductPrice(String productName) {
-           return getElementProduct(productName).findElement(By.className("inventory_item_price"));
-       }
+    //метод, который позволяет обратиться к форме товара
+    private WebElement getElementProduct(String productName) {
+        return getWebDriver().findElement(By.xpath("//*[@class='inventory_item_name' and text()='" + productName + "']/ancestor::div[@class='inventory_item']"));
+    }
 
-       private WebElement getAddToCartBtn(String productName) {
-           return getElementProduct(productName).findElement(By.tagName("button"));
-       }
+    private WebElement getProductPrice(String productName) {
+        return getElementProduct(productName).findElement(By.className("inventory_item_price"));
+    }
 
-       //тк uri уникальна для данной страницы, проверку можно вызвать при создании сущности
-       public ProductPage() {
-           verifyPageUri();
-       }
+    private WebElement getAddToCartBtn(String productName) {
+        return getElementProduct(productName).findElement(By.tagName("button"));
+    }
 
-       //проверка Uri страницы
-       public void verifyPageUri() {
-           Assert.assertTrue(getWebDriver().getCurrentUrl().contains("inventory.html"));
-       }
+    //проверка Uri страницы
+    public void verifyPageUri() {
+        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("inventory.html"));
+    }
 
 
-       public ProductPage verifyPageTitle() {
-           Assert.assertEquals(getWebDriver().findElement(title).getText(), "PRODUCTS");
-           return this;
+    public ProductPage verifyPageTitle() {
+        Assert.assertEquals(getWebDriver().findElement(title).getText(), "PRODUCTS");
+        return this;
 
-       }
+    }
 
-       public ProductPage verifyFilterOptions() {
-           List<String> expectedData = Arrays.asList(
-                   "Name (A to Z)",
-                   "Name (Z to A)",
-                   "Price (low to high)",
-                   "Price (high to low)");
-           Assert.assertEquals(getText(getFilterOptions), expectedData);
-           return this;
-       }
+    public ProductPage verifyFilterOptions() {
+        List<String> expectedData = Arrays.asList(
+                "Name (A to Z)",
+                "Name (Z to A)",
+                "Price (low to high)",
+                "Price (high to low)");
+        Assert.assertEquals(getText(getFilterOptions), expectedData);
+        return this;
+    }
 
-       public ProductPage addProductToBasket(String productName) {
-           click(getAddToCartBtn(productName));
-           return this;
-       }
+    public ProductPage addProductToBasket(String productName) {
+        click(getAddToCartBtn(productName));
+        return this;
+    }
 
-       //для реализации с invocationCount
-       public ProductPage addAllProductToBasket() {
-           clickAll(addToCartBtn);
-           return this;
-       }
+    //для реализации с invocationCount
+    public ProductPage addAllProductToBasket() {
+        clickAll(addToCartBtn);
+        return this;
+    }
 
-       public String getProductCost(String productName) {
-           return getText(getProductPrice(productName));
-       }
-   }
+    public String getProductCost(String productName) {
+        return getText(getProductPrice(productName));
+    }
+}

@@ -17,7 +17,7 @@ public class Lesson6 {
         getWebDriver().get("https://www.saucedemo.com/");
     }
 
-    @Test (enabled = false)
+    @Test(enabled = false)
     public void testForLesson7() {
         String productName = "Sauce Labs Backpack";
         getWebDriver().findElement(By.id("user-name")).sendKeys("standard_user");
@@ -34,7 +34,7 @@ public class Lesson6 {
 
     //методы, который будет возвращать веб элемент(получаем название товара в каталоге, второй метод - в списке)
     private WebElement getElementProduct(String productName) {
-        return getWebDriver().findElement(By.xpath("//*[@class='inventory_item_name' and text()='"+ productName +"']/ancestor::div[@class='inventory_item']")); //через разделение строки передаем название товара
+        return getWebDriver().findElement(By.xpath("//*[@class='inventory_item_name' and text()='" + productName + "']/ancestor::div[@class='inventory_item']")); //через разделение строки передаем название товара
     }
 
     private WebElement getElementCartItem(String productName) {
@@ -42,7 +42,7 @@ public class Lesson6 {
     }
 
 
-    @Test (enabled = false)
+    @Test(enabled = false)
     public void authTest() {
         getWebDriver().findElement(By.id("user-name")).sendKeys("standard_user");
         getWebDriver().findElement(By.name("password")).sendKeys("secret_sauce");
@@ -52,8 +52,8 @@ public class Lesson6 {
         elementExist(By.className("app_logo"));
     }
 
-    @Test (enabled = false)
-    public void aboveTest(){
+    @Test(enabled = false)
+    public void aboveTest() {
         System.out.println(getWebDriver().findElements(with(By.tagName("input")).near(By.name("password"))).size());
         System.out.println(getWebDriver().findElements(with(By.tagName("input")).near(By.name("password"), 60)).size());
         getWebDriver().findElement(with(By.tagName("input")).above(By.name("password"))).sendKeys("above");
@@ -63,7 +63,7 @@ public class Lesson6 {
     }
 
     private void elementExist(By by) {
-        Assert.assertEquals(getWebDriver().findElements(by).size(),1);
+        Assert.assertEquals(getWebDriver().findElements(by).size(), 1);
     }
 }
 
