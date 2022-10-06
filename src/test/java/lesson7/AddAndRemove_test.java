@@ -8,8 +8,10 @@ import pageObjects.saucedemo.HeaderPage;
 import pageObjects.saucedemo.LoginPage;
 import pageObjects.saucedemo.ProductPage;
 
-/** 1 тест на добавление товара в корзину
- * 1 тест на удаление товара из корзины */
+/**
+ * 1 тест на добавление товара в корзину
+ * 1 тест на удаление товара из корзины
+ */
 
 public class AddAndRemove_test extends BaseTest {
 
@@ -23,7 +25,7 @@ public class AddAndRemove_test extends BaseTest {
     }
 
     @Test
-    public void test1(){
+    public void test1() {
         new ProductPage()
                 .verifyPageTitle()
                 .verifyFilterOptions()

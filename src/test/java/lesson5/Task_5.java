@@ -15,13 +15,14 @@ import java.util.List;
 
 import static driver.SimpleDriver.getWebDriver;
 
-/**Написать 3 теста по сценарию ниже с различными данными и вариантами.
-
- Открыть сайт https://masterskayapola.ru/kalkulyator/laminata.html
- Ввести параметры для расчета.
- Нажать на кнопку ‘Рассчитать’.
- Проверить полученные значения.
- Закрыть окно браузера.
+/**
+ * Написать 3 теста по сценарию ниже с различными данными и вариантами.
+ * <p>
+ * Открыть сайт https://masterskayapola.ru/kalkulyator/laminata.html
+ * Ввести параметры для расчета.
+ * Нажать на кнопку ‘Рассчитать’.
+ * Проверить полученные значения.
+ * Закрыть окно браузера.
  */
 public class Task_5 {
     @BeforeTest
@@ -61,38 +62,38 @@ public class Task_5 {
         Assert.assertEquals(actualData, expectedData);
     }
 
-   @Test
-   public void test2 (){
-       enter("calc_roomwidth", "6");
-       enter("calc_roomheight", "3");
+    @Test
+    public void test2() {
+        enter("calc_roomwidth", "6");
+        enter("calc_roomheight", "3");
 
-       enter("calc_lamwidth", "1300");
-       enter("calc_lamheight", "192");
-       enter("calc_inpack", "12");
-       enter("calc_price", "500");
+        enter("calc_lamwidth", "1300");
+        enter("calc_lamheight", "192");
+        enter("calc_inpack", "12");
+        enter("calc_price", "500");
 
-       select("По длине комнаты");
+        select("По длине комнаты");
 
-       enter("calc_bias", "300");
-       enter("calc_walldist", "10");
-       submit();
+        enter("calc_bias", "300");
+        enter("calc_walldist", "10");
+        submit();
 
-       List<String> actualData = getActualData();
+        List<String> actualData = getActualData();
 
-       List<String> expectedData = new ArrayList<>() {{
-           add("Площадь укладки: 17.82 м2.");
-           add("Кол-во панелей: 76 шт.");
-           add("Кол-во упаковок: 7 шт.");
-           add("Стоимость: 10483 руб.");
-           add("Остатки: 8 шт.");
-           add("Отрезки: 4 шт.");
-       }};
+        List<String> expectedData = new ArrayList<>() {{
+            add("Площадь укладки: 17.82 м2.");
+            add("Кол-во панелей: 76 шт.");
+            add("Кол-во упаковок: 7 шт.");
+            add("Стоимость: 10483 руб.");
+            add("Остатки: 8 шт.");
+            add("Отрезки: 4 шт.");
+        }};
 
-       Assert.assertEquals(actualData, expectedData);
-   }
+        Assert.assertEquals(actualData, expectedData);
+    }
 
     @Test
-    public void test3 (){
+    public void test3() {
         enter("calc_roomwidth", "15");
         enter("calc_roomheight", "10");
 
@@ -122,7 +123,7 @@ public class Task_5 {
     }
 
     @AfterTest
-    public void postconditions(){
+    public void postconditions() {
         getWebDriver().close();
     }
 

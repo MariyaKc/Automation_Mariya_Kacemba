@@ -8,7 +8,7 @@ import pageObjects.saucedemo.ProductPage;
 public class Lesson7_1 extends BaseTest {
 
     @Test
-    public void loginTest1(){
+    public void loginTest1() {
         //авторизация
         LoginPage loginPage = new LoginPage(); //объект класса LoginPage
         loginPage.open();

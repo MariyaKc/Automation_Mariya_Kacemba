@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Lesson 11" thread-count="2" parallel="tests">
+
+    <parameter name="username" value="standard_user"/>
+    <parameter name="password" value="secret_sauce"/>
+
+    <test name="Product Test With steps">
+        <classes>
+            <class name="lesson11.Product_Test"/>
+        </classes>
+    </test>
+
+    <test name="Product Test Without steps">
+        <parameter name="steps" value="1"/>
+        <classes>
+            <class name="lesson11.Login_Test"/>
+            <class name="lesson11.Product_Test"/>
+        </classes>
+    </test>
+
+
+</suite>

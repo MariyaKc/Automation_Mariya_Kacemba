@@ -12,7 +12,8 @@ public enum NavigationItems {
     INPUTS("Inputs"),
     DROPDOWN_LIST("Dropdown"),
     DRAG_AND_DROP("Drag and Drop"),
-    MULTIPLE_WINDOWS("Multiple Windows");
+    MULTIPLE_WINDOWS("Multiple Windows"),
+    DATA_TABLES("Sortable Data Tables");
 
     private String item;
 

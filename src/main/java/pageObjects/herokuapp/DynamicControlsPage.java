@@ -13,51 +13,51 @@ public class DynamicControlsPage extends BasePage {
     private final By GoneMessage = By.xpath("//p[contains(text(), 'gone')]");
     private final By EnabledMessage = By.xpath("//p[contains(text(), 'enable')]");
 
-    public DynamicControlsPage verifyCheckBoxIsFind(){
+    public DynamicControlsPage verifyCheckBoxIsFind() {
         Assert.assertTrue(driver.findElement(checkBox).isDisplayed());
         return this;
     }
 
-    public DynamicControlsPage clickRemove(){
+    public DynamicControlsPage clickRemove() {
         click(removeBtn);
         return this;
     }
 
-    public DynamicControlsPage waitGoneMessage(String expectedMessage){
+    public DynamicControlsPage waitGoneMessage(String expectedMessage) {
         wait.until(ExpectedConditions.textToBe(GoneMessage, expectedMessage));
         return this;
     }
 
-    public DynamicControlsPage verifyCheckBoxIsNotExist(){
+    public DynamicControlsPage verifyCheckBoxIsNotExist() {
         //долгое ожидание у обоих методов
         //Assert.assertEquals(driver.findElements(checkBox).size(),0);
         //wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(checkBox)));
 
-       fluentWait(30,1).until(driver->ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(checkBox)));
+        fluentWait(30, 1).until(driver -> ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(checkBox)));
         return this;
     }
 
-    public DynamicControlsPage verifyInputIsFind(){
+    public DynamicControlsPage verifyInputIsFind() {
         Assert.assertTrue(driver.findElement(input).isDisplayed());
         return this;
     }
 
-    public DynamicControlsPage verifyInputIsDisabled(){
+    public DynamicControlsPage verifyInputIsDisabled() {
         wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(input)));
         return this;
     }
 
-    public DynamicControlsPage clickEnable(){
+    public DynamicControlsPage clickEnable() {
         click(enableBtn);
         return this;
     }
 
-    public DynamicControlsPage waitEnabledMessage(String expectedMessage){
-        wait.until(ExpectedConditions.textToBe(EnabledMessage,expectedMessage));
+    public DynamicControlsPage waitEnabledMessage(String expectedMessage) {
+        wait.until(ExpectedConditions.textToBe(EnabledMessage, expectedMessage));
         return this;
     }
 
-    public DynamicControlsPage verifyInputIsEnabled(){
+    public DynamicControlsPage verifyInputIsEnabled() {
         wait.until(ExpectedConditions.elementToBeClickable(input));
         return this;
     }

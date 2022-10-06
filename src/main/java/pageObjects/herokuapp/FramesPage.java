@@ -8,6 +8,7 @@ public class FramesPage extends BasePage {
     private By iframe = By.id("mce_0_ifr");
     private By textArea = By.id("tinymce");
     private By boldTxt = By.cssSelector("[aria-label='Bold']");
+
     private By clickLink(String linkText) {
         return By.linkText(linkText);
     }

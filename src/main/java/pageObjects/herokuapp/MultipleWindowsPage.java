@@ -27,7 +27,7 @@ public class MultipleWindowsPage extends BasePage {
         return this;
     }
 
-    public MultipleWindowsPage returnToHomeTab(){
+    public MultipleWindowsPage returnToHomeTab() {
         driver.close();
         driver.switchTo().window(handleHomeTab);
         return this;
@@ -35,7 +35,7 @@ public class MultipleWindowsPage extends BasePage {
 
 
     public MultipleWindowsPage verifyNewTabIsClosed() {
-        Assert.assertTrue(driver.getWindowHandles().size()==1);
+        Assert.assertTrue(driver.getWindowHandles().size() == 1);
         return this;
     }
 }

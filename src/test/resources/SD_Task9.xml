@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo tasks" thread-count="2" parallel="tests">
+
+
+    <test name="Login test set 1.1">
+        <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+        <classes>
+            <class name="lesson9.SauceDemoLogin_test"></class>
+        </classes>
+    </test>
+
+    <test name="Cart test set 1.2">
+        <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+        <classes>
+            <class name="lesson9.SauceDemoCart_test"></class>
+        </classes>
+    </test>
+
+
+</suite>
