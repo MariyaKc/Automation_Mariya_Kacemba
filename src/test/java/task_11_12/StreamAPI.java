@@ -38,7 +38,6 @@ public class StreamAPI extends BaseTest {
         /** 2-способ */
         List<String> expectedData2 = data.stream().map(number -> number.toString().replace("-", "")).sorted().collect(Collectors.toList());
         System.out.println("Sort ascending by convert to string  :: " + expectedData2);
-
     }
 
     @Test
@@ -50,5 +49,27 @@ public class StreamAPI extends BaseTest {
         List<String> changeEmail = mapTableData.get("Email").stream().map(data -> data.substring(0, data.indexOf("@")) + "@gmail.com").sorted().collect(Collectors.toList());
         System.out.println("Replace and sorted result :: " + changeEmail);
         System.out.println("----------------");
+        /** 2-способ */
+        List<String> gmailData = mapTableData.get("Email").stream().map(data -> data.split("@")[0] + "@gmail.com").sorted().collect(Collectors.toList());
+        gmailData.forEach(System.out::println); // запись в столбик
+        System.out.println("----------------");
+        //.split - расщепляет строку на две. @ - параметр по которому делим получаем массив [jdoe, gmail.com].Забираем первую часть 0-элемент массива и добавляем  + "@gmail.com"
+
+        /** 3-способ */
+        List<String> gmail = mapTableData.get("Email").stream().map(data-> {
+            String newData =" ";
+            if(data.contains("yaho")) {
+                newData =data.replace("yahoo","gmail");
+            } else if(data.contains("hotmail")){
+                newData = data.replace("hotmail","gmail");
+            } else if(data.contains("earthlink")){
+                newData = data.replace("earthlink.net","gmail.com");
+            }else{
+                newData=data;
+            }
+            return newData;
+        }).sorted().collect(Collectors.toList());
+        System.out.println("Replace and sorted result with else if :: " + gmail);
     }
+
 }
