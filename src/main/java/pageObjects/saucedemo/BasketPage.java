@@ -19,10 +19,9 @@ public class BasketPage extends BasePage {
     private final By allProductName = By.cssSelector(".inventory_item_name");
     private final By removeBtn = By.xpath("//button[contains(text(),'Remove')]");
 
-    private final List<WebElement> allCostAndNameInCart = getWebDriver().findElements(By.cssSelector(".inventory_item_name, .inventory_item_price"));
-
     public BasketPage() {
         verifyPageUri();
+        verifyBasketPage();
     }
 
     private WebElement getElementCartItem(String productName) { //3 - формируется элемент на уровне productName
@@ -45,18 +44,6 @@ public class BasketPage extends BasePage {
         return getText(getElementProductCost(productName)); //6- целый элемент передается в метод getText
     }
 
-    public BasketPage verifyProductCostAndName() {
-        List<String> expectedData = Arrays.asList(
-                "Sauce Labs Backpack",
-                "$29.99",
-                "Sauce Labs Fleece Jacket",
-                "$49.99",
-                "Sauce Labs Onesie",
-                "$7.99");
-        Assert.assertEquals(getText(allCostAndNameInCart), expectedData);
-        return this;
-    }
-
     public String enterCartQuantity(String productName) {
         return getText(getElementCartQuantity(productName));
     }
@@ -66,6 +53,10 @@ public class BasketPage extends BasePage {
         return this;
     }
 
+    public BasketPage verifyBasketPage() {
+        Assert.assertTrue(waitVisibilityOfElements(continueShoppingBtn, checkoutBtn));
+        return this;
+    }
 
     public BasketPage verifyTitle() {
         Assert.assertEquals(getText(title), "YOUR CART");
@@ -107,6 +98,4 @@ public class BasketPage extends BasePage {
         fluentWait(20, 1).until(driver -> ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(allProductName)));
         return this;
     }
-
-
 }

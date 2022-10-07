@@ -30,12 +30,12 @@ public class Checkout_test extends BaseTest {
         new BasketPage()
                 .verifyTitle()
                 .clickCheckout();
-        new CheckoutPage()
+        new CheckoutOnePage()
                 .getFirstName("Firstname")
                 .getLastName("LastName")
                 .getZipCode("12345")
-                .clickContinueBtn()
-                .clickFinishBtn()
-                .verifyFinalPageTitle();
+                .clickContinueBtn();
+        new CheckoutTwoPage().clickFinishBtn();
+        new CheckoutCompletePage().verifyFinalPageTitle();
     }
 }

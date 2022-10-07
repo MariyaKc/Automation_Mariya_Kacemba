@@ -57,16 +57,20 @@ public class BasePage {
         return driver.getCurrentUrl();
     }
 
-
     protected void enter(WebElement webElement, String enterData) {
         System.out.println("I'm enter :: " + enterData + ", by web element :: " + webElement);
         webElement.clear();
         webElement.sendKeys(enterData);
     }
 
-    protected void enter(By locator, CharSequence... enterData) {
+    protected void enter(By locator, CharSequence... enterData) { //по идее должно работать с разными ОС
         System.out.println("I'm enter :: " + enterData + ", by locator :: " + locator);
-        findElement(locator).sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
+        String os = System.getProperty("os.name");
+        if (os.contains("Mac")) {
+            findElement(locator).sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
+        } else {
+            findElement(locator).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+        }
         findElement(locator).sendKeys(enterData);
     }
 
@@ -81,11 +85,13 @@ public class BasePage {
         new UIElement(driver, wait, webElement).click();
     }
 
-    protected void clickAll(By locator) {
-        List<WebElement> buttons = findElements(locator);
-        for (WebElement button : buttons) {
+    protected void clickAll(By... locators) {
+        for (By locator : locators) {
             System.out.println("I'm click by :: " + locator);
-            button.click();
+            List<WebElement> buttons = driver.findElements(locator);
+            for (WebElement button : buttons) {
+                button.click();
+            }
         }
     }
 
@@ -111,21 +117,49 @@ public class BasePage {
         return webElement.getText();
     }
 
-    protected List<String> getText(List<WebElement> elements) {
-        System.out.println("I'm get text by  :: " + elements);
-        List<String> actualData = new ArrayList<>();
-        elements.forEach(webElement -> {
-            actualData.add(webElement.getText());
-        });
-        return actualData;
-    }
-
     protected List<String> getTexts(By locator) {
         System.out.println("I'm get texts by  :: " + locator);
         return findElements(locator).stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
         //через stream() представили коллекцию веб элементов в качестве потока данных
         //через map перебираем каждый элемент и переделываем его с типа webElement -> webElement.getText() в строку
         //map представляет собой стрим,через collect(Collectors.toList() переводим в лист
+    }
+
+    protected List<String> getSortAscendingByTexts(By locator) {
+        System.out.println("I'm sorting texts by  :: " + locator);
+        List<String> sortAscendingList = getTexts(locator);
+        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+        return sortAscendingList;
+    }
+
+    protected List<String> getSortDescendingByTexts(By locator) {
+        List<String> sortDescendingList = getTexts(locator);
+        Collections.sort(sortDescendingList,Collections.reverseOrder());
+        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        return sortDescendingList;
+    }
+
+    protected List<Double> getValues(By locator) {
+        List<Double> getData = findElements(locator).stream()
+                .map(webElement -> webElement.getText())
+                .map(webElement -> webElement.replace("$", ""))
+                .map(Double::parseDouble).collect(Collectors.toList());
+        System.out.println("I'm get values by  :: " + getData);
+        return getData;
+    }
+
+    protected List<Double> getSortAscendingByValues(By locator) {
+        List<Double> sortAscendingList = getValues(locator);
+        Collections.sort(sortAscendingList);
+        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+        return sortAscendingList;
+    }
+
+    protected List<Double> getSortDescendingByValues(By locator) {
+        List<Double> sortDescendingList = getValues(locator);
+        Collections.sort(sortDescendingList, Collections.reverseOrder());
+        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        return sortDescendingList;
     }
 
     protected String getElementAttribute(By by, String attribute) { //получение атрибута элемента
@@ -156,6 +190,14 @@ public class BasePage {
     protected void waitVisibilityOfElement(By locator) {
         System.out.println("wait visibility of element => " + locator);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    protected boolean waitVisibilityOfElements(By... locators) {
+        for (By locator : locators) {
+            System.out.println("wait visibility of element => " + locator);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        }
+        return true;
     }
 
     protected void verifyElementTextToBe(By locator, String text) {

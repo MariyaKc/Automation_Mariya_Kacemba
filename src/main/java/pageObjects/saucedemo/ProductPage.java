@@ -13,12 +13,23 @@ import static driver.SimpleDriver.getWebDriver;
 //описываем страницу с товарами
 public class ProductPage extends BasePage {
     private final By title = By.xpath("//span[@class='title']");
-    private final List<WebElement> getFilterOptions = getWebDriver().findElements(By.tagName("option"));
+    private final By getFilterOptions = By.tagName("option");
     private final By addToCartBtn = By.cssSelector("[id|=add-to-cart]");
+    private final By logo = By.cssSelector(".app_logo");
+    private final By filterBtn = By.className("product_sort_container");
+    private final By allProducts = By.className("inventory_item_name");
+    private final By allProductPrices = By.className("inventory_item_price");
+    private final By productSort = By.className("product_sort_container");
 
     //тк uri уникальна для данной страницы, проверку можно вызвать при создании сущности
     public ProductPage() {
         verifyPageUri();
+        verifyProductPage();
+    }
+
+    public ProductPage verifyProductPage() {
+        Assert.assertTrue(waitVisibilityOfElements(addToCartBtn, logo));
+        return this;
     }
 
     //метод, который позволяет обратиться к форме товара
@@ -41,9 +52,8 @@ public class ProductPage extends BasePage {
 
 
     public ProductPage verifyPageTitle() {
-        Assert.assertEquals(getWebDriver().findElement(title).getText(), "PRODUCTS");
+        Assert.assertEquals(getText(title), "PRODUCTS");
         return this;
-
     }
 
     public ProductPage verifyFilterOptions() {
@@ -52,7 +62,7 @@ public class ProductPage extends BasePage {
                 "Name (Z to A)",
                 "Price (low to high)",
                 "Price (high to low)");
-        Assert.assertEquals(getText(getFilterOptions), expectedData);
+        Assert.assertEquals(getTexts(getFilterOptions), expectedData);
         return this;
     }
 
@@ -66,8 +76,37 @@ public class ProductPage extends BasePage {
         clickAll(addToCartBtn);
         return this;
     }
+    public ProductPage clickFilterBtn() {
+        click(filterBtn);
+        return this;
+    }
+
+    public ProductPage selectByName(String value) {
+        select(productSort, value);
+        return this;
+    }
 
     public String getProductCost(String productName) {
         return getText(getProductPrice(productName));
+    }
+
+    public ProductPage VerifySortNameAtoZ() {
+        Assert.assertEquals(getTexts(allProducts),getSortAscendingByTexts(allProducts));
+        return this;
+    }
+
+    public ProductPage VerifySortNameZtoA() {
+        Assert.assertEquals(getTexts(allProducts),getSortDescendingByTexts(allProducts));
+        return this;
+    }
+
+    public ProductPage VerifySortPriceLowToHigh() {
+        Assert.assertEquals(getValues(allProductPrices),getSortAscendingByValues(allProductPrices));
+        return this;
+    }
+
+    public ProductPage VerifySortPriceHighToLow() {
+        Assert.assertEquals(getValues(allProductPrices),getSortDescendingByValues(allProductPrices));
+        return this;
     }
 }

@@ -23,6 +23,11 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    public LoginPage verifyLoginPage() {
+        Assert.assertTrue(waitVisibilityOfElements(username, password, loginBtn));
+        return this;
+    }
+
     public LoginPage enterUsername(String username) {
         enter(this.username, username);
         return this;
