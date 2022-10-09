@@ -95,6 +95,17 @@ public class BasePage {
         }
     }
 
+    protected void clickAll(WebElement... elements) {
+        for (WebElement element : elements) {
+            System.out.println("I'm click by :: " + element);
+            List<WebElement> buttons = new ArrayList<>();
+            buttons.add(element);
+            for (WebElement button : buttons) {
+                button.click();
+            }
+        }
+    }
+
     protected void select(By locator, Integer index) {
         System.out.println("Select by locator => " + locator + " with index => " + index);
         Select select = new Select(findElement(locator));
@@ -104,6 +115,17 @@ public class BasePage {
     protected void select(By locator, String value) {
         System.out.println("Select by locator => " + locator + " with value => " + value);
         Select select = new Select(findElement(locator));
+        select.selectByVisibleText(value);
+    }
+    protected void select(WebElement element, Integer index) {
+        System.out.println("Select by locator => " + element + " with index => " + index);
+        Select select = new Select(element);
+        select.selectByIndex(index);
+    }
+
+    protected void select(WebElement element, String value) {
+        System.out.println("Select by locator => " + element + " with value => " + value);
+        Select select = new Select(element);
         select.selectByVisibleText(value);
     }
 
@@ -124,6 +146,10 @@ public class BasePage {
         //через map перебираем каждый элемент и переделываем его с типа webElement -> webElement.getText() в строку
         //map представляет собой стрим,через collect(Collectors.toList() переводим в лист
     }
+    protected List<String> getTexts(List<WebElement> webElements) {
+        System.out.println("I'm get texts by  :: " + webElements);
+        return webElements.stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
+    }
 
     protected List<String> getSortAscendingByTexts(By locator) {
         System.out.println("I'm sorting texts by  :: " + locator);
@@ -132,8 +158,23 @@ public class BasePage {
         return sortAscendingList;
     }
 
+    protected List<String> getSortAscendingByTexts(List<WebElement> webElements) {
+        System.out.println("I'm sorting texts by  :: " + webElements);
+        List<String> sortAscendingList = getTexts(webElements);
+        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+        return sortAscendingList;
+    }
+
+
     protected List<String> getSortDescendingByTexts(By locator) {
         List<String> sortDescendingList = getTexts(locator);
+        Collections.sort(sortDescendingList,Collections.reverseOrder());
+        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        return sortDescendingList;
+    }
+
+    protected List<String> getSortDescendingByTexts(List<WebElement> webElements) {
+        List<String> sortDescendingList = getTexts(webElements);
         Collections.sort(sortDescendingList,Collections.reverseOrder());
         System.out.println("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
@@ -148,6 +189,15 @@ public class BasePage {
         return getData;
     }
 
+    protected List<Double> getValues(List<WebElement> webElements) {
+        List<Double> getData = webElements.stream()
+                .map(webElement -> webElement.getText())
+                .map(webElement -> webElement.replace("$", ""))
+                .map(Double::parseDouble).collect(Collectors.toList());
+        System.out.println("I'm get values by  :: " + getData);
+        return getData;
+    }
+
     protected List<Double> getSortAscendingByValues(By locator) {
         List<Double> sortAscendingList = getValues(locator);
         Collections.sort(sortAscendingList);
@@ -155,8 +205,22 @@ public class BasePage {
         return sortAscendingList;
     }
 
+    protected List<Double> getSortAscendingByValues(List<WebElement> webElements) {
+        List<Double> sortAscendingList = getValues(webElements);
+        Collections.sort(sortAscendingList);
+        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+        return sortAscendingList;
+    }
+
     protected List<Double> getSortDescendingByValues(By locator) {
         List<Double> sortDescendingList = getValues(locator);
+        Collections.sort(sortDescendingList, Collections.reverseOrder());
+        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        return sortDescendingList;
+    }
+
+    protected List<Double> getSortDescendingByValues(List<WebElement> webElements) {
+        List<Double> sortDescendingList = getValues(webElements);
         Collections.sort(sortDescendingList, Collections.reverseOrder());
         System.out.println("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
@@ -187,6 +251,7 @@ public class BasePage {
         return false;
     }
 
+
     protected void waitVisibilityOfElement(By locator) {
         System.out.println("wait visibility of element => " + locator);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -196,6 +261,14 @@ public class BasePage {
         for (By locator : locators) {
             System.out.println("wait visibility of element => " + locator);
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        }
+        return true;
+    }
+
+    protected boolean waitVisibilityOfElements(WebElement... webElements) {
+        for (WebElement webElement : webElements) {
+            System.out.println("wait visibility of element => " + webElement);
+            wait.until(ExpectedConditions.visibilityOf(webElement));
         }
         return true;
     }
@@ -218,6 +291,7 @@ public class BasePage {
         }
     }
 
+    /** Для варианта реализации herokuapp.DataTablesPage-> */
     protected List<String> sortAscending(By element) {
         List<WebElement> webElementsList = getWebDriver().findElements(element);
         List<String> sortAscendingList = new ArrayList<>();

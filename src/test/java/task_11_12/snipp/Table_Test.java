@@ -10,6 +10,11 @@ import java.time.YearMonth;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/** 1. На основе https://snipp.ru/html-css/table-style создать свой html документ с таблицей
+ 2. Открыть драйвером созданный html документ
+ 3. Написать методы, которые позволяют переформировать таблицу web в коллекции java
+ 4. Написать пару тестов по валидации данных из таблицы */
+
 public class Table_Test extends BaseTest {
 
     @BeforeMethod
@@ -56,6 +61,4 @@ public class Table_Test extends BaseTest {
         System.out.println(expectedData);
         Assert.assertEquals(actualData,expectedData);
     }
-
-
 }
