@@ -1,18 +1,37 @@
-package pageObjects.saucedemo;
+package pageFactory.saucedemo;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
 import static driver.SimpleDriver.getWebDriver;
 
 public class HeaderPage extends BasePage {
-    private final By basketBtn = By.className("shopping_cart_link");
-    private final By navigationBtn = By.id("react-burger-menu-btn");
-    private final By allItemsBtn = By.id("inventory_sidebar_link");
-    private final By aboutBtn = By.id("about_sidebar_link");
-    private final By logoutBtn = By.id("logout_sidebar_link");
-    private final By resetAppBtn = By.id("reset_sidebar_link");
+
+    @FindBy (className = "shopping_cart_link")
+    WebElement basketBtn;
+
+    @FindBy (id = "react-burger-menu-btn")
+    WebElement navigationBtn;
+
+    @FindBy (id = "inventory_sidebar_link")
+    WebElement allItemsBtn;
+
+    @FindBy (id = "about_sidebar_link")
+    WebElement aboutBtn;
+
+    @FindBy (id = "logout_sidebar_link")
+    WebElement logoutBtn;
+
+    @FindBy (id = "reset_sidebar_link")
+    WebElement resetAppBtn;
+
+    public HeaderPage(){
+        PageFactory.initElements(driver, this);
+    }
 
     public HeaderPage clickBasketBtn() {
         click(basketBtn);
@@ -54,4 +73,3 @@ public class HeaderPage extends BasePage {
         return this;
     }
 }
-

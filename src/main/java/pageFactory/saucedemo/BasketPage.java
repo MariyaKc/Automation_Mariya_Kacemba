@@ -1,35 +1,49 @@
-package pageObjects.saucedemo;
+package pageFactory.saucedemo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static driver.SimpleDriver.getWebDriver;
 
 public class BasketPage extends BasePage {
 
-    private final By checkoutBtn = By.id("checkout");
-    private final By continueShoppingBtn = By.id("continue-shopping");
-    private final By title = By.xpath("//span[@class='title']");
-    private final By allProductName = By.cssSelector(".inventory_item_name");
-    private final By removeBtn = By.xpath("//button[contains(text(),'Remove')]");
+    @FindBy (id ="checkout")
+    WebElement checkoutBtn;
+
+    @FindBy (id ="continue-shopping")
+    WebElement continueShoppingBtn;
+
+    @FindBy (xpath ="//span[@class='title']")
+    WebElement title;
+
+    @FindBys({
+            @FindBy(css = ".inventory_item_name")
+    })
+    List<WebElement> allProductName;
+
+    @FindBy (xpath ="//button[contains(text(),'Remove')]")
+    WebElement removeBtn;
 
     public BasketPage() {
-        verifyPageUri();
+        PageFactory.initElements(driver, this);
+        verifyPageUri();  /** Loadable Page pattern */
         verifyBasketPage();
     }
 
-    private WebElement getElementCartItem(String productName) { //3 - формируется элемент на уровне productName
+    private WebElement getElementCartItem(String productName) {
         return getWebDriver().findElement(By.xpath("//*[@class = 'inventory_item_name' and text() = '" + productName + "']//ancestor::div[@class='cart_item']"));
     }
 
-    private WebElement getElementProductCost(String productName) { // 2 - передается productName, затем обращение к родительскому getElementCartItem
-        return getElementCartItem(productName).findElement(By.className("inventory_item_price")); //4-от родительского формируется элемент inventory_item_price
+    private WebElement getElementProductCost(String productName) {
+        return getElementCartItem(productName).findElement(By.className("inventory_item_price"));
     }
 
     private WebElement getElementCartQuantity(String productName) {
@@ -40,8 +54,8 @@ public class BasketPage extends BasePage {
         return getElementCartItem(productName).findElement(By.cssSelector(".btn.btn_secondary.btn_small.cart_button"));
     }
 
-    public String getProductCost(String productName) {  //1- приходит productName
-        return getText(getElementProductCost(productName)); //6- целый элемент передается в метод getText
+    public String getProductCost(String productName) {
+        return getText(getElementProductCost(productName));
     }
 
     public String enterCartQuantity(String productName) {
@@ -73,7 +87,7 @@ public class BasketPage extends BasePage {
         return this;
     }
 
-    public BasketPage removeAllProduct() {
+    public BasketPage removeAllProduct() { /** Chain of Invocations pattern */
         clickAll(removeBtn);
         return this;
     }
@@ -88,14 +102,8 @@ public class BasketPage extends BasePage {
         return this;
     }
 
-    public BasketPage verifyAllProductInCart() {
-        Assert.assertEquals(getWebDriver().findElements(By.className("inventory_item_name")).size(), 3);
-        return this;
-    }
-
-
     public BasketPage verifyProductIsRemove() {
-        fluentWait(20, 1).until(driver -> ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(allProductName)));
+        fluentWait(20, 1).until(driver -> ExpectedConditions.not(ExpectedConditions.visibilityOfAllElements(allProductName)));
         return this;
     }
 }

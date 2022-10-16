@@ -1,7 +1,10 @@
-package pageObjects.saucedemo;
+package pageFactory.saucedemo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
@@ -10,29 +13,53 @@ import java.util.List;
 
 import static driver.SimpleDriver.getWebDriver;
 
-//описываем страницу с товарами
 public class ProductPage extends BasePage {
-    private final By title = By.xpath("//span[@class='title']");
-    private final By getFilterOptions = By.tagName("option");
-    private final By addToCartBtn = By.cssSelector("[id|=add-to-cart]");
-    private final By logo = By.cssSelector(".app_logo");
-    private final By filterBtn = By.className("product_sort_container");
-    private final By allProducts = By.className("inventory_item_name");
-    private final By allProductPrices = By.className("inventory_item_price");
-    private final By productSort = By.className("product_sort_container");
 
-    //тк uri уникальна для данной страницы, проверку можно вызвать при создании сущности
+    @FindBy(xpath = "//span[@class='title']")
+    WebElement title;
+
+    @FindBys({
+            @FindBy(tagName = "option")
+    })
+    List <WebElement> getFilterOptions;
+
+    @FindBy(css = "[id|=add-to-cart]")
+    WebElement  addToCartBtn;
+
+    @FindBy(css = ".app_logo")
+    WebElement  logo;
+
+    @FindBy(className = "product_sort_container")
+    WebElement filterBtn;
+
+    @FindBys({
+            @FindBy(className = "inventory_item_name")
+    })
+    List <WebElement> allProducts;
+
+    @FindBys({
+            @FindBy(className = "inventory_item_price")
+    })
+    List <WebElement> allProductPrices;
+
+    @FindBy(className = "product_sort_container")
+    WebElement productSort;
+
     public ProductPage() {
+        PageFactory.initElements(driver, this);
         verifyPageUri();
-        verifyProductPage();
+        verifyProductPageIsOpened();
     }
 
-    public ProductPage verifyProductPage() {
-        Assert.assertTrue(waitVisibilityOfElements(addToCartBtn, logo));
+    public ProductPage verifyProductPageIsOpened() {
+      waitVisibilityOfElements(addToCartBtn, logo);
         return this;
     }
 
-    //метод, который позволяет обратиться к форме товара
+    public void verifyPageUri() {
+        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("inventory.html"));
+    }
+
     private WebElement getElementProduct(String productName) {
         return getWebDriver().findElement(By.xpath("//*[@class='inventory_item_name' and text()='" + productName + "']/ancestor::div[@class='inventory_item']"));
     }
@@ -44,12 +71,6 @@ public class ProductPage extends BasePage {
     private WebElement getAddToCartBtn(String productName) {
         return getElementProduct(productName).findElement(By.tagName("button"));
     }
-
-    //проверка Uri страницы
-    public void verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("inventory.html"));
-    }
-
 
     public ProductPage verifyPageTitle() {
         Assert.assertEquals(getText(title), "PRODUCTS");
@@ -71,7 +92,6 @@ public class ProductPage extends BasePage {
         return this;
     }
 
-    //для реализации с invocationCount
     public ProductPage addAllProductToBasket() {
         clickAll(addToCartBtn);
         return this;
