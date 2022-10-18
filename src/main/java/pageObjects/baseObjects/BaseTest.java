@@ -28,6 +28,8 @@ public abstract class BaseTest {
         log.debug("I'm started new wed driver!");
         properties = getProperties();
         getManager(DriverManagerType.valueOf(properties.getProperty("browser").toUpperCase()));
+        System.out.println(properties.containsKey("browser"));
+        getManager(DriverManagerType.valueOf(properties.containsKey("browser") ? properties.getProperty("browser").toUpperCase() : "CHROME"));
     }
 
     //дженерик для создания инстанс
