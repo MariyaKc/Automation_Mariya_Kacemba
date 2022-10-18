@@ -1,45 +1,45 @@
 pipeline {
     agent any
     stages {
-       stage('Build') {
-              steps {
-                   cleanWs()
-                    checkout scm
-                     echo "Building ${env.JOB_NAME}..."
-              }
-       }
+        stage('Build') {
+                    steps {
+                        cleanWs()
+                        checkout scm
+                        echo "Building ${env.JOB_NAME}..."
+                    }
+        }
         stage('Run tests') {
-              agent {
-                 dockerfile {
-                    reuseNode true
-                    args '-u root'
-                 }
-              }
-             steps{
-                sh '''export M2_HOME=/opt/homebrew/Cellar/maven/3.8.6/libexec
-                      export PATH=$PATH:$M2_HOME/bin
-                      mvn clean test -Dconfig="${CONFIG}" -DsuiteXml=${SUITE}'''
+            agent {
+                   dockerfile {
+                       reuseNode true
+                       args '-u root'
+                   }
+            }
+            steps {
+                sh '''export M2_HOME=/usr/local/Cellar/maven/3.8.6/libexec
+                                      export PATH=$PATH:$M2_HOME/bin
+                                      mvn clean test -Dconfig="${CONFIG}" -DsuiteXml=${SUITE}'''
             }
             post {
-               always {
-                      sh 'chown -R 1003:1003 ./target/allure-results'
-                      archiveArtifacts artifacts: 'target/allure-results/*',
-                   archiveArtifacts artifacts: 'target/logs/*', allowEmptyArchive: true
-               }
+                always {
+                    sh 'chown -R 1003:1003 ./target/allure-results'
+                    archiveArtifacts artifacts: 'target/allure-results/*', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'target/logs/*', allowEmptyArchive: true
+                }
             }
         }
     }
-    post{
-        always {
-            script {
-               allure([
-               includeProperties: false,
-               jdk: '',
-               properties: [],
-               reportBuildPolicy: 'ALWAYS',
-               results: [[path: 'target/allure-results']]
-                   ])
-               }
-            }
-        }
-   }
+     post {
+                always {
+                        script {
+                            allure([
+                                    includeProperties: false,
+                                    jdk: '',
+                                    properties: [],
+                                    reportBuildPolicy: 'ALWAYS',
+                                    results: [[path: 'target/allure-results']]
+                            ])
+                        }
+                }
+      }
+}
