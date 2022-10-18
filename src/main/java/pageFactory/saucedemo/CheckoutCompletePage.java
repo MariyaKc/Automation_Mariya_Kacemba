@@ -32,7 +32,7 @@ public class CheckoutCompletePage extends BasePage {
     }
 
     public CheckoutCompletePage verifyCheckoutCompletePage() {
-        Assert.assertTrue(waitVisibilityOfElements(backHomeBtn, finishTitle));
+        waitVisibilityOfElements(backHomeBtn, finishTitle);
         return this;
     }
 

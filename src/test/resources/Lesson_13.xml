@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Lesson 13" thread-count="1" parallel="tests">
+<suite name="Lesson 13" thread-count="3" parallel="tests">
 
-    <parameter name="url" value="https://moodpanda.com/"/>
-    <parameter name="email" value="test@test.com"/>
-    <parameter name="password" value="secret_sauce"/>
-
-    <test name="Mood panda tests (PageFactory)" enabled="false">
+    <test name="Mood panda tests (PageFactory)" >
         <classes>
             <class name="lesson13.LoginPageFactory_Test"/>
         </classes>
     </test>
 
-    <test name="Mood panda tests (Component)" enabled="false">
+    <test name="Mood panda tests (Component)" >
         <classes>
             <class name="lesson13.LoginComponent_Test"/>
         </classes>

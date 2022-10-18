@@ -13,7 +13,7 @@ public class LoginPage extends BasePage {
 
     //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
     public LoginPage open() {
-        load("https://www.saucedemo.com/");
+        load();
         return this; //this- каждый из методов возвращает ссылку на данный объект
     }
 
@@ -35,6 +35,16 @@ public class LoginPage extends BasePage {
 
     public LoginPage enterPassword(String password) {
         enter(this.password, password);
+        return this;
+    }
+
+    public LoginPage enterUsername() {
+        enter(this.username, properties.getProperty("username"));
+        return this;
+    }
+
+    public LoginPage enterPassword() {
+        enter(this.password,  properties.getProperty("password"));
         return this;
     }
 

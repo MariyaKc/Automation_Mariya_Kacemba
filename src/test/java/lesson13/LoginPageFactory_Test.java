@@ -8,15 +8,14 @@ import pageObjects.baseObjects.BaseTest;
 
 public class LoginPageFactory_Test extends BaseTest {
 
-    @Parameters({"url", "email", "password"})
     @Test
-    public void login_Test(String url, String email, String password) {
+    public void login_Test() {
         new HomePage()
-                .open(url)
+                .open()
                 .clickGetStarted();
         new LoginPage()
-                .enterEmail(email)
-                .enterPassword(password)
+                .enterEmail(properties.getProperty("email"))
+                .enterPassword(properties.getProperty("password"))
                 .clickLogin()
                 .verifyErrorMessage("Your email or password is wrong");
     }

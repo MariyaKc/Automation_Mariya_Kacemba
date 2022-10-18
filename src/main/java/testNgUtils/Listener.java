@@ -4,15 +4,18 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+import propertyHelper.PropertyReader;
 
-/**
- * for TestNG Report
- */
+/**Listener для TestNG Report и для получения параметра для работы с property*/
 public class Listener implements ITestListener {
 
     @Override
-    public void onStart(ITestContext context) {
-        Reporter.log(context.getSuite().getXmlSuite().getTest()); // получаем текст свита и записываем в лог
+    public void onStart(ITestContext context) {//ITestContext - интерфейс, который содержит всю информацию о тесте и о параметризации внутри xml
+        System.out.println(context.getSuite().getParameter("config"));
+        // <уcловие> ? <если уcловие = true> : <если уcловие = false>
+        String propertyName = context.getSuite().getParameter("config") == null ? System.getProperty("config") : context.getSuite().getParameter("config"); // получаем "config" из системы или из свита
+        new PropertyReader(propertyName);//передаем название файла из параметра "config", который прописываем в xml
+
     }
 
     @Override

@@ -1,25 +1,31 @@
 package pageObjects.baseObjects;
 
 import driver.SimpleDriver;
+import lombok.extern.log4j.Log4j;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import testNgUtils.ExtentReportListener;
 import testNgUtils.InvokedMethodListener;
+import testNgUtils.Listener;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Properties;
 
 import static driver.SimpleDriver.closeWebDriver;
+import static propertyHelper.PropertyReader.getProperties;
 
 // класс содержит методы, которые могут быть многократно использованы в конкретных классах страниц
-@Listeners({InvokedMethodListener.class, ExtentReportListener.class})
-
+@Listeners({Listener.class, InvokedMethodListener.class, ExtentReportListener.class})
+@Log4j
 public abstract class BaseTest {
+    protected Properties properties;
 
     @BeforeTest
     public void setUp() {
-        System.out.println("I'm started new wed driver!");
+        log.debug("I'm started new wed driver!");
         new SimpleDriver(); //instance объекта обращение к конструктору объекта
+        properties = getProperties();
     }
 
     //дженерик для создания инстанс
@@ -36,8 +42,7 @@ public abstract class BaseTest {
 
     @AfterTest
     public void stop() {
-        System.out.println("I'm close wed driver!");
+        log.debug("I'm close wed driver!");
         closeWebDriver();
     }
-
 }

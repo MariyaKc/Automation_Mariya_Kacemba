@@ -26,8 +26,11 @@ public class Lesson10_Test extends BaseTest {
                 .navigateTo(DATA_TABLES);
         new DataTablesPage2().getTableRowsData().forEach(System.out::println);
         Map<String, List<String>> TablesData = new DataTablesPage2().getTableData();
-        //Map<String, List<String>> mapTableData = new DataTablesPage2().clickTableColumn("Last Name").getTableData();
-        Map<String, List<String>> mapTableData = new DataTablesPage2().checkTableIsDisplayedFallure().clickTableColumn("Last Name").getTableData(); //фейл(for lesson 11)
+        Map<String, List<String>> mapTableData = new DataTablesPage2().clickTableColumn("Last Name").getTableData();
+
+        /** зафейленный вариант(for lesson 11) -> */
+        //Map<String, List<String>> mapTableData = new DataTablesPage2().checkTableIsDisplayedFailure().clickTableColumn("Last Name").getTableData();
+
         List<List<String>> tableData = new DataTablesPage2().getTableRowsData();
         Assert.assertTrue(tableData.get(2).contains("$100.00"));
         List<String> lastNameData = mapTableData.get("Last Name");
