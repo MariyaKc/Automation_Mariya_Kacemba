@@ -8,7 +8,7 @@ import pageObjects.baseObjects.BasePage;
 import java.util.Arrays;
 import java.util.List;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 //описываем страницу с товарами
 public class ProductPage extends BasePage {
@@ -35,7 +35,7 @@ public class ProductPage extends BasePage {
 
     //метод, который позволяет обратиться к форме товара
     private WebElement getElementProduct(String productName) {
-        return getWebDriver().findElement(By.xpath("//*[@class='inventory_item_name' and text()='" + productName + "']/ancestor::div[@class='inventory_item']"));
+        return getDriver().findElement(By.xpath("//*[@class='inventory_item_name' and text()='" + productName + "']/ancestor::div[@class='inventory_item']"));
     }
 
     private WebElement getProductPrice(String productName) {
@@ -48,7 +48,7 @@ public class ProductPage extends BasePage {
 
     //проверка Uri страницы
     public void verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("inventory.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("inventory.html"));
     }
 
 

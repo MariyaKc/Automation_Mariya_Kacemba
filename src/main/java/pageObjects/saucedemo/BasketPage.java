@@ -9,7 +9,7 @@ import pageObjects.baseObjects.BasePage;
 import java.util.Arrays;
 import java.util.List;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 public class BasketPage extends BasePage {
 
@@ -27,7 +27,7 @@ public class BasketPage extends BasePage {
     }
 
     private WebElement getElementCartItem(String productName) { //3 - формируется элемент на уровне productName
-        return getWebDriver().findElement(By.xpath("//*[@class = 'inventory_item_name' and text() = '" + productName + "']//ancestor::div[@class='cart_item']"));
+        return getDriver().findElement(By.xpath("//*[@class = 'inventory_item_name' and text() = '" + productName + "']//ancestor::div[@class='cart_item']"));
     }
 
     private WebElement getElementProductCost(String productName) { // 2 - передается productName, затем обращение к родительскому getElementCartItem
@@ -51,7 +51,7 @@ public class BasketPage extends BasePage {
     }
 
     public BasketPage verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("cart.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("cart.html"));
         return this;
     }
 
@@ -102,7 +102,7 @@ public class BasketPage extends BasePage {
     }
 
     public BasketPage verifyAllProductInCart() {
-        Assert.assertEquals(getWebDriver().findElements(By.className("inventory_item_name")).size(), 3);
+        Assert.assertEquals(getDriver().findElements(By.className("inventory_item_name")).size(), 3);
         return this;
     }
 

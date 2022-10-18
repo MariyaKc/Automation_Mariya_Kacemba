@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 public class HeaderPage extends BasePage {
     private final By basketBtn = By.className("shopping_cart_link");
@@ -45,7 +45,7 @@ public class HeaderPage extends BasePage {
     }
 
     public HeaderPage verifyAboutPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().equals("https://saucelabs.com/"));
+        Assert.assertTrue(getDriver().getCurrentUrl().equals("https://saucelabs.com/"));
         return this;
     }
 

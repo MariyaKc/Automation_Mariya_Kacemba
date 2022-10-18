@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 @Log4j
 public class CheckoutTwoPage extends BasePage {
     private final By finishBtn = By.id("finish");
@@ -27,7 +27,7 @@ public class CheckoutTwoPage extends BasePage {
     }
 
     public void verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("checkout-step-two.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("checkout-step-two.html"));
     }
 
     public CheckoutTwoPage verifyCheckoutTwo() {

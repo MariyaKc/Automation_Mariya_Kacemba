@@ -14,7 +14,7 @@ import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 import static propertyHelper.PropertyReader.getProperties;
 
 //Класс для инициализации объектов страниц
@@ -28,8 +28,8 @@ public abstract class BasePage {
 
     //выполняется, когда создается экземпляр класса BasePage
     protected BasePage() {
-        driver = getWebDriver();
-        wait = new WebDriverWait(getWebDriver(), Duration.ofSeconds(20));
+        driver = getDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         actions = new Actions(driver);
         properties = getProperties();
     }
@@ -308,7 +308,7 @@ public abstract class BasePage {
 
     /** Для варианта реализации herokuapp.DataTablesPage-> */
     protected List<String> sortAscending(By element) {
-        List<WebElement> webElementsList = getWebDriver().findElements(element);
+        List<WebElement> webElementsList = findElements(element);
         List<String> sortAscendingList = new ArrayList<>();
         webElementsList.forEach(elements -> {
             sortAscendingList.add(elements.getText());
@@ -319,7 +319,7 @@ public abstract class BasePage {
     }
 
     protected List<String> sortDescending(By element) {
-        List<WebElement> webElementsList = getWebDriver().findElements(element);
+        List<WebElement> webElementsList = findElements(element);
         List<String> sortDescendingList = new ArrayList<>();
         webElementsList.forEach(elements -> {
             sortDescendingList.add(elements.getText());
@@ -364,7 +364,7 @@ public abstract class BasePage {
     }
 
     protected List<String> getActualList(By element) {
-        List<WebElement> webElementsList = getWebDriver().findElements(element);
+        List<WebElement> webElementsList = findElements(element);
         List<String> actualList = new ArrayList<>();
         webElementsList.forEach(elements -> {
             actualList.add(elements.getText());

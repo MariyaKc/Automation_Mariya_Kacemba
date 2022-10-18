@@ -5,7 +5,7 @@ import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 import pageObjects.saucedemo.lombok.Checkout;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 public class CheckoutOnePage extends BasePage {
     private final By firstName = By.id("first-name");
@@ -22,7 +22,7 @@ public class CheckoutOnePage extends BasePage {
     }
 
     public void verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("checkout-step-one.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("checkout-step-one.html"));
     }
 
     public CheckoutOnePage verifyCheckoutOne() {
