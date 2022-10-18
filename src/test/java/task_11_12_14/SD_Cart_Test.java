@@ -1,4 +1,4 @@
-package task_11_12;
+package task_11_12_14;
 
 import io.qameta.allure.Step;
 import org.testng.annotations.BeforeMethod;
@@ -9,45 +9,49 @@ import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.BasketPage;
 import pageObjects.saucedemo.HeaderPage;
 import pageObjects.saucedemo.ProductPage;
-import task_11_12.steps.LoginSteps;
+import task_11_12_14.steps.LoginSteps;
+import task_11_12_14.steps.ProductStep;
 
 
 public class SD_Cart_Test extends BaseTest {
 
     @BeforeMethod
-    @Step("Login by user: {username} , {password}")
-    @Parameters({"url", "username", "password"})
-    public void preconditions(String url, String username, String password){
-        get(LoginSteps.class).login(url, username, password);
+    public void preconditions(){
+        get(LoginSteps.class).login();
     }
 
     @Test(description = "Test add and remove all products")
     public void addRemoveAllProductsTest() {
-        get(ProductPage.class).addAllProductToBasket();
+        get(ProductStep.class).addAllProduct().removeAllProduct();
         get(HeaderPage.class).clickBasketBtn();
-        get(BasketPage.class)
-                .verifyTitle()
-                .removeAllProduct()
-                .verifyProductIsRemove();
+        get(BasketPage.class).verifyProductIsRemove();
     }
 
     @Test(description = "Test to add and remove products by name")
     public void addRemoveProductTest1(){
-        get(ProductPage.class).addProductToBasket("Sauce Labs Bolt T-Shirt");
-        get(HeaderPage.class).clickBasketBtn();
+        get(ProductStep.class)
+                .addProductByName(properties.getProperty("productName3"));
         get(BasketPage.class)
-                .verifyTitle().verifyQuantityProductInCart("Sauce Labs Bolt T-Shirt")
+                .verifyQuantityProductInCart(properties.getProperty("productName3"))
                 .clickContinueShopping();
-        get(ProductPage.class).addProductToBasket("Sauce Labs Bike Light");
-        get(HeaderPage.class).clickBasketBtn();
+        get(ProductStep.class)
+                .addProductByName(properties.getProperty("productName2"));
         get(BasketPage.class)
-                .removeProduct("Sauce Labs Bike Light")
-                .removeProduct("Sauce Labs Bolt T-Shirt")
+                .removeProduct(properties.getProperty("productName3"))
+                .removeProduct(properties.getProperty("productName2"))
                 .verifyProductIsRemove();
     }
 
+    @Test(description = "Test to add and remove products by count")
+    public void addRemoveProductByCount(){
+        get(ProductStep.class).addProductByCount(5);
+        get(BasketPage.class).clickContinueShopping();
+        get(ProductStep.class).addProductByCount(1).removeProductByCount(6);
+        get(BasketPage.class).verifyProductIsRemove();
+    }
+
     @Test(dataProvider = "product data", description = "Add and remove products with DataProvider test")
-    public void addRemoveProductTest2(String name) {
+    public void addRemoveProductDataProviderTest(String name) {
         get(ProductPage.class).addProductToBasket(name);
         get(HeaderPage.class).clickBasketBtn();
         get(BasketPage.class)

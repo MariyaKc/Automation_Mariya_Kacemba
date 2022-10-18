@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="SauceDemo tests for lesson 11-12" thread-count="4" parallel="tests">
-
-    <parameter name="url" value="https://www.saucedemo.com/"></parameter>
-    <parameter name="username" value="standard_user"/>
-    <parameter name="password" value="secret_sauce"/>
-    <parameter name="productName" value="Sauce Labs Bolt T-Shirt"/>
+<suite name="SauceDemo tests for lesson 11-12, 14" thread-count="4" parallel="tests">
 
     <test name="Login test set 1.1">
         <classes>
-            <class name="task_11_12.SD_Login_Test"></class>
+            <class name="task_11_12_14.SD_Login_Test"></class>
         </classes>
     </test>
 
     <test name="Cart test set 1.2">
         <classes>
-            <class name="task_11_12.SD_Cart_Test"></class>
+            <class name="task_11_12_14.SD_Cart_Test"></class>
         </classes>
     </test>
 
     <test name="Checkout test set 1.3">
         <classes>
-            <class name="task_11_12.SD_Checkout_Test"></class>
+            <class name="task_11_12_14.SD_Checkout_Test"></class>
         </classes>
     </test>
 
     <test name="Filter test set 1.4">
         <classes>
-            <class name="task_11_12.SD_Filter_Test"></class>
+            <class name="task_11_12_14.SD_Filter_Test"></class>
         </classes>
     </test>
 
     <test name="Header test set 1.5">
         <classes>
-            <class name="task_11_12.SD_Header_Test"></class>
+            <class name="task_11_12_14.SD_Header_Test"></class>
         </classes>
     </test>
 
     <test name="Social Media test set 1.6">
         <classes>
-            <class name="task_11_12.SD_SocialMedia_Test"></class>
+            <class name="task_11_12_14.SD_SocialMedia_Test"></class>
         </classes>
     </test>
 

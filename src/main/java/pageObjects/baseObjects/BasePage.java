@@ -138,6 +138,12 @@ public abstract class BasePage {
         select.selectByVisibleText(value);
     }
 
+    protected Integer countFoundElements(By element) {
+        log.debug("Count elements :: " + element);
+        int count=  findElements(element).size();
+        return count;
+    }
+
     protected String getText(By locator) {
         log.debug("I'm get text by  :: " + locator);
         return findElement(locator).getText();
@@ -192,7 +198,7 @@ public abstract class BasePage {
     protected List<Double> getValues(By locator) {
         List<Double> getData = findElements(locator).stream()
                 .map(webElement -> webElement.getText())
-                .map(webElement -> webElement.replace("$", ""))
+                .map(webElement -> webElement.replaceAll("[^\\d.]+", "")) //все, кроме цифр и точки, + совпадает один или более раз
                 .map(Double::parseDouble).collect(Collectors.toList());
         log.debug("I'm get values by  :: " + getData);
         return getData;
@@ -201,7 +207,7 @@ public abstract class BasePage {
     protected List<Double> getValues(List<WebElement> webElements) {
         List<Double> getData = webElements.stream()
                 .map(webElement -> webElement.getText())
-                .map(webElement -> webElement.replace("$", ""))
+                .map(webElement -> webElement.replaceAll("[^\\d.]+", ""))
                 .map(Double::parseDouble).collect(Collectors.toList());
         log.debug("I'm get values by  :: " + getData);
         return getData;

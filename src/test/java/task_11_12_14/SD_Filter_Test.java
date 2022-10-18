@@ -1,21 +1,18 @@
-package task_11_12;
+package task_11_12_14;
 
-import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.ProductPage;
-import task_11_12.steps.LoginSteps;
+import task_11_12_14.steps.LoginSteps;
 
 public class SD_Filter_Test extends BaseTest {
 
-    @Step("Login by user: {username} , {password}")
-    @Parameters({"url", "username", "password"})
     @Test(description = "Sorting of products test")
-    public void SortFilterTest(String url, String username, String password){
+    public void SortFilterTest(){
 
-        get(LoginSteps.class).login(url, username, password);
+        get(LoginSteps.class).login();
 
         get(ProductPage.class)
                 .clickFilterBtn()

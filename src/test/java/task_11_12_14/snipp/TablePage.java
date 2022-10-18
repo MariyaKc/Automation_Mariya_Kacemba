@@ -1,4 +1,4 @@
-package task_11_12.snipp;
+package task_11_12_14.snipp;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;

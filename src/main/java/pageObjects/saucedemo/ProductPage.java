@@ -24,10 +24,11 @@ public class ProductPage extends BasePage {
     //тк uri уникальна для данной страницы, проверку можно вызвать при создании сущности
     public ProductPage() {
         verifyPageUri();
-        verifyProductPage();
+        verifyProductPageIsOpened();
+        verifyPageTitle();
     }
 
-    public ProductPage verifyProductPage() {
+    public ProductPage verifyProductPageIsOpened() {
         Assert.assertTrue(waitVisibilityOfElements(addToCartBtn, logo));
         return this;
     }
@@ -63,6 +64,13 @@ public class ProductPage extends BasePage {
                 "Price (low to high)",
                 "Price (high to low)");
         Assert.assertEquals(getTexts(getFilterOptions), expectedData);
+        return this;
+    }
+
+    public ProductPage addProductToBasketForCount(int count) {
+        for (int i=0; i<count; i++) {
+            click(addToCartBtn);
+        }
         return this;
     }
 

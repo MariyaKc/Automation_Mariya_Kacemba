@@ -31,9 +31,9 @@ public class Checkout_test extends BaseTest {
                 .verifyTitle()
                 .clickCheckout();
         new CheckoutOnePage()
-                .getFirstName("Firstname")
-                .getLastName("LastName")
-                .getZipCode("12345")
+                .enterFirstName("Firstname")
+                .enterLastName("LastName")
+                .enterZipCode("12345")
                 .clickContinueBtn();
         new CheckoutTwoPage().clickFinishBtn();
         new CheckoutCompletePage().verifyFinalPageTitle();

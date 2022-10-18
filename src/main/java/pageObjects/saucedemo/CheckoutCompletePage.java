@@ -22,7 +22,7 @@ public class CheckoutCompletePage extends BasePage {
     }
 
     public CheckoutCompletePage verifyCheckoutCompletePage() {
-        Assert.assertTrue(waitVisibilityOfElements(backHomeBtn, finishTitle));
+     waitVisibilityOfElements(backHomeBtn, finishTitle);
         return this;
     }
 
@@ -33,7 +33,7 @@ public class CheckoutCompletePage extends BasePage {
     }
 
     public  CheckoutCompletePage verifyFinalPageTitle() {
-        Assert.assertEquals(getWebDriver().findElement(finishTitle).getText(), "THANK YOU FOR YOUR ORDER");
+        Assert.assertEquals(getText(finishTitle), "THANK YOU FOR YOUR ORDER");
         return this;
     }
     public CheckoutCompletePage clickBackHome() {
