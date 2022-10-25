@@ -1,10 +1,9 @@
-package lessson14;
+package lesson14;
 
-import lessson14.entity.Car;
-import lessson14.entity.Home;
-import lessson14.entity.Person;
+import lesson14.entity.Car;
+import lesson14.entity.Home;
+import lesson14.entity.Person;
 import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.Test;
 
 @Log4j

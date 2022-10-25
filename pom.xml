@@ -23,6 +23,7 @@
         <logging.log4j.version>2.19.0</logging.log4j.version>
         <dataformat.version>2.13.4</dataformat.version>
         <log4j.version>1.2.17</log4j.version>
+        <selenide.version>6.9.0</selenide.version>
         <suiteXml/>
     </properties>
 
@@ -77,6 +78,11 @@
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${dataformat.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -109,4 +115,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
