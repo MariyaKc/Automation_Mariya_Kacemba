@@ -1,5 +1,6 @@
 package pageObjects.moodpanda_Selenide;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import pageObjects.baseObjects.SelenideBasePage;
@@ -18,6 +19,9 @@ public class LoginPage extends SelenideBasePage {
     private final SelenideElement dontAccountBtn = $(By.partialLinkText("Don't have"));
     private final SelenideElement forgotBtn = $(By.partialLinkText("Forgot password"));
     private final SelenideElement cantLoginBtn = $(By.partialLinkText("I can't login"));
+
+    private final SelenideElement notification = $(By.cssSelector("[class^=notification]"));
+
 
     public LoginPage() {
         verifyPageUri();
@@ -74,6 +78,12 @@ public class LoginPage extends SelenideBasePage {
 
     public LoginPage verifyValidationAlert(String errorMessage) {
         verifyAlert(this.validationAlert, errorMessage);
+        return this;
+    }
+
+    /** for cucumber test */
+    public LoginPage verifyErrorMessage(String message) {
+        notification.should(Condition.text(message));
         return this;
     }
 }

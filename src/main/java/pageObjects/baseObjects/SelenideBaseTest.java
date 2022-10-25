@@ -25,4 +25,10 @@ public class SelenideBaseTest {
 // page не создает драйвер, но возвращает инстанс
 //open создает драйвер и возвращает инстанс
 //hasWebDriverStarted() спрашивает состояние драйвера
+
+    protected <T> T get(Class<T> page, String url) { //позволяет напрямую пробрасывать урл
+        T instance = null;
+        properties = getProperties();
+        return driver().hasWebDriverStarted() ? page(page) : open(url, page);
+    }
 }

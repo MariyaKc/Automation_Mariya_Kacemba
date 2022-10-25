@@ -67,4 +67,17 @@ public class NavigationPage extends SelenideBasePage {
         }
         return this;
     }
+
+
+    /**for cucumber test */
+
+    private SelenideElement getNavigationLink(String linkText) {
+        return $(By.partialLinkText(linkText));
+    }
+
+
+    public NavigationPage clickNavigationItem(String linkText) {
+        getNavigationLink(linkText).click();
+        return this;
+    }
 }
