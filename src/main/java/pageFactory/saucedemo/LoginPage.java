@@ -20,13 +20,16 @@ public class LoginPage extends BasePage {
     @FindBy(id = "login-button")
     WebElement loginBtn;
 
+    @FindBy(xpath = "//h3[@data-test='error']")
+    WebElement error;
+
 
     public LoginPage() {
        PageFactory.initElements(driver, this);
     }
 
 
-    public LoginPage open(String url) {//урл прописываем в xml файле
+    public LoginPage open(String url) {
         load(url);
         verifyLoginPageIsOpened();
         return this;
@@ -59,24 +62,19 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-//    public LoginPage verifyThatLoginPageIsClosed() {
-//        Assert.assertTrue(elementNotExist(loginBtn));
-//        return this;
-//    }
-
     public LoginPage clickLoginBtn() {
         click(loginBtn);
         return this;
     }
 
     public LoginPage verifyErrorMessage() {
-        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")), "Epic sadface: Sorry, this user has been locked out.");
+        Assert.assertEquals(getText(error), "Epic sadface: Sorry, this user has been locked out.");
         return this;
     }
 
     //для dataProvider
     public LoginPage verifyErrorMessage(String errorMessage) {
-        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")), errorMessage);
+        Assert.assertEquals(getText(error), errorMessage);
         return this;
     }
 }

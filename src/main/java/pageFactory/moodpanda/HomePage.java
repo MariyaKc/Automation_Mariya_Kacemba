@@ -15,8 +15,8 @@ public class HomePage extends BasePage {
         //для инициализации паттерна PageFactory, .initElements() ожидает драйвер и ссылку на объект текущего класса
     }
 
-    public HomePage open(String url) {
-        load(url);
+    public HomePage open() {
+        load();
         return this;
     }
 

@@ -1,6 +1,5 @@
-package task_11_12;
+package task_11_12_14;
 
-import io.qameta.allure.Description;
 import io.qameta.allure.Link;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -17,18 +16,17 @@ import pageObjects.saucedemo.ProductPage;
  @Test(description=””) */
 
 public class SD_Login_Test extends BaseTest {
-    @Parameters("url")
+
     @BeforeMethod
-    public void preconditions(String url) {
+    public void preconditions() {
         get(LoginPage.class)
-                .open(url);
+                .open();
     }
 
     @Link("https://www.saucedemo.com/")
     @Test(description = "Test with all user data", dataProvider = "user data")
     public void loginTest(String username, String password, String errorMessage) {
         get(LoginPage.class)
-                .verifyLoginPage()
                 .enterUsername(username)
                 .enterPassword(password)
                 .clickLoginBtn();
@@ -47,12 +45,22 @@ public class SD_Login_Test extends BaseTest {
     @Test(description = "Test with negative user data", dataProvider = "negative user data")
     public void negativeLoginTest(String username, String password, String errorMessage) {
         get(LoginPage.class)
-                .verifyLoginPage()
                 .enterUsername(username)
                 .enterPassword(password)
                 .clickLoginBtn()
                 .verifyErrorMessage(errorMessage);
         }
+
+    /** В DataProvider данные записывать так же или лучше закинуть креды всех пользователей в saucedemo.properties
+     * и забирать отуда ?
+     * @DataProvider(name = "name")
+     *         public Object [][] dat(){
+     *             return new Object[][] {
+     *                     {properties.getProperty("username"), properties.getProperty("password"), properties.getProperty("error")},
+     *                     {.......},
+     *             };
+     *         }
+     */
 
     @DataProvider(name = "user data")
     public Object [][] data(){

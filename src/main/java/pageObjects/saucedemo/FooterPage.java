@@ -4,13 +4,14 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 public class FooterPage extends BasePage {
 
     public final By twitterBtn = By.cssSelector(".social_twitter");
     public final By facebookBtn = By.cssSelector(".social_facebook");
     public final By linkedinBtn = By.cssSelector(".social_linkedin");
+    public final By title = By.tagName("h1");
 
     private final String handleHomeTab = driver.getWindowHandle(); //текущий дескриптор
 
@@ -36,19 +37,19 @@ public class FooterPage extends BasePage {
     }
 
     public FooterPage verifyPageTwitter() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("saucelabs"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("saucelabs"));
         return this;
     }
 
     public FooterPage verifyPageFacebook() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("saucelabs"));
-        Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(), "Sauce Labs");
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("saucelabs"));
+        Assert.assertEquals(getText(title), "Sauce Labs");
         return this;
     }
 
     public FooterPage verifyPageLinkedin() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("linkedin.com"),"You must be logged in Linkedin to view this page.");
-        Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(), "Присоединитесь к LinkedIn");
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("linkedin.com"),"You must be logged in Linkedin to view this page.");
+        Assert.assertEquals(getText(title), "Join LinkedIn");
         return this;
     }
 

@@ -1,12 +1,10 @@
-package task_11_12.snipp;
+package task_11_12_14.snipp;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.*;
 import java.util.stream.Collectors;
 

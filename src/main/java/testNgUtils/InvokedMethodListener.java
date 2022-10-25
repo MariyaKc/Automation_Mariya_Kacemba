@@ -7,14 +7,14 @@ import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
-import static driver.SimpleDriver.getWebDriver;
-
+import static driver.DriverManager.getDriver;
+/**Listener для скриншотов в Allure Reports*/
 public class InvokedMethodListener implements IInvokedMethodListener {
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-        if (!testResult.isSuccess() && getWebDriver() != null) {//если тест не прошел и если драйвер не пустой
-            byte[] screenshot = ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
+        if (!testResult.isSuccess() && getDriver() != null) {//если тест не прошел и если драйвер не пустой
+            byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
             saveScreenshots(screenshot);
         }
     }

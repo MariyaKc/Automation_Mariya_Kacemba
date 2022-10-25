@@ -1,5 +1,6 @@
 package pageObjects.herokuapp;
 
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -7,7 +8,7 @@ import pageObjects.baseObjects.BasePage;
 
 import java.io.File;
 import java.util.List;
-
+@Log4j
 public class FileDownloadPage extends BasePage {
 
     private final By fileLink = By.xpath("//div[@class='example']/a");
@@ -35,13 +36,13 @@ public class FileDownloadPage extends BasePage {
                 lastDownloadFile = files[i];
             }
         }
-        System.out.println("I'm download :: " + lastDownloadFile.getName());
+        log.debug("I'm download :: " + lastDownloadFile.getName());
         return lastDownloadFile;
     }
 
     public FileDownloadPage verifyLastFileInDirectory() {
         File lastFile = getLastDownloadFileInDirectory();
-        System.out.println("I'm found file :: " + lastFile.getName());
+        log.debug("I'm found file :: " + lastFile.getName());
         Assert.assertTrue(lastFile.exists()); //проверка
         lastFile.deleteOnExit(); //удаление
         return this;

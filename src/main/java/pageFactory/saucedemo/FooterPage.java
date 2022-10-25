@@ -21,6 +21,9 @@ public class FooterPage extends BasePage {
     @FindBy (how = How.CSS,using = ".social_linkedin")
     WebElement linkedinBtn;
 
+    @FindBy (how = How.TAG_NAME,using = ".h1")
+    WebElement title;
+
     private final String handleHomeTab = driver.getWindowHandle();
 
     public FooterPage(){
@@ -55,13 +58,13 @@ public class FooterPage extends BasePage {
 
     public FooterPage verifyPageFacebook() {
         Assert.assertTrue(getWebDriver().getCurrentUrl().contains("saucelabs"));
-        Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(), "Sauce Labs");
+        Assert.assertEquals(getText(title), "Sauce Labs");
         return this;
     }
 
     public FooterPage verifyPageLinkedin() {
         Assert.assertTrue(getWebDriver().getCurrentUrl().contains("linkedin.com"));
-        Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(), "Присоединитесь к LinkedIn");
+        Assert.assertEquals(getText(title), "Присоединитесь к LinkedIn");
         return this;
     }
 

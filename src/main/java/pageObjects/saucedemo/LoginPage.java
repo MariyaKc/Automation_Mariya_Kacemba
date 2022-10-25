@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
+import pageObjects.saucedemo.lombok.User;
 
 
 public class LoginPage extends BasePage {
@@ -13,7 +14,7 @@ public class LoginPage extends BasePage {
 
     //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
     public LoginPage open() {
-        load("https://www.saucedemo.com/");
+        load();
         return this; //this- каждый из методов возвращает ссылку на данный объект
     }
 
@@ -23,7 +24,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage verifyLoginPage() {
+    public LoginPage verifyLoginPageIsOpened() {
         Assert.assertTrue(waitVisibilityOfElements(username, password, loginBtn));
         return this;
     }
@@ -35,6 +36,23 @@ public class LoginPage extends BasePage {
 
     public LoginPage enterPassword(String password) {
         enter(this.password, password);
+        return this;
+    }
+
+    public LoginPage enterUsername() {
+        enter(this.username, properties.getProperty("username"));
+        return this;
+    }
+
+    public LoginPage enterPassword() {
+        enter(this.password,  properties.getProperty("password"));
+        return this;
+    }
+
+    //для реализации с Lombok Builder pattern
+    public LoginPage enterData(User user){
+        enterUsername(user.getUsername());
+        enterPassword(user.getPassword());
         return this;
     }
 

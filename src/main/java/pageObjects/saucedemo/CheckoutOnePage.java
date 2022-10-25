@@ -3,8 +3,9 @@ package pageObjects.saucedemo;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
+import pageObjects.saucedemo.lombok.Checkout;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 public class CheckoutOnePage extends BasePage {
     private final By firstName = By.id("first-name");
@@ -17,14 +18,15 @@ public class CheckoutOnePage extends BasePage {
     public CheckoutOnePage() {
         verifyPageUri();
         verifyCheckoutOne();
+        verifyPageTitle();
     }
 
     public void verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("checkout-step-one.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("checkout-step-one.html"));
     }
 
     public CheckoutOnePage verifyCheckoutOne() {
-        Assert.assertTrue(waitVisibilityOfElements(firstName, lastName, zipCode,continueBtn));
+        waitVisibilityOfElements(firstName, lastName, zipCode,continueBtn);
         return this;
     }
     public CheckoutOnePage verifyPageTitle() {
@@ -33,18 +35,25 @@ public class CheckoutOnePage extends BasePage {
 
     }
 
-    public CheckoutOnePage getFirstName(String firstName) {
+    public CheckoutOnePage enterFirstName(String firstName) {
         enter(this.firstName, firstName);
         return this;
     }
 
-    public CheckoutOnePage getLastName(String lastName) {
+    public CheckoutOnePage enterLastName(String lastName) {
         enter(this.lastName, lastName);
         return this;
     }
 
-    public CheckoutOnePage getZipCode(String zipCode) {
+    public CheckoutOnePage enterZipCode(String zipCode) {
         enter(this.zipCode, zipCode);
+        return this;
+    }
+
+    public CheckoutOnePage enterData(Checkout checkout){
+        enterFirstName(checkout.getFirstName());
+        enterLastName(checkout.getLastName());
+        enterZipCode(checkout.getZipCode());
         return this;
     }
 

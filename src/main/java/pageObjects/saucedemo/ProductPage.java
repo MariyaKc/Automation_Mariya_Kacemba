@@ -8,7 +8,7 @@ import pageObjects.baseObjects.BasePage;
 import java.util.Arrays;
 import java.util.List;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 //описываем страницу с товарами
 public class ProductPage extends BasePage {
@@ -24,17 +24,18 @@ public class ProductPage extends BasePage {
     //тк uri уникальна для данной страницы, проверку можно вызвать при создании сущности
     public ProductPage() {
         verifyPageUri();
-        verifyProductPage();
+        verifyProductPageIsOpened();
+        verifyPageTitle();
     }
 
-    public ProductPage verifyProductPage() {
+    public ProductPage verifyProductPageIsOpened() {
         Assert.assertTrue(waitVisibilityOfElements(addToCartBtn, logo));
         return this;
     }
 
     //метод, который позволяет обратиться к форме товара
     private WebElement getElementProduct(String productName) {
-        return getWebDriver().findElement(By.xpath("//*[@class='inventory_item_name' and text()='" + productName + "']/ancestor::div[@class='inventory_item']"));
+        return getDriver().findElement(By.xpath("//*[@class='inventory_item_name' and text()='" + productName + "']/ancestor::div[@class='inventory_item']"));
     }
 
     private WebElement getProductPrice(String productName) {
@@ -47,7 +48,7 @@ public class ProductPage extends BasePage {
 
     //проверка Uri страницы
     public void verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("inventory.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("inventory.html"));
     }
 
 
@@ -63,6 +64,13 @@ public class ProductPage extends BasePage {
                 "Price (low to high)",
                 "Price (high to low)");
         Assert.assertEquals(getTexts(getFilterOptions), expectedData);
+        return this;
+    }
+
+    public ProductPage addProductToBasketForCount(int count) {
+        for (int i=0; i<count; i++) {
+            click(addToCartBtn);
+        }
         return this;
     }
 

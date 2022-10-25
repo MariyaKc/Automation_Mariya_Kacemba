@@ -25,8 +25,8 @@ public class DataTablesPage2 extends BasePage {
         return this;
     }
 
-    //фейл для проверки скриншота (lesson11)
-    public DataTablesPage2 checkTableIsDisplayedFallure() {
+    /** фейл для проверки скриншота (lesson11) */
+    public DataTablesPage2 checkTableIsDisplayedFailure() {
         Assert.assertTrue(driver.findElement(table).isDisplayed());
         return this;
     }
@@ -75,6 +75,4 @@ public class DataTablesPage2 extends BasePage {
     // 4 - создаем лист columnData для записи данных из колонок
     // 5.6 - перебираем лист по первому хедеру(0) и получаем данные из первой колонки, записываем в columnData [Smith],[John]...
     // 7 - в мапу запишется ключ "Last name" и 4ре значения
-
-
 }

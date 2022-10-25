@@ -5,7 +5,7 @@
 
     <test name="Data table test">
         <classes>
-            <class name="task_11_12.snipp.Table_Test"></class>
+            <class name="task_11_12_14.snipp.Table_Test"></class>
         </classes>
     </test>
 

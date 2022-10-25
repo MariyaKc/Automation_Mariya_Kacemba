@@ -1,7 +1,9 @@
 package pageObjects.baseObjects;
 
 import driver.UIElement;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -9,25 +11,27 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
+import static propertyHelper.PropertyReader.getProperties;
 
 //Класс для инициализации объектов страниц
-public class BasePage {
+@Log4j
+public abstract class BasePage {
+
     protected WebDriverWait wait;
     protected WebDriver driver;
     protected Actions actions;
+    protected Properties properties;
 
     //выполняется, когда создается экземпляр класса BasePage
     protected BasePage() {
-        driver = getWebDriver();
-        wait = new WebDriverWait(getWebDriver(), Duration.ofSeconds(20));
+        driver = getDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         actions = new Actions(driver);
+        properties = getProperties();
     }
 
     //гибкое ожидание
@@ -47,24 +51,29 @@ public class BasePage {
         return driver.findElements(locator);
     }
 
+    protected void load() { //для реализации с проперти
+        log.debug("Open page :: " + properties.getProperty("url"));
+        driver.get(properties.getProperty("url"));
+    }
+
     protected void load(String url) {
-        System.out.println("Open page :: " + url);
+        log.debug("Open page :: " + url);
         driver.get(url);
     }
 
     protected String getPageUrl() {
-        System.out.println("Get page url");
+        log.debug("Get page url");
         return driver.getCurrentUrl();
     }
 
     protected void enter(WebElement webElement, String enterData) {
-        System.out.println("I'm enter :: " + enterData + ", by web element :: " + webElement);
+        log.debug("I'm enter :: " + enterData + ", by web element :: " + webElement);
         webElement.clear();
         webElement.sendKeys(enterData);
     }
 
     protected void enter(By locator, CharSequence... enterData) { //по идее должно работать с разными ОС
-        System.out.println("I'm enter :: " + enterData + ", by locator :: " + locator);
+        log.debug("I'm enter :: " + enterData + ", by locator :: " + locator);
         String os = System.getProperty("os.name");
         if (os.contains("Mac")) {
             findElement(locator).sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
@@ -75,19 +84,19 @@ public class BasePage {
     }
 
     protected void click(By locator) {
-        System.out.println("I'm click by :: " + locator);
+        log.debug("I'm click by :: " + locator);
         verifyElementClickable(locator);
         findElement(locator).click();
     }
 
     protected void click(WebElement webElement) {
-        System.out.println("I'm click by :: " + webElement);
+        log.debug("I'm click by :: " + webElement);
         new UIElement(driver, wait, webElement).click();
     }
 
     protected void clickAll(By... locators) {
         for (By locator : locators) {
-            System.out.println("I'm click by :: " + locator);
+            log.debug("I'm click by :: " + locator);
             List<WebElement> buttons = driver.findElements(locator);
             for (WebElement button : buttons) {
                 button.click();
@@ -97,7 +106,7 @@ public class BasePage {
 
     protected void clickAll(WebElement... elements) {
         for (WebElement element : elements) {
-            System.out.println("I'm click by :: " + element);
+            log.debug("I'm click by :: " + element);
             List<WebElement> buttons = new ArrayList<>();
             buttons.add(element);
             for (WebElement button : buttons) {
@@ -107,61 +116,67 @@ public class BasePage {
     }
 
     protected void select(By locator, Integer index) {
-        System.out.println("Select by locator => " + locator + " with index => " + index);
+        log.debug("Select by locator => " + locator + " with index => " + index);
         Select select = new Select(findElement(locator));
         select.selectByIndex(index);
     }
 
     protected void select(By locator, String value) {
-        System.out.println("Select by locator => " + locator + " with value => " + value);
+        log.debug("Select by locator => " + locator + " with value => " + value);
         Select select = new Select(findElement(locator));
         select.selectByVisibleText(value);
     }
     protected void select(WebElement element, Integer index) {
-        System.out.println("Select by locator => " + element + " with index => " + index);
+        log.debug("Select by locator => " + element + " with index => " + index);
         Select select = new Select(element);
         select.selectByIndex(index);
     }
 
     protected void select(WebElement element, String value) {
-        System.out.println("Select by locator => " + element + " with value => " + value);
+        log.debug("Select by locator => " + element + " with value => " + value);
         Select select = new Select(element);
         select.selectByVisibleText(value);
     }
 
+    protected Integer countFoundElements(By element) {
+        log.debug("Count elements :: " + element);
+        int count=  findElements(element).size();
+        return count;
+    }
+
     protected String getText(By locator) {
-        System.out.println("I'm get text by  :: " + locator);
+        log.debug("I'm get text by  :: " + locator);
         return findElement(locator).getText();
     }
 
     protected String getText(WebElement webElement) {
-        System.out.println("I'm get text by  :: " + webElement);
+        log.debug("I'm get text by  :: " + webElement);
         return webElement.getText();
     }
 
     protected List<String> getTexts(By locator) {
-        System.out.println("I'm get texts by  :: " + locator);
+        log.debug("I'm get texts by  :: " + locator);
         return findElements(locator).stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
         //через stream() представили коллекцию веб элементов в качестве потока данных
         //через map перебираем каждый элемент и переделываем его с типа webElement -> webElement.getText() в строку
         //map представляет собой стрим,через collect(Collectors.toList() переводим в лист
     }
     protected List<String> getTexts(List<WebElement> webElements) {
-        System.out.println("I'm get texts by  :: " + webElements);
+        log.debug("I'm get texts by  :: " + webElements);
         return webElements.stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
     }
 
     protected List<String> getSortAscendingByTexts(By locator) {
-        System.out.println("I'm sorting texts by  :: " + locator);
+        log.debug("I'm sorting texts by  :: " + locator);
         List<String> sortAscendingList = getTexts(locator);
-        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+        log.debug("I'm ascending sorted data :: " + sortAscendingList);
         return sortAscendingList;
     }
 
     protected List<String> getSortAscendingByTexts(List<WebElement> webElements) {
-        System.out.println("I'm sorting texts by  :: " + webElements);
+        log.debug("I'm sorting texts by  :: " + webElements);
         List<String> sortAscendingList = getTexts(webElements);
-        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+        log.debug("I'm ascending sorted data :: " + sortAscendingList);
         return sortAscendingList;
     }
 
@@ -169,70 +184,70 @@ public class BasePage {
     protected List<String> getSortDescendingByTexts(By locator) {
         List<String> sortDescendingList = getTexts(locator);
         Collections.sort(sortDescendingList,Collections.reverseOrder());
-        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        log.debug("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
     }
 
     protected List<String> getSortDescendingByTexts(List<WebElement> webElements) {
         List<String> sortDescendingList = getTexts(webElements);
         Collections.sort(sortDescendingList,Collections.reverseOrder());
-        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        log.debug("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
     }
 
     protected List<Double> getValues(By locator) {
         List<Double> getData = findElements(locator).stream()
                 .map(webElement -> webElement.getText())
-                .map(webElement -> webElement.replace("$", ""))
+                .map(webElement -> webElement.replaceAll("[^\\d.]+", "")) //все, кроме цифр и точки, + совпадает один или более раз
                 .map(Double::parseDouble).collect(Collectors.toList());
-        System.out.println("I'm get values by  :: " + getData);
+        log.debug("I'm get values by  :: " + getData);
         return getData;
     }
 
     protected List<Double> getValues(List<WebElement> webElements) {
         List<Double> getData = webElements.stream()
                 .map(webElement -> webElement.getText())
-                .map(webElement -> webElement.replace("$", ""))
+                .map(webElement -> webElement.replaceAll("[^\\d.]+", ""))
                 .map(Double::parseDouble).collect(Collectors.toList());
-        System.out.println("I'm get values by  :: " + getData);
+        log.debug("I'm get values by  :: " + getData);
         return getData;
     }
 
     protected List<Double> getSortAscendingByValues(By locator) {
         List<Double> sortAscendingList = getValues(locator);
         Collections.sort(sortAscendingList);
-        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+        log.debug("I'm ascending sorted data :: " + sortAscendingList);
         return sortAscendingList;
     }
 
     protected List<Double> getSortAscendingByValues(List<WebElement> webElements) {
         List<Double> sortAscendingList = getValues(webElements);
         Collections.sort(sortAscendingList);
-        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+        log.debug("I'm ascending sorted data :: " + sortAscendingList);
         return sortAscendingList;
     }
 
     protected List<Double> getSortDescendingByValues(By locator) {
         List<Double> sortDescendingList = getValues(locator);
         Collections.sort(sortDescendingList, Collections.reverseOrder());
-        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        log.debug("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
     }
 
     protected List<Double> getSortDescendingByValues(List<WebElement> webElements) {
         List<Double> sortDescendingList = getValues(webElements);
         Collections.sort(sortDescendingList, Collections.reverseOrder());
-        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        log.debug("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
     }
 
     protected String getElementAttribute(By by, String attribute) { //получение атрибута элемента
-        System.out.println("Get element => " + by + ", attribute :: " + attribute);
+        log.debug("Get element => " + by + ", attribute :: " + attribute);
         return findElement(by).getAttribute(attribute);
     }
 
     protected List<String> getElementsAttribute(By by, String attribute) {
-        System.out.println("Get element => " + by + ", attribute :: " + attribute);
+        log.debug("Get element => " + by + ", attribute :: " + attribute);
         return findElements(by).stream().map(webElement -> webElement.getAttribute(attribute)).collect(Collectors.toList());
     }
 
@@ -240,7 +255,7 @@ public class BasePage {
     public Boolean elementNotExist(By by) {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0)); //отключаем implicitlyWait(драйвер не ждет выполнения элемента)
         for (int counter = 1; counter < 20; counter++) {
-            System.out.println("Wait element not exist count = " + counter);
+            log.debug("Wait element not exist count = " + counter);
             if (findElements(by).size() == 0) {
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
                 return true;
@@ -253,13 +268,13 @@ public class BasePage {
 
 
     protected void waitVisibilityOfElement(By locator) {
-        System.out.println("wait visibility of element => " + locator);
+        log.debug("wait visibility of element => " + locator);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     protected boolean waitVisibilityOfElements(By... locators) {
         for (By locator : locators) {
-            System.out.println("wait visibility of element => " + locator);
+            log.debug("wait visibility of element => " + locator);
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         }
         return true;
@@ -267,19 +282,19 @@ public class BasePage {
 
     protected boolean waitVisibilityOfElements(WebElement... webElements) {
         for (WebElement webElement : webElements) {
-            System.out.println("wait visibility of element => " + webElement);
+            log.debug("wait visibility of element => " + webElement);
             wait.until(ExpectedConditions.visibilityOf(webElement));
         }
         return true;
     }
 
     protected void verifyElementTextToBe(By locator, String text) {
-        System.out.println("verify element text to be => " + locator);
+        log.debug("verify element text to be => " + locator);
         wait.until(ExpectedConditions.textToBe(locator, text));
     }
 
     protected void verifyElementClickable(By locator) {
-        System.out.println("verify element clickable => " + locator);
+        log.debug("verify element clickable => " + locator);
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -293,24 +308,24 @@ public class BasePage {
 
     /** Для варианта реализации herokuapp.DataTablesPage-> */
     protected List<String> sortAscending(By element) {
-        List<WebElement> webElementsList = getWebDriver().findElements(element);
+        List<WebElement> webElementsList = findElements(element);
         List<String> sortAscendingList = new ArrayList<>();
         webElementsList.forEach(elements -> {
             sortAscendingList.add(elements.getText());
             Collections.sort(sortAscendingList);
         });
-        System.out.println("I'm ascending list ::" + sortAscendingList);
+        log.debug("I'm ascending list ::" + sortAscendingList);
         return sortAscendingList;
     }
 
     protected List<String> sortDescending(By element) {
-        List<WebElement> webElementsList = getWebDriver().findElements(element);
+        List<WebElement> webElementsList = findElements(element);
         List<String> sortDescendingList = new ArrayList<>();
         webElementsList.forEach(elements -> {
             sortDescendingList.add(elements.getText());
             Collections.sort(sortDescendingList, Collections.reverseOrder());
         });
-        System.out.println("I'm descending list ::" + sortDescendingList);
+        log.debug("I'm descending list ::" + sortDescendingList);
         return sortDescendingList;
     }
 
@@ -328,7 +343,7 @@ public class BasePage {
             }
         };
         Collections.sort(sortAscendingList, comparator);
-        System.out.println("I'm ascending list ::" + sortAscendingList);
+        log.debug("I'm ascending list ::" + sortAscendingList);
         return sortAscendingList;
     }
 
@@ -344,17 +359,17 @@ public class BasePage {
             }
         };
         Collections.sort(sortDescendingList, comparator);
-        System.out.println("I'm descending list ::" + sortDescendingList);
+        log.debug("I'm descending list ::" + sortDescendingList);
         return sortDescendingList;
     }
 
     protected List<String> getActualList(By element) {
-        List<WebElement> webElementsList = getWebDriver().findElements(element);
+        List<WebElement> webElementsList = findElements(element);
         List<String> actualList = new ArrayList<>();
         webElementsList.forEach(elements -> {
             actualList.add(elements.getText());
         });
-        System.out.println("I'm actual List :: " + actualList);
+        log.debug("I'm actual List :: " + actualList);
         return actualList;
     }
 }

@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 public class CheckoutCompletePage extends BasePage {
 
@@ -18,11 +18,11 @@ public class CheckoutCompletePage extends BasePage {
     }
 
     public void verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("checkout-complete.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("checkout-complete.html"));
     }
 
     public CheckoutCompletePage verifyCheckoutCompletePage() {
-        Assert.assertTrue(waitVisibilityOfElements(backHomeBtn, finishTitle));
+     waitVisibilityOfElements(backHomeBtn, finishTitle);
         return this;
     }
 
@@ -33,7 +33,7 @@ public class CheckoutCompletePage extends BasePage {
     }
 
     public  CheckoutCompletePage verifyFinalPageTitle() {
-        Assert.assertEquals(getWebDriver().findElement(finishTitle).getText(), "THANK YOU FOR YOUR ORDER");
+        Assert.assertEquals(getText(finishTitle), "THANK YOU FOR YOUR ORDER");
         return this;
     }
     public CheckoutCompletePage clickBackHome() {

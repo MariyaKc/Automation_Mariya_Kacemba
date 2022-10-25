@@ -20,10 +20,11 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.935 sec
 **mvn -Dtest=Lesson5_2#test2+test3 test** (запуск двух определенных тестов из класса)
 [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.798 s - in lesson5.Lesson5_2
 
-**mvn clean test -DsuiteXmlFile="Lesson_10"** (запуск определенного свита)
+**mvn clean test -DsuiteXml="Lesson_10"** (запуск определенного свита)
 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.796 s - in TestSuite
 
 **Пробросить параметр из mvn command line внутрь теста** (для lesson10.SaucedemoLogin_test)
 **mvn clean test -Dtest=SaucedemoLogin_test -Dusername=standard_user -Dpassword=secret_sauce**
 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.689 s - in lesson10.SaucedemoLogin_test
+**mvn clean test -Dconfig="moodpanda" -DsuiteXml="Lesson_13"** (запуск свита с пробросом проперти через параметр config из командной строки )
 

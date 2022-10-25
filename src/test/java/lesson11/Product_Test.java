@@ -13,15 +13,15 @@ import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.ProductPage;
 
 public class Product_Test extends BaseTest {
-    @Parameters({"username", "password", "steps"})
+    @Parameters("steps")
     @Test
     @Description("Product test")
     @Step("Login and check product page")
     @Link("https://test.com")
     @Issue("Product Page issue")
     @TmsLink("Product Page tms")
-    public void productTest(String username, String password, @Optional("0") String steps) {
-        if (steps.equals("0")) get(LoginSteps.class).login(username, password);
+    public void productTest( @Optional("0") String steps) {
+        if (steps.equals("0")) get(LoginSteps.class).login(properties.getProperty("username"), properties.getProperty("password"));
         get(ProductPage.class).verifyPageTitle();
     }
 }
