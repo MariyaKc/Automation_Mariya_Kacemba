@@ -56,9 +56,7 @@ public class SignUpPage extends SelenideBasePage {
         enterLastNameInitial(signUp.getLastName());
         enterEmail(signUp.getEmail());
         enterPassword(signUp.getPassword());
-        if (signUp.getCheckbox()==true && checkbox.isSelected()==false) {
-                checkbox.click();
-        }else if(signUp.getCheckbox()==false && checkbox.isSelected()==true) {
+        if ((signUp.getCheckbox()==true & checkbox.isSelected()==false) || (signUp.getCheckbox()==false & checkbox.isSelected()==true)) {
             checkbox.click();
         }
         signUpBtn.click();

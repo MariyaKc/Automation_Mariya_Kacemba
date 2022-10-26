@@ -23,17 +23,18 @@ public abstract class SelenideBasePage {
 
     protected void verifyUri(String uri) {
         webdriver().shouldHave(urlContaining(uri));
+        log.debug("I'm verify then page contains uri :: " + uri);
     }
 
     protected void enter(SelenideElement element, CharSequence... enterData) {
-        log.debug("I'm enter :: " + enterData + ", by locator :: " + element);
+        log.debug("I'm verify then element is visible and enter :: " + enterData + ", by locator :: " + element);
         String os = System.getProperty("os.name");
         if (os.contains("Mac")) {
            element.sendKeys(Keys.chord(Keys.COMMAND, "a"));
            element.sendKeys(Keys.chord(Keys.DELETE));
         } else {
            element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-            element.sendKeys(Keys.chord(Keys.DELETE));
+           element.sendKeys(Keys.chord(Keys.DELETE));
         }
         element.shouldBe(visible).sendKeys(enterData);
     }
@@ -44,11 +45,13 @@ public abstract class SelenideBasePage {
     }
 
     protected void verifyText(SelenideElement element, String title) {
+        log.debug("I'm verify, then " + element + "match text :: " + title);
         element.shouldBe(Condition.visible).shouldHave(Condition.matchText(title));
     }
 
     protected void verifyAlert(SelenideElement element, String alert) {
         if (element.exists()) {
+            log.debug("I'm verify, then " + element + "is exists and match text :: " + alert);
             element.shouldBe(matchText(alert));
         }
     }
