@@ -1,0 +1,148 @@
+body {
+    font-family: serif;
+}
+
+.text-center {
+  text-align: center;
+}
+
+#title {
+    color: DarkOrange;
+    font-family: Marker Felt;
+    font-weight: bold;
+    font-size: 280%;
+}
+
+#logForm {
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+#user, #pswrd {
+    border: 1px solid black;
+    font-size: 120%;
+    font-family: Helvetica;
+    margin: 8px;
+
+}
+
+#logIn_btn {
+    color: white;
+    font-weight: bold;
+    padding: 6px;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+
+    border-radius: 8px;
+    background: DarkOrange;
+    font-size: 95%
+}
+
+ #cncl {
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+
+    border-radius: 8px;
+    background: IndianRed ;
+    font-size: 80%
+    margin:30px
+}
+
+#lb {
+ margin:30px
+font-family: Helvetica;
+    font-weight: bold;
+    font-size: 130%;
+
+}
+
+[name="cities"] {
+    font-family: Helvetica;
+    font-size: 100%;
+    margin: 10px 10px 10px;
+}
+
+#tab{
+margin: 0 auto;
+border: solid 2px;
+}
+
+.table_sort th {
+    color: #ffebcd;
+    background: DarkOrange;
+    cursor: pointer;
+}
+
+.table_sort td,
+.table_sort th {
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    border: 2px solid #846868;
+}
+
+.table_sort tbody tr:nth-child(even) {
+    background: #e3e3e3;
+}
+
+th.sorted[data-order="1"],
+th.sorted[data-order="-1"] {
+    position: relative;
+}
+
+th.sorted[data-order="1"]::after,
+th.sorted[data-order="-1"]::after {
+    right: 8px;
+    position: absolute;
+}
+
+th.sorted[data-order="-1"]::after {
+	content: "D"
+}
+
+th.sorted[data-order="1"]::after {
+	content: "Up"
+}
+
+#h2{
+font-family: Helvetica;
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.fa {
+  padding: 10px;
+  font-size: 10px;
+  width: 20px;
+  text-align: center;
+  text-decoration: none;
+  margin: 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+
+.fa-reddit {
+  background: #ff5700;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
