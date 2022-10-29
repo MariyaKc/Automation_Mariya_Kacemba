@@ -1,0 +1,27 @@
+{
+  "id": 1,
+  "name": "User",
+  "age": 30,
+  "work": true,
+  "country": "Minsk",
+  "sex": "female",
+  "cars": [
+    "Audi",
+    "WV"
+  ],
+  "children": [
+    {
+      "name": "Userka",
+      "age": 10
+    },
+    {
+      "name": "Usercheok",
+      "age": 2
+    }
+  ],
+  "wife": {
+    "name": "Userovna",
+    "age": 29,
+    "work": null
+  }
+}

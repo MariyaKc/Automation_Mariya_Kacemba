@@ -1,6 +1,7 @@
 package testNgUtils;
 
 import com.codeborne.selenide.Configuration;
+import lombok.SneakyThrows;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import propertyHelper.PropertyReader;
@@ -9,6 +10,7 @@ import static propertyHelper.PropertyReader.getProperties;
 
 public class SelenideListener implements ITestListener {
 
+    @SneakyThrows
     @Override
     public void onStart(ITestContext context) {
         String propertyName = context.getSuite().getParameter("config") == null ? System.getProperty("config") : context.getSuite().getParameter("config");
