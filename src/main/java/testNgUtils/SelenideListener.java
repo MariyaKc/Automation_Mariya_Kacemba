@@ -13,6 +13,7 @@ public class SelenideListener implements ITestListener {
     @SneakyThrows
     @Override
     public void onStart(ITestContext context) {
+        System.out.println(System.getProperty("browser"));
         String propertyName = context.getSuite().getParameter("config") == null ? System.getProperty("config") : context.getSuite().getParameter("config");
         new PropertyReader(propertyName);
         setUpSelenideConfigs();
