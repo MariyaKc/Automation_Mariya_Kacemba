@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Task 19" thread-count="2" parallel="tests">
+
+    <test name="Data table test">
+        <classes>
+            <class name="task_19.TableTest"></class>
+        </classes>
+    </test>
+    <test name="Page test">
+        <classes>
+            <class name="task_19.PageTest"></class>
+        </classes>
+    </test>
+
+</suite>

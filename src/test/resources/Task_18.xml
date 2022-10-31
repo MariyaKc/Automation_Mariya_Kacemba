@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Task 18" thread-count="2" parallel="tests">
+
+    <listeners>
+        <listener class-name="testNgUtils.SelenideListener"/>
+    </listeners>
+
+    <test name="RabotaBy tests">
+        <classes>
+            <class name="task_18.RunRabotaByCucumber"/>
+        </classes>
+    </test>
+</suite>

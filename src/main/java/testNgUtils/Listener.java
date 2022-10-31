@@ -1,5 +1,6 @@
 package testNgUtils;
 
+import lombok.SneakyThrows;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -9,6 +10,7 @@ import propertyHelper.PropertyReader;
 /**Listener для TestNG Report и для получения параметра для работы с property*/
 public class Listener implements ITestListener {
 
+    @SneakyThrows
     @Override
     public void onStart(ITestContext context) {//ITestContext - интерфейс, который содержит всю информацию о тесте и о параметризации внутри xml
         // <уcловие> ? <если уcловие = true> : <если уcловие = false>
