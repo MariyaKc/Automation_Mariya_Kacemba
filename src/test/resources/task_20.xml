@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Task 20 (JSON)" thread-count="2" parallel="tests">
+
+    <test name="Rest Assured test set">
+        <classes>
+            <class name="task_20.RestAssured_Test"></class>
+        </classes>
+    </test>
+    <test name="JSON Schema test set">
+        <classes>
+            <class name="task_20.JsonSchema_test"></class>
+        </classes>
+    </test>
+
+</suite>
