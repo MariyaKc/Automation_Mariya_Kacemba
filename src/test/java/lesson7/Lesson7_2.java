@@ -14,7 +14,7 @@ public class Lesson7_2 extends BaseTest {
     @BeforeClass
     public void loginTest() {
         new LoginPage()
-                .open()
+                .open("https://www.saucedemo.com/")
                 .enterUsername("standard_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();
