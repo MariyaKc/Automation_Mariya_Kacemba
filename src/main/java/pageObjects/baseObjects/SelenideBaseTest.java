@@ -1,6 +1,7 @@
 package pageObjects.baseObjects;
 
 import com.codeborne.selenide.Configuration;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Listeners;
 import testNgUtils.SelenideListener;
 
@@ -30,5 +31,12 @@ public class SelenideBaseTest {
         T instance = null;
         properties = getProperties();
         return driver().hasWebDriverStarted() ? page(page) : open(url, page);
+    }
+
+    @AfterTest
+    public void stop() {
+        if(driver().hasWebDriverStarted()) {
+            driver().close();
+        }
     }
 }

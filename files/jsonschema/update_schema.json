@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "required": [
+    "name",
+    "job",
+    "updatedAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Za-z\\s]+$"
+    },
+    "job": {
+      "type": "string",
+      "pattern": "^[A-Za-z\\s]+$"
+    },
+    "updatedAt": {
+      "type": "string"
+    }
+  }
+}
