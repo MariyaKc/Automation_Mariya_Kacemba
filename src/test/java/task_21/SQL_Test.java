@@ -5,31 +5,31 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import sql.SelectHelper;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
+import static sql.DeleteHelper.getDelete;
+import static sql.InsertHelper.getInsert;
+import static sql.SelectHelper.getSelect;
+import static sql.UpdateHelper.getUpdate;
 
-import static jdk.nashorn.internal.objects.Global.print;
 
-
-public class SQL_Test {
+public class
+SQL_Test {
 
     Connection connection;
     Statement statement;
-    SelectHelper selectHelper;
 
     @SneakyThrows
     @BeforeTest
     public void precondition() {
         connection = DriverManager.getConnection("jdbc:mysql://db4free.net/testqa07?user=testqa07&password=testqa07");
         statement = connection.createStatement();
-        selectHelper = new SelectHelper(statement);
-        print(selectHelper.select("SELECT * FROM Pets"));
+        print(getSelect().select("*").from("Pets").getData());
+
     }
 
     /** Создать таблицу */
@@ -44,9 +44,9 @@ public class SQL_Test {
                 " PRIMARY KEY ( PetsID ))");
 
         String sql = "INSERT INTO Pets VALUES (1, 'Fluffy', 'Gwen', 'cat', 2)";
-        insert(sql);
+        getInsert().insert(sql);
        sql = "INSERT INTO Pets VALUES (3, 'Claws', 'Benny', 'dog', 7)";
-         insert(sql);
+         getInsert().insert(sql);
       //.......................
     }
 
@@ -54,21 +54,21 @@ public class SQL_Test {
     /** Реализовать теста (2 - 3) которые выполняют запрос на добавление данных в таблицу */
     @Test(priority = 1)
     public void insert1_Test() {
-        print(selectHelper.select("SELECT * FROM Pets WHERE owner is null"));
-        insert("INSERT INTO Pets (PetsId, name, species) VALUES (20, 'Micky','hamster')");
-        print(selectHelper.select("SELECT * FROM Pets WHERE owner is null"));
+        print(getSelect().select("*").from("Pets").where("owner is null").getData());
+        getInsert().insert("Pets").into("PetsId, name, species").values("20,'Micky','hamster'").execute();
+        print(getSelect().select("*").from("Pets").where("owner is null").getData());
     }
 
     @Test(priority = 2)
     public void insert2_Test() {
-        insert("INSERT INTO Pets VALUES (21, 'Fluffy', 'Alex', 'cat', 7)");
+        getInsert().insert("Pets").values("21, 'Fluffy', 'Alex', 'cat', 7").execute();
     }
 
     @Test(priority = 3)
     public void insert3_Test() {
-        print(selectHelper.select("SELECT * FROM Pets WHERE name is null"));
-        insert("INSERT INTO Pets (PetsID) VALUES (33)");
-        print(selectHelper.select("SELECT * FROM Pets WHERE name is null"));
+        print(getSelect().select("*").from("Pets").where("name is null").getData());
+        getInsert().insert("Pets").into("PetsID").values("33");
+        print(getSelect().select("*").from("Pets").where("name is null").getData());
     }
 
     /** Реализовать тесты (2 - 3) которые выполняют запрос на извлечения данных из таблицы */
@@ -76,8 +76,8 @@ public class SQL_Test {
     @Test(priority = 4)
     public void selectLike_Test() {
         String sql = "SELECT * FROM Pets WHERE name LIKE '%y'";
-        print(selectHelper.select(sql));
-        selectHelper.select(sql).forEach(row -> {
+        print(getSelect().select(sql).getData());
+        getSelect().select(sql).getData().forEach(row -> {
             Assert.assertTrue(row.get("name").contains("y"));
         });
     }
@@ -85,8 +85,8 @@ public class SQL_Test {
     @Test(priority = 5)
     public void selectBetween_Test() {
         String sql = "SELECT * FROM Pets WHERE age BETWEEN 2 AND 10";
-        print(selectHelper.select(sql));
-        selectHelper.select(sql).forEach(row -> {
+        print(getSelect().select(sql).getData());
+        getSelect().select(sql).getData().forEach(row -> {
             Assert.assertTrue(Integer.parseInt(row.get("age")) >= 2 && Integer.parseInt(row.get("age")) <= 10);
         });
     }
@@ -94,8 +94,8 @@ public class SQL_Test {
     @Test(priority = 6)
     public void selectIn_Test() {
         String sql = "SELECT * FROM Pets WHERE species IN('hamster','bird')";
-        print(selectHelper.select(sql));
-        selectHelper.select(sql).forEach(row -> {
+        print(getSelect().select(sql).getData());
+        getSelect().select(sql).getData().forEach(row -> {
             Assert.assertTrue(row.get("species").contains("hamster") | row.get("species").contains("bird"));
         });
     }
@@ -103,58 +103,43 @@ public class SQL_Test {
     /** Реализовать тесты (2 - 3) которые выполняют запрос на редактирование данных таблицы */
     @Test(priority = 7)
     public void update1_Test() {
-        print(selectHelper.select("SELECT * FROM Pets WHERE age is null"));
-        update("UPDATE Pets SET age=null WHERE age=2");
-        print(selectHelper.select("SELECT * FROM Pets WHERE age is null"));
+        print(getSelect().select("SELECT * FROM Pets WHERE age is null").getData());
+        getUpdate().update("Pets").set("age=null WHERE age=2");
+        print(getSelect().select("SELECT * FROM Pets WHERE age is null").getData());
     }
 
     @Test(priority = 8)
     public void update2_Test() {
-        print(selectHelper.select("SELECT * FROM Pets WHERE owner LIKE '%User%'"));
-        update("UPDATE Pets SET owner='Admin' WHERE owner LIKE '%User%'");
-        print(selectHelper.select("SELECT * FROM Pets WHERE owner='Admin'"));
+        print(getSelect().select("SELECT * FROM Pets WHERE owner LIKE '%User%'").getData());
+        getUpdate().update("Pets").set("owner='Admin' WHERE owner LIKE '%User%'");
+        print(getSelect().select("SELECT * FROM Pets WHERE owner LIKE '%User%'").getData());
     }
 
     @Test(priority = 9)
     public void update3_Test() {
-        print(selectHelper.select("SELECT * FROM Pets WHERE species='bird'"));
-        update("UPDATE Pets SET species=null WHERE species='bird'");
-        print(selectHelper.select("SELECT * FROM Pets WHERE species is null"));
+        print(getSelect().select("SELECT * FROM Pets WHERE species='bird'").getData());
+        getUpdate().update("Pets").set("species=null WHERE species='bird'");
+        print(getSelect().select("SELECT * FROM Pets WHERE species is null").getData());
     }
 
 
     /** Реализовать тесты (2 - 3) которые выполняют запрос на удаление данных таблицы  */
     @Test(priority = 10)
     public void delete1_Test() {
-        print(selectHelper.select("SELECT * FROM Pets WHERE species is null"));
-        delete("DELETE FROM Pets WHERE name='Chirpy'");
-        print(selectHelper.select("SELECT * FROM Pets WHERE name is null"));
+        print(getSelect().select("SELECT * FROM Pets WHERE name is null").getData());
+        getDelete().deleteFrom("Pets").where("name='Chirpy'");
+        print(getSelect().select("SELECT * FROM Pets WHERE name is null").getData());
     }
 
     @Test(priority = 11)
     public void delete2_Test() {
-        print(selectHelper.select("SELECT * FROM Pets WHERE owner='Admin'"));
-        delete("DELETE FROM Pets WHERE PetsID=12");
-        print(selectHelper.select("SELECT * FROM Pets WHERE owner='Admin'"));
+        print(getSelect().select("SELECT * FROM Pets WHERE owner='Admin'").getData());
+        getDelete().deleteFrom("Pets").where("PetsID=12");
+        print(getSelect().select("SELECT * FROM Pets WHERE owner='Admin'").getData());
     }
 
     @SneakyThrows
     private Integer createTable(String sql) {
-        return statement.executeUpdate(sql);
-    }
-
-    @SneakyThrows
-    private Integer update(String sql) { //метод для update
-        return statement.executeUpdate(sql);
-    }
-
-    @SneakyThrows
-    private Integer insert(String sql) {
-        return statement.executeUpdate(sql);
-    }
-
-    @SneakyThrows
-    private Integer delete(String sql) {
         return statement.executeUpdate(sql);
     }
 

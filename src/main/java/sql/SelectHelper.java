@@ -5,23 +5,45 @@ import lombok.SneakyThrows;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SelectHelper {
+public class SelectHelper extends DBConnector {
+    private String select;
+    private String from;
+    private String where;
 
-    Statement statement;
 
-    public SelectHelper(Statement statement) {
-        this.statement = statement;
+    public static SelectHelper getSelect() {
+        return new SelectHelper();
+    }
+
+    public SelectHelper select(String select) {
+        this.select = select;
+        return this;
+    }
+
+    public SelectHelper from(String from) {
+        this.from = from;
+        return this;
+    }
+
+    public SelectHelper where(String where) {
+        this.where = where;
+        return this;
     }
 
     @SneakyThrows
-    public List<Map<String, String>> select(String sql) {
-        ResultSet resultSet = statement.executeQuery(sql); // позволяет выполнить запрос и записать результат в ResultSet, который потом можно переформатировать в необходимый формат
+    public ResultSet execute() { // что нужно получить мз строки
+        String setWhere = where == null ? "" : " WHERE " + where;
+        return getStatement().executeQuery("SELECT " + select + " FROM " + from +"WHERE" +where);
+    }
+
+    @SneakyThrows
+    public List<Map<String, String>> getData() {
+        ResultSet resultSet = execute(); // позволяет выполнить запрос и записать результат в ResultSet, который потом можно переформатировать в необходимый формат
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData(); //чтобы переиспользовать данные из таблицы, переводим в ResultSetMetaData
         List<Map<String, String>> data = new ArrayList<>(); //строка(название колонки = значение,...)
         while (resultSet.next()) { //-заходит на строку; значения будут перебираться до тех пор, пока существуют записи. next() означает перебор, можно обращаться к новому значению по индексу
@@ -33,4 +55,6 @@ public class SelectHelper {
         }
         return data;
     }
+
+
 }
