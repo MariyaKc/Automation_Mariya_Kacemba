@@ -10,6 +10,7 @@ import java.math.RoundingMode;
 import java.util.List;
 
 import static driver.DriverManager.getDriver;
+
 @Log4j
 public class CheckoutTwoPage extends BasePage {
     private final By finishBtn = By.id("finish");
@@ -34,6 +35,7 @@ public class CheckoutTwoPage extends BasePage {
         waitVisibilityOfElements(finishBtn, cancelBtn);
         return this;
     }
+
     public CheckoutTwoPage verifyPageTitle() {
         Assert.assertEquals(getText(title), "CHECKOUT: OVERVIEW");
         return this;
@@ -47,7 +49,7 @@ public class CheckoutTwoPage extends BasePage {
 
     public CheckoutTwoPage verifyItemTotalPrice() {  //сравнение
         double itemTotalPrice = Double.parseDouble(findElement(itemPrice).getText().replaceAll("[^\\d.]+", ""));
-        Assert.assertEquals(itemTotalPrice,calculationItemTotalPrice(), "Total prices are not equal");
+        Assert.assertEquals(itemTotalPrice, calculationItemTotalPrice(), "Total prices are not equal");
         log.debug("Calculation items total price ::" + calculationItemTotalPrice() + " Items total price in checkout page ::" + itemTotalPrice);
         return this;
     }
@@ -56,11 +58,11 @@ public class CheckoutTwoPage extends BasePage {
         double taxPrice = Double.parseDouble(findElement(tax).getText().replaceAll("[^\\d.]+", ""));
         double actualTotalPrice = Double.parseDouble(findElement(totalPrice).getText().replaceAll("[^\\d.]+", ""));
 
-        BigDecimal result = new BigDecimal((calculationItemTotalPrice()+taxPrice));
+        BigDecimal result = new BigDecimal((calculationItemTotalPrice() + taxPrice));
         result = result.setScale(2, RoundingMode.DOWN);
         double expectedTotalPrice = result.doubleValue();
 
-        Assert.assertEquals(actualTotalPrice,expectedTotalPrice, "Total prices are not equal");
+        Assert.assertEquals(actualTotalPrice, expectedTotalPrice, "Total prices are not equal");
         log.debug("Calculation actual total price ::" + expectedTotalPrice + " Total price in checkout page ::" + actualTotalPrice);
         return this;
     }

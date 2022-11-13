@@ -25,7 +25,9 @@ public class DataTablesPage2 extends BasePage {
         return this;
     }
 
-    /** фейл для проверки скриншота (lesson11) */
+    /**
+     * фейл для проверки скриншота (lesson11)
+     */
     public DataTablesPage2 checkTableIsDisplayedFailure() {
         Assert.assertTrue(driver.findElement(table).isDisplayed());
         return this;

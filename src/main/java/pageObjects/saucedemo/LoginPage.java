@@ -1,7 +1,6 @@
 package pageObjects.saucedemo;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 import pageObjects.saucedemo.lombok.User;
@@ -45,12 +44,12 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage enterPassword() {
-        enter(this.password,  properties.getProperty("password"));
+        enter(this.password, properties.getProperty("password"));
         return this;
     }
 
     //для реализации с Lombok Builder pattern
-    public LoginPage enterData(User user){
+    public LoginPage enterData(User user) {
         enterUsername(user.getUsername());
         enterPassword(user.getPassword());
         return this;

@@ -38,7 +38,14 @@
         "properties": {
           "id": {
             "type": "integer",
-            "enum" : [1,2,3,4,5,6]
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
           },
           "name": {
             "type": "string",
@@ -46,8 +53,8 @@
           },
           "year": {
             "type": "integer",
-            "minimum":2000,
-            "maximum":2005
+            "minimum": 2000,
+            "maximum": 2005
           },
           "color": {
             "type": "string"

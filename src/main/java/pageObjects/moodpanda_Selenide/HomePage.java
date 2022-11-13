@@ -1,11 +1,8 @@
 package pageObjects.moodpanda_Selenide;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import pageObjects.baseObjects.SelenideBasePage;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -32,33 +29,33 @@ public class HomePage extends SelenideBasePage {
         return this;
     }
 
-    public HomePage verifyTitle(){
+    public HomePage verifyTitle() {
         verifyText(this.title, "MoodPanda");
         return this;
     }
 
-    public HomePage verifyStartImg(){
+    public HomePage verifyStartImg() {
         this.startImg.shouldBe(Condition.exist);
         return this;
     }
 
-    public HomePage clickGetStarted(){
+    public HomePage clickGetStarted() {
         click(getStartedBtn);
         return this;
     }
 
-    public HomePage signUpForFree(){
-       click(signUpForFreeBtn);
+    public HomePage signUpForFree() {
+        click(signUpForFreeBtn);
         return this;
     }
 
-    public HomePage clickGoToAppStore(){
+    public HomePage clickGoToAppStore() {
         click(appStoreBtn);
         return this;
     }
 
-    public HomePage clickGToGooglePlay(){
-       click(googlePlayBtn);
+    public HomePage clickGToGooglePlay() {
+        click(googlePlayBtn);
         return this;
     }
 }

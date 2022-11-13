@@ -8,7 +8,9 @@ import java.sql.Statement;
 
 import static propertyHelper.PropertyReader.getProperties;
 
-/** создает соединение с БД*/
+/**
+ * создает соединение с БД
+ */
 public abstract class DBConnector {
     private static Connection connection;
 
@@ -27,6 +29,6 @@ public abstract class DBConnector {
 
     @SneakyThrows
     public void closeConnect() {
-            connection.close();
+        connection.close();
     }
 }

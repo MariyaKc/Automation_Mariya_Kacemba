@@ -10,8 +10,8 @@ public class Checkout {
     private String lastName;
     private String zipCode;
 
-    public static class CheckoutBuilder{
-        public CheckoutBuilder(){
+    public static class CheckoutBuilder {
+        public CheckoutBuilder() {
         }
     }
 }

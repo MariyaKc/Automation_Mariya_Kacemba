@@ -3,8 +3,7 @@ package pageObjects.baseObjects;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.log4j.Log4j;
-import org.openqa.selenium.*;
-
+import org.openqa.selenium.Keys;
 
 import java.util.Properties;
 
@@ -30,11 +29,11 @@ public abstract class SelenideBasePage {
         log.debug("I'm verify then element is visible and enter :: " + enterData + ", by locator :: " + element);
         String os = System.getProperty("os.name");
         if (os.contains("Mac")) {
-           element.sendKeys(Keys.chord(Keys.COMMAND, "a"));
-           element.sendKeys(Keys.chord(Keys.DELETE));
+            element.sendKeys(Keys.chord(Keys.COMMAND, "a"));
+            element.sendKeys(Keys.chord(Keys.DELETE));
         } else {
-           element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-           element.sendKeys(Keys.chord(Keys.DELETE));
+            element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+            element.sendKeys(Keys.chord(Keys.DELETE));
         }
         element.shouldBe(visible).sendKeys(enterData);
     }

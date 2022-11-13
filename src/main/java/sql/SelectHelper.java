@@ -38,7 +38,7 @@ public class SelectHelper extends DBConnector {
     @SneakyThrows
     public ResultSet execute() { // что нужно получить мз строки
         String setWhere = where == null ? "" : " WHERE " + where;
-        return getStatement().executeQuery("SELECT " + select + " FROM " + from +"WHERE" +where);
+        return getStatement().executeQuery("SELECT " + select + " FROM " + from + "WHERE" + where);
     }
 
     @SneakyThrows
@@ -55,6 +55,4 @@ public class SelectHelper extends DBConnector {
         }
         return data;
     }
-
-
 }

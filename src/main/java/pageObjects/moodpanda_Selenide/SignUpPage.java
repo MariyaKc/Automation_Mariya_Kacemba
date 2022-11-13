@@ -2,7 +2,6 @@ package pageObjects.moodpanda_Selenide;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-
 import pageObjects.baseObjects.SelenideBasePage;
 import pageObjects.moodpanda_Selenide.lombok.SignUp;
 
@@ -28,7 +27,7 @@ public class SignUpPage extends SelenideBasePage {
     }
 
     public SignUpPage verifyPageUri() {
-       verifyUri("signup");
+        verifyUri("signup");
         return this;
     }
 
@@ -41,14 +40,15 @@ public class SignUpPage extends SelenideBasePage {
         enter(this.lastNameInitial, lastname);
         return this;
     }
+
     public SignUpPage enterEmail(String email) {
         enter(this.email, email);
         return this;
     }
 
     public SignUpPage enterPassword(String password) {
-      enter(this.password, password);
-       return this;
+        enter(this.password, password);
+        return this;
     }
 
     public SignUpPage enterData(SignUp signUp) {
@@ -56,15 +56,15 @@ public class SignUpPage extends SelenideBasePage {
         enterLastNameInitial(signUp.getLastName());
         enterEmail(signUp.getEmail());
         enterPassword(signUp.getPassword());
-        if ((signUp.getCheckbox()==true & checkbox.isSelected()==false) || (signUp.getCheckbox()==false & checkbox.isSelected()==true)) {
+        if ((signUp.getCheckbox() == true & checkbox.isSelected() == false) || (signUp.getCheckbox() == false & checkbox.isSelected() == true)) {
             checkbox.click();
         }
         signUpBtn.click();
         return this;
     }
 
-    public SignUpPage clickSignUpMe(){
-       click(signMeUpBtn);
+    public SignUpPage clickSignUpMe() {
+        click(signMeUpBtn);
         return this;
     }
 

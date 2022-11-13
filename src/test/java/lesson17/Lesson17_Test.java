@@ -9,13 +9,13 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.matchText;
+import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Configuration.*;
 
 public class Lesson17_Test {
     @BeforeTest
-    public void pre(){
+    public void pre() {
         baseUrl = "https://www.rw.by/";
     }
 

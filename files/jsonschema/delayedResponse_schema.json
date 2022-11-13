@@ -38,8 +38,8 @@
         "properties": {
           "id": {
             "type": "integer",
-            "minimum":1,
-            "maximum":7
+            "minimum": 1,
+            "maximum": 7
           },
           "email": {
             "type": "string"

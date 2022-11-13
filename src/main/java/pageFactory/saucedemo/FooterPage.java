@@ -1,6 +1,5 @@
 package pageFactory.saucedemo;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -12,21 +11,17 @@ import static driver.SimpleDriver.getWebDriver;
 
 public class FooterPage extends BasePage {
 
-    @FindBy (how = How.CSS,using = ".social_twitter")
+    private final String handleHomeTab = driver.getWindowHandle();
+    @FindBy(how = How.CSS, using = ".social_twitter")
     WebElement twitterBtn;
-
-    @FindBy (how = How.CSS,using = ".social_facebook")
+    @FindBy(how = How.CSS, using = ".social_facebook")
     WebElement facebookBtn;
-
-    @FindBy (how = How.CSS,using = ".social_linkedin")
+    @FindBy(how = How.CSS, using = ".social_linkedin")
     WebElement linkedinBtn;
-
-    @FindBy (how = How.TAG_NAME,using = ".h1")
+    @FindBy(how = How.TAG_NAME, using = ".h1")
     WebElement title;
 
-    private final String handleHomeTab = driver.getWindowHandle();
-
-    public FooterPage(){
+    public FooterPage() {
         PageFactory.initElements(driver, this);
     }
 

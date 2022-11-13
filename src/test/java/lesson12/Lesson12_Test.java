@@ -42,7 +42,7 @@ public class Lesson12_Test extends BaseTest {
         String[] array = {"123", "123", "123"}; //// 3-способ создания листа(из массива перегнать значения в лист) ->
         List<String> data3 = Arrays.asList(array);
 
-       /**переформировать текущий массив и добавить объем("2.0")-> */
+        /**переформировать текущий массив и добавить объем("2.0")-> */
         List<String> data4 = Arrays.asList("Audi", "WV", "Lada");
         List<String> dataWithV = data4.stream().map(car -> car + "2.0").collect(Collectors.toList());
         System.out.println(dataWithV);

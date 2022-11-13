@@ -12,7 +12,9 @@ import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.driver;
 import static propertyHelper.PropertyReader.getProperties;
 
-/**реализует метод get, который стартует драйвер, если его нет и создает инстанс страницы */
+/**
+ * реализует метод get, который стартует драйвер, если его нет и создает инстанс страницы
+ */
 
 @Listeners(SelenideListener.class)
 public class SelenideBaseTest {
@@ -35,7 +37,7 @@ public class SelenideBaseTest {
 
     @AfterTest
     public void stop() {
-        if(driver().hasWebDriverStarted()) {
+        if (driver().hasWebDriverStarted()) {
             driver().close();
         }
     }

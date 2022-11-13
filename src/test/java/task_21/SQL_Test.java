@@ -6,8 +6,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.sql.*;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
@@ -32,10 +33,12 @@ SQL_Test {
 
     }
 
-    /** Создать таблицу */
+    /**
+     * Создать таблицу
+     */
     @Test(enabled = false)
     public void createTable_Test() {
-        createTable( "CREATE TABLE Pets " +
+        createTable("CREATE TABLE Pets " +
                 "(PetsID INTEGER not NULL, " +
                 " name VARCHAR(255), " +
                 " owner VARCHAR(255), " +
@@ -45,13 +48,15 @@ SQL_Test {
 
         String sql = "INSERT INTO Pets VALUES (1, 'Fluffy', 'Gwen', 'cat', 2)";
         getInsert().insert(sql);
-       sql = "INSERT INTO Pets VALUES (3, 'Claws', 'Benny', 'dog', 7)";
-         getInsert().insert(sql);
-      //.......................
+        sql = "INSERT INTO Pets VALUES (3, 'Claws', 'Benny', 'dog', 7)";
+        getInsert().insert(sql);
+        //.......................
     }
 
 
-    /** Реализовать теста (2 - 3) которые выполняют запрос на добавление данных в таблицу */
+    /**
+     * Реализовать теста (2 - 3) которые выполняют запрос на добавление данных в таблицу
+     */
     @Test(priority = 1)
     public void insert1_Test() {
         print(getSelect().select("*").from("Pets").where("owner is null").getData());
@@ -71,7 +76,9 @@ SQL_Test {
         print(getSelect().select("*").from("Pets").where("name is null").getData());
     }
 
-    /** Реализовать тесты (2 - 3) которые выполняют запрос на извлечения данных из таблицы */
+    /**
+     * Реализовать тесты (2 - 3) которые выполняют запрос на извлечения данных из таблицы
+     */
 
     @Test(priority = 4)
     public void selectLike_Test() {
@@ -100,7 +107,9 @@ SQL_Test {
         });
     }
 
-    /** Реализовать тесты (2 - 3) которые выполняют запрос на редактирование данных таблицы */
+    /**
+     * Реализовать тесты (2 - 3) которые выполняют запрос на редактирование данных таблицы
+     */
     @Test(priority = 7)
     public void update1_Test() {
         print(getSelect().select("SELECT * FROM Pets WHERE age is null").getData());
@@ -123,7 +132,9 @@ SQL_Test {
     }
 
 
-    /** Реализовать тесты (2 - 3) которые выполняют запрос на удаление данных таблицы  */
+    /**
+     * Реализовать тесты (2 - 3) которые выполняют запрос на удаление данных таблицы
+     */
     @Test(priority = 10)
     public void delete1_Test() {
         print(getSelect().select("SELECT * FROM Pets WHERE name is null").getData());
@@ -150,10 +161,10 @@ SQL_Test {
         System.out.println("===================================================");
     }
 
-   @SneakyThrows
+    @SneakyThrows
     @AfterTest
-    public void postcondition(){
-        if(connection!=null)
+    public void postcondition() {
+        if (connection != null)
             connection.close();
     }
 

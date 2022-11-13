@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class Lesson19 {
 
-   // @Test
+    // @Test
     public void jsonTest() {
         Gson gson = new Gson();
         String data = getJsonData();
@@ -34,7 +34,7 @@ public class Lesson19 {
         String data = getJsonData();
         Person person = gson.fromJson(data, Person.class);//преобразование объекта строкового типа в Person
         person.getCars().forEach(System.out::println);//получение Cars у объекта person
-        person.getChildren().forEach(children -> System.out.print(" "+ children.getName()));
+        person.getChildren().forEach(children -> System.out.print(" " + children.getName()));
     }
 
     //метод который позволяет получить файл в качестве строки

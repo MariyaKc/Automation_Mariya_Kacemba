@@ -2,8 +2,6 @@ package sql;
 
 import lombok.SneakyThrows;
 
-import java.sql.ResultSet;
-
 public class DeleteHelper extends DBConnector {
 
     private String from;

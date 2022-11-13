@@ -18,15 +18,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
 
-/** Для приложения https://reqres.in/ автоматизировать REST API-запросы (10 - 15 тестов) с использованием следующих http методов:
- GET
- POST
- PUT
- DELETE
- PATCH
- HEAD */
+/**
+ * Для приложения https://reqres.in/ автоматизировать REST API-запросы (10 - 15 тестов) с использованием следующих http методов:
+ * GET
+ * POST
+ * PUT
+ * DELETE
+ * PATCH
+ * HEAD
+ */
 
 public class RestAssured_Test {
 
@@ -48,7 +51,7 @@ public class RestAssured_Test {
         Assert.assertEquals(users.getTotal_pages(), 2);
 
         users.getData().forEach(element -> {
-            Assert.assertTrue(element.id >0);
+            Assert.assertTrue(element.id > 0);
             Assert.assertNotNull(element.email);
             Assert.assertNotNull(element.first_name);
             Assert.assertNotNull(element.last_name);
@@ -126,7 +129,9 @@ public class RestAssured_Test {
         Assert.assertEquals(response.getBody().asString(), "{}");
     }
 
-     /** вариант - 1 */
+    /**
+     * вариант - 1
+     */
     @Test(priority = 7, description = "PUT UPDATE test with POJO Object")
     public void putUpdate_test1() {
 
@@ -144,7 +149,9 @@ public class RestAssured_Test {
         Assert.assertTrue(userUpdResponse.getUpdatedAt().contains(LocalDate.now().toString()));
     }
 
-    /** вариант - 2 */
+    /**
+     * вариант - 2
+     */
     @Test(priority = 8, description = "PUT UPDATE test from file")
     public void putUpdate_test2() {
         Response response = given().header("Content-Type", "application/json").body(getJsonData("update")).put("/users/2");
@@ -202,7 +209,7 @@ public class RestAssured_Test {
     @Test(priority = 15, description = "DELAYED RESPONSE test with POJO Object")
     public void getDelayedResponse_test() {
 
-        Response response = given().get( "/users?delay=3");
+        Response response = given().get("/users?delay=3");
         response.then().assertThat().statusCode(200).body(Matchers.notNullValue());
 
         Delayed delayed = response.as(Delayed.class);
@@ -213,7 +220,7 @@ public class RestAssured_Test {
         Assert.assertEquals(delayed.getTotal_pages(), 2);
 
         delayed.getData().forEach(element -> {
-            Assert.assertTrue(element.id>0);
+            Assert.assertTrue(element.id > 0);
             Assert.assertNotNull(element.email.contains("@reqres.in"));
             Assert.assertNotNull(element.first_name);
             Assert.assertNotNull(element.last_name);

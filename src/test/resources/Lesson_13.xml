@@ -3,13 +3,13 @@
 
 <suite name="Lesson 13" thread-count="3" parallel="tests">
 
-    <test name="Mood panda tests (PageFactory)" >
+    <test name="Mood panda tests (PageFactory)">
         <classes>
             <class name="lesson13.LoginPageFactory_Test"/>
         </classes>
     </test>
 
-    <test name="Mood panda tests (Component)" >
+    <test name="Mood panda tests (Component)">
         <classes>
             <class name="lesson13.LoginComponent_Test"/>
         </classes>

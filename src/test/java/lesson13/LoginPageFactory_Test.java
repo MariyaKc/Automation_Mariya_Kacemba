@@ -1,6 +1,5 @@
 package lesson13;
 
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageFactory.moodpanda.HomePage;
 import pageFactory.moodpanda.LoginPage;

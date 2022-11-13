@@ -22,7 +22,7 @@ public class CheckoutCompletePage extends BasePage {
     }
 
     public CheckoutCompletePage verifyCheckoutCompletePage() {
-     waitVisibilityOfElements(backHomeBtn, finishTitle);
+        waitVisibilityOfElements(backHomeBtn, finishTitle);
         return this;
     }
 
@@ -32,10 +32,11 @@ public class CheckoutCompletePage extends BasePage {
 
     }
 
-    public  CheckoutCompletePage verifyFinalPageTitle() {
+    public CheckoutCompletePage verifyFinalPageTitle() {
         Assert.assertEquals(getText(finishTitle), "THANK YOU FOR YOUR ORDER");
         return this;
     }
+
     public CheckoutCompletePage clickBackHome() {
         click(backHomeBtn);
         return this;

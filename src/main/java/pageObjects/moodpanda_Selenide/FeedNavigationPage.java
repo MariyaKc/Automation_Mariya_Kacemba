@@ -20,37 +20,37 @@ public class FeedNavigationPage extends SelenideBasePage {
     }
 
     public FeedNavigationPage verifyPageUri() {
-       verifyUri ("/feed/global");
+        verifyUri("/feed/global");
         return this;
     }
 
     public FeedNavigationPage verifyPageTitle() {
-        verifyText(this.title,"This is a community. Be kind." );
+        verifyText(this.title, "This is a community. Be kind.");
         return this;
     }
 
-    public FeedNavigationPage clickHome(){
-       click(homeBtn);
+    public FeedNavigationPage clickHome() {
+        click(homeBtn);
         return this;
     }
 
-    public FeedNavigationPage clickDiary(){
-       click(diaryBtn);
+    public FeedNavigationPage clickDiary() {
+        click(diaryBtn);
         return this;
     }
 
-    public FeedNavigationPage clickDashboard(){
-       click(dashboardBtn);
+    public FeedNavigationPage clickDashboard() {
+        click(dashboardBtn);
         return this;
     }
 
-    public FeedNavigationPage clickPatron(){
+    public FeedNavigationPage clickPatron() {
         click(patronsBtn);
         return this;
     }
 
-    public FeedNavigationPage clickLogout(){
-       click(logoutFirstBtn);
+    public FeedNavigationPage clickLogout() {
+        click(logoutFirstBtn);
         return this;
     }
 

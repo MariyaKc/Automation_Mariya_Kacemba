@@ -6,7 +6,10 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-/**Listener для ExtentReport */
+
+/**
+ * Listener для ExtentReport
+ */
 public class ExtentReportListener implements ITestListener {
     private static ExtentReports extentReports;
     private static ExtentTest extentTest;

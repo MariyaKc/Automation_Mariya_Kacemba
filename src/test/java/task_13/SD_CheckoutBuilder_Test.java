@@ -13,14 +13,14 @@ public class SD_CheckoutBuilder_Test extends BaseTest {
 
     @BeforeMethod
     @Parameters("url")
-    public void precondition(String url){
-        loginPage= new LoginPage();
+    public void precondition(String url) {
+        loginPage = new LoginPage();
         loginPage.open(url);
     }
 
     @Test(description = "Test (Builder Pattern) :: with standard user data {username}, {password}")
     @Parameters({"username", "password", "firstname", "lastname", "zipcode"})
-    public void checkoutTest(String username, String password, String firstname, String lastname, String zipcode){
+    public void checkoutTest(String username, String password, String firstname, String lastname, String zipcode) {
 
         LoginBuilder loginBuilder = new LoginBuilder.Builder()
                 .withUsername(username)

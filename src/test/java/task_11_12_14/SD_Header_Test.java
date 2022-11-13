@@ -1,6 +1,5 @@
 package task_11_12_14;
 
-import io.qameta.allure.Step;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -14,7 +13,7 @@ import task_11_12_14.steps.ProductStep;
 public class SD_Header_Test extends BaseTest {
 
     @BeforeMethod
-    public void preconditions(){
+    public void preconditions() {
         get(LoginSteps.class).login();
     }
 

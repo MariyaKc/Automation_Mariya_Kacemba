@@ -1,9 +1,7 @@
 package lesson13;
 
 
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.moodpanda.HomePage;
 import pageObjects.moodpanda.LoginPage;

@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static sql.SelectHelper.getSelect;
-
 
 public class Lesson21 extends BaseTest {
 

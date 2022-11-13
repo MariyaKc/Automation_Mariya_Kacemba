@@ -1,6 +1,5 @@
 package pageFactory.saucedemo;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -25,7 +24,7 @@ public class LoginPage extends BasePage {
 
 
     public LoginPage() {
-       PageFactory.initElements(driver, this);
+        PageFactory.initElements(driver, this);
     }
 
 
@@ -50,13 +49,13 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage enterData(Login_VObject login_vObject){
+    public LoginPage enterData(Login_VObject login_vObject) {
         enterUsername(login_vObject.getUsername());
         enterPassword(login_vObject.getPassword());
         return this;
     }
 
-    public LoginPage enterData(LoginBuilder loginBuilder){
+    public LoginPage enterData(LoginBuilder loginBuilder) {
         enterUsername(loginBuilder.getUsername());
         enterPassword(loginBuilder.getPassword());
         return this;

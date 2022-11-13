@@ -8,9 +8,9 @@ import pageObjects.baseObjects.BasePage;
 
 public class DropdownListPage extends BasePage {
     private final By dropDown = By.id("dropdown");
-    private By title = By.tagName("h3");
     private final By option1 = By.xpath("//option[@value='1']");
     private final By option2 = By.xpath("//option[@value='2']");
+    private By title = By.tagName("h3");
 
     public DropdownListPage verifyPageTitle(String text) {
         Assert.assertEquals(getText(title), text);

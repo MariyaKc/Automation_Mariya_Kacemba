@@ -14,11 +14,12 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 
 /**
- (*) JsonSchema
- К 3 -5 ответам сформировать схемы которые будут валидировать :
- тип элемента
- обязательные поля объекта
- данные которые может содержать элемент */
+ * (*) JsonSchema
+ * К 3 -5 ответам сформировать схемы которые будут валидировать :
+ * тип элемента
+ * обязательные поля объекта
+ * данные которые может содержать элемент
+ */
 
 public class JsonSchema_test {
 

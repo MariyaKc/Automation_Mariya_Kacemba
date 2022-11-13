@@ -1,8 +1,6 @@
 package pageObjects.moodpanda;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import pageObjects.baseObjects.BasePage;
 
 public class HomePage extends MoodPandaBasePage {
 
@@ -18,7 +16,10 @@ public class HomePage extends MoodPandaBasePage {
         click(getStartedBtn);
         return this;
     }
- /** паттерн Loadable Page*/
+
+    /**
+     * паттерн Loadable Page
+     */
     @Override
     public void isPageOpened() { //реализуем метод из абстрактного класса и закидываем в метод open либо создаем дженерик в абстрактном классе
         waitVisibilityOfElement(title); //

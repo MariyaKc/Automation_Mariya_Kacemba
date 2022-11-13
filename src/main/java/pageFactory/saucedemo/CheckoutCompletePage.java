@@ -1,11 +1,9 @@
 package pageFactory.saucedemo;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.reporters.jq.BasePanel;
 import pageObjects.baseObjects.BasePage;
 
 import static driver.SimpleDriver.getWebDriver;
@@ -19,7 +17,7 @@ public class CheckoutCompletePage extends BasePage {
     private WebElement finishTitle;
 
     @FindBy(xpath = "//span[@class='title']")
-    private WebElement title ;
+    private WebElement title;
 
     public CheckoutCompletePage() { /** Loadable Page pattern */
         PageFactory.initElements(driver, this);

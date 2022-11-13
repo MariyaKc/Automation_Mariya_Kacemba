@@ -1,6 +1,8 @@
 package pageObjects.moodpanda.entity;
 
-/** реализауия Value Object*/
+/**
+ * реализауия Value Object
+ */
 public class SignUp {
     private String firstName;
     private String lastName;

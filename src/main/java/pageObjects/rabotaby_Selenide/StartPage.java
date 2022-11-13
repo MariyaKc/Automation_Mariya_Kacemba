@@ -12,9 +12,9 @@ public class StartPage extends SelenideBasePage {
 
     private final SelenideElement searchBtn = $(By.xpath("//button[contains(@data-qa, 'search')]"));
     private final SelenideElement searchFiled = $("#a11y-search-input");
-    private final SelenideElement notification =$(".bloko-notification__plate");
-    private final SelenideElement confirmRegionBtn =$("[data-qa='region-clarification-confirm']");
-    private final SelenideElement changeRegionBtn =$("[class='supernova-navi-item_area-switcher-button']");
+    private final SelenideElement notification = $(".bloko-notification__plate");
+    private final SelenideElement confirmRegionBtn = $("[data-qa='region-clarification-confirm']");
+    private final SelenideElement changeRegionBtn = $("[class='supernova-navi-item_area-switcher-button']");
 
     public StartPage() {
         verifyPageUrl();
@@ -25,19 +25,19 @@ public class StartPage extends SelenideBasePage {
         return this;
     }
 
-    public StartPage clickSearch(){
+    public StartPage clickSearch() {
         click(searchBtn);
         return this;
     }
 
-    public StartPage confirmRegion(){
+    public StartPage confirmRegion() {
         if (notification.exists()) {
             click(confirmRegionBtn);
         }
         return this;
     }
 
-    public StartPage changeRegion(){
+    public StartPage changeRegion() {
         if (notification.exists()) {
             click(changeRegionBtn);
         }
@@ -53,7 +53,7 @@ public class StartPage extends SelenideBasePage {
         return this;
     }
 
-    public StartPage enterSearch(String text){
+    public StartPage enterSearch(String text) {
         enter(this.searchFiled, text);
         return this;
     }

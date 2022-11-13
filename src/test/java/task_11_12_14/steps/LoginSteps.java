@@ -9,7 +9,7 @@ public class LoginSteps extends BasePage {
     LoginPage loginPage = new LoginPage();
 
     @Step("Login by user: {username} , {password}")
-    public LoginSteps login(){
+    public LoginSteps login() {
         loginPage.open();
 
         User user = new User.UserBuilder()

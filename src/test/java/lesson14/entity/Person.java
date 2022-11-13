@@ -1,7 +1,10 @@
 package lesson14.entity;
 
 import lombok.*;
-/**Создание сущности с библиотекой lombok */
+
+/**
+ * Создание сущности с библиотекой lombok
+ */
 @Getter
 @Setter
 @ToString

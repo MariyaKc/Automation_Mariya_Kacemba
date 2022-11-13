@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link href="style.css" rel="stylesheet">
     <title>Page Title</title>
 </head>
 <body>
-<img src="petheader.jpg" alt="Logo" style="max-width: 100%; height: auto;">
+<img alt="Logo" src="petheader.jpg" style="max-width: 100%; height: auto;">
 <h1 class="text-center" id="title"> PetShop </h1>
 <p id="logForm">Login: </p>
 <form id="login_form">
     <div class="container">
-    <label for="user"><b>Username:</b></label><br>
-    <input type="username" placeholder="enter username" id="user" name="username"><br>
-    <label for="pswrd"><b>Password:</b></label><br>
-    <input type="password" placeholder="enter password" id="pswrd" name="password">
-    <button id="logIn_btn" type="button">Login</button>
-    <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
+        <label for="user"><b>Username:</b></label><br>
+        <input id="user" name="username" placeholder="enter username" type="username"><br>
+        <label for="pswrd"><b>Password:</b></label><br>
+        <input id="pswrd" name="password" placeholder="enter password" type="password">
+        <button id="logIn_btn" type="button">Login</button>
+        <label>
+            <input checked="checked" name="remember" type="checkbox"> Remember me
+        </label>
     </div>
     <div class="container" style="background-color:#f1f1f1">
-        <button id= "cncl" type="button" class="cancelbtn">Cancel</button>
+        <button class="cancelbtn" id="cncl" type="button">Cancel</button>
         <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
 </form>
@@ -28,14 +28,14 @@
 </form>
 <p class="cities">
     <label for="cities" id="lb"><b>Select your city:</b></label><br>
-    <select name="cities" id="cities">
+    <select id="cities" name="cities">
         <option value="1">Minsk</option>
         <option value="2">Gomel</option>
         <option value="3">Warshaw</option>
         <option value="4">Riga</option>
     </select></p>
 
-<table id="tab" class ="table_sort" >
+<table class="table_sort" id="tab">
     <thead>
     <tr>
         <th>Brand</th>
@@ -115,13 +115,14 @@
 
     document.querySelectorAll('.table_sort thead').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
 
-});</script>
+});
+</script>
 
 <h2 id="h2"> Contact us on social networks: </h2>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<a href="https://twitter.com/" class="fa fa-twitter"></a>
-<a href="https://www.reddit.com/" class="fa fa-reddit"></a>
-<a href="https://www.saucedemo.com/" class="fa fa-instagram"></a>
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<a class="fa fa-twitter" href="https://twitter.com/"></a>
+<a class="fa fa-reddit" href="https://www.reddit.com/"></a>
+<a class="fa fa-instagram" href="https://www.saucedemo.com/"></a>
 </body>
 </html>

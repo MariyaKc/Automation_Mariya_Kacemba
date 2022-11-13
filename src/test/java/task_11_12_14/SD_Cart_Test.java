@@ -1,9 +1,7 @@
 package task_11_12_14;
 
-import io.qameta.allure.Step;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.BasketPage;
@@ -16,7 +14,7 @@ import task_11_12_14.steps.ProductStep;
 public class SD_Cart_Test extends BaseTest {
 
     @BeforeMethod
-    public void preconditions(){
+    public void preconditions() {
         get(LoginSteps.class).login();
     }
 
@@ -28,7 +26,7 @@ public class SD_Cart_Test extends BaseTest {
     }
 
     @Test(description = "Test to add and remove products by name")
-    public void addRemoveProductTest1(){
+    public void addRemoveProductTest1() {
         get(ProductStep.class)
                 .addProductByName(properties.getProperty("productName3"));
         get(BasketPage.class)
@@ -43,7 +41,7 @@ public class SD_Cart_Test extends BaseTest {
     }
 
     @Test(description = "Test to add and remove products by count")
-    public void addRemoveProductByCount(){
+    public void addRemoveProductByCount() {
         get(ProductStep.class).addProductByCount(5);
         get(BasketPage.class).clickContinueShopping();
         get(ProductStep.class).addProductByCount(1).removeProductByCount(6);

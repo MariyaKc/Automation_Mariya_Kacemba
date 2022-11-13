@@ -4,13 +4,15 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.SelenideBaseTest;
-import pageObjects.moodpanda_Selenide.navigation.NavigationPage;
 import pageObjects.moodpanda_Selenide.SignUpPage;
 import pageObjects.moodpanda_Selenide.lombok.SignUp;
-import testNgUtils.Retry;
+import pageObjects.moodpanda_Selenide.navigation.NavigationPage;
 
 import java.lang.reflect.Method;
-/** Написать 3 теста регистрацию */
+
+/**
+ * Написать 3 теста регистрацию
+ */
 public class SignUp_Test extends SelenideBaseTest {
 
     @BeforeTest
@@ -63,7 +65,7 @@ public class SignUp_Test extends SelenideBaseTest {
                     {"FirstName", "L", "test@test.ru", "", true, "One or more validation errors occurred.", "Password is required"},
                     {"", "", "", "", false, "One or more validation errors occurred.", ""}};
         } else if (method.getName().equals("positiveSignUpTest")) {
-            result =  new Object[][]{
+            result = new Object[][]{
                     {properties.getProperty("firstName"), properties.getProperty("lastNameInitial"), properties.getProperty("email"), properties.getProperty("password"), true, "You already have an account, or this account cannot be created"}
             };
         }

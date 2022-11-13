@@ -30,7 +30,7 @@ public class UpdateHelper extends DBConnector {
     @SneakyThrows
     public UpdateHelper execute() {
         String setWhere = where == null ? "" : " WHERE " + where;
-       getStatement().executeUpdate("UPDATE " + update + " SET " + set + setWhere);
+        getStatement().executeUpdate("UPDATE " + update + " SET " + set + setWhere);
         return this;
     }
 }

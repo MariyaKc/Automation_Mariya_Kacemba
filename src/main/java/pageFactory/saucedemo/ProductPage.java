@@ -21,13 +21,13 @@ public class ProductPage extends BasePage {
     @FindBys({
             @FindBy(tagName = "option")
     })
-    List <WebElement> getFilterOptions;
+    List<WebElement> getFilterOptions;
 
     @FindBy(css = "[id|=add-to-cart]")
-    WebElement  addToCartBtn;
+    WebElement addToCartBtn;
 
     @FindBy(css = ".app_logo")
-    WebElement  logo;
+    WebElement logo;
 
     @FindBy(className = "product_sort_container")
     WebElement filterBtn;
@@ -35,12 +35,12 @@ public class ProductPage extends BasePage {
     @FindBys({
             @FindBy(className = "inventory_item_name")
     })
-    List <WebElement> allProducts;
+    List<WebElement> allProducts;
 
     @FindBys({
             @FindBy(className = "inventory_item_price")
     })
-    List <WebElement> allProductPrices;
+    List<WebElement> allProductPrices;
 
     @FindBy(className = "product_sort_container")
     WebElement productSort;
@@ -52,7 +52,7 @@ public class ProductPage extends BasePage {
     }
 
     public ProductPage verifyProductPageIsOpened() {
-      waitVisibilityOfElements(addToCartBtn, logo);
+        waitVisibilityOfElements(addToCartBtn, logo);
         return this;
     }
 
@@ -96,6 +96,7 @@ public class ProductPage extends BasePage {
         clickAll(addToCartBtn);
         return this;
     }
+
     public ProductPage clickFilterBtn() {
         click(filterBtn);
         return this;
@@ -111,22 +112,22 @@ public class ProductPage extends BasePage {
     }
 
     public ProductPage VerifySortNameAtoZ() {
-        Assert.assertEquals(getTexts(allProducts),getSortAscendingByTexts(allProducts));
+        Assert.assertEquals(getTexts(allProducts), getSortAscendingByTexts(allProducts));
         return this;
     }
 
     public ProductPage VerifySortNameZtoA() {
-        Assert.assertEquals(getTexts(allProducts),getSortDescendingByTexts(allProducts));
+        Assert.assertEquals(getTexts(allProducts), getSortDescendingByTexts(allProducts));
         return this;
     }
 
     public ProductPage VerifySortPriceLowToHigh() {
-        Assert.assertEquals(getValues(allProductPrices),getSortAscendingByValues(allProductPrices));
+        Assert.assertEquals(getValues(allProductPrices), getSortAscendingByValues(allProductPrices));
         return this;
     }
 
     public ProductPage VerifySortPriceHighToLow() {
-        Assert.assertEquals(getValues(allProductPrices),getSortDescendingByValues(allProductPrices));
+        Assert.assertEquals(getValues(allProductPrices), getSortDescendingByValues(allProductPrices));
         return this;
     }
 }

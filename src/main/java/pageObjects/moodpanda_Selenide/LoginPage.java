@@ -5,7 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import pageObjects.baseObjects.SelenideBasePage;
 
-
 import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPage extends SelenideBasePage {
@@ -26,6 +25,7 @@ public class LoginPage extends SelenideBasePage {
     public LoginPage() {
         verifyPageUri();
     }
+
     public LoginPage verifyPageUri() {
         verifyUri("login");
         return this;
@@ -42,22 +42,22 @@ public class LoginPage extends SelenideBasePage {
     }
 
     public LoginPage clickLogin() {
-       click(loginBtn);
+        click(loginBtn);
         return this;
     }
 
     public LoginPage clickDontAccount() {
-       click(dontAccountBtn);
+        click(dontAccountBtn);
         return this;
     }
 
     public LoginPage clickForgotPassword() {
-       click(forgotBtn);
+        click(forgotBtn);
         return this;
     }
 
     public LoginPage clickCantLogin() {
-       click(cantLoginBtn);
+        click(cantLoginBtn);
         return this;
     }
 
@@ -81,7 +81,9 @@ public class LoginPage extends SelenideBasePage {
         return this;
     }
 
-    /** for cucumber test */
+    /**
+     * for cucumber test
+     */
     public LoginPage verifyErrorMessage(String message) {
         notification.should(Condition.text(message));
         return this;
