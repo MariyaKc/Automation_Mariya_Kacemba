@@ -11,18 +11,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** Stream API
- 1. [-79, 99, -83, -75, -78, -22, -57, 84, 11, 15]
- Преобразовать элементы коллекции в положительные и отсортировать по возрастанию.
-
- Результат вывода в консоль:
- [11, 15, 22, 57, 75, 78, 79, 83, 84, 99]
-
- 2. http://the-internet.herokuapp.com/tables
- - Получить данные таблицы 1 колонки Email
- - Данные колонки Email преобразовать в формат <name>@gmail.com
- Результат вывода в консоль
- [fbach@gmail.com, jdoe@gmail.com, jsmith@gmail.com, tconway@gmail.com] */
+/**
+ * Stream API
+ * 1. [-79, 99, -83, -75, -78, -22, -57, 84, 11, 15]
+ * Преобразовать элементы коллекции в положительные и отсортировать по возрастанию.
+ * <p>
+ * Результат вывода в консоль:
+ * [11, 15, 22, 57, 75, 78, 79, 83, 84, 99]
+ * <p>
+ * 2. http://the-internet.herokuapp.com/tables
+ * - Получить данные таблицы 1 колонки Email
+ * - Данные колонки Email преобразовать в формат <name>@gmail.com
+ * Результат вывода в консоль
+ * [fbach@gmail.com, jdoe@gmail.com, jsmith@gmail.com, tconway@gmail.com]
+ */
 
 public class StreamAPI extends BaseTest {
 
@@ -56,16 +58,16 @@ public class StreamAPI extends BaseTest {
         //.split - расщепляет строку на две. @ - параметр по которому делим получаем массив [jdoe, gmail.com].Забираем первую часть 0-элемент массива и добавляем  + "@gmail.com"
 
         /** 3-способ */
-        List<String> gmail = mapTableData.get("Email").stream().map(data-> {
-            String newData =" ";
-            if(data.contains("yaho")) {
-                newData =data.replace("yahoo","gmail");
-            } else if(data.contains("hotmail")){
-                newData = data.replace("hotmail","gmail");
-            } else if(data.contains("earthlink")){
-                newData = data.replace("earthlink.net","gmail.com");
-            }else{
-                newData=data;
+        List<String> gmail = mapTableData.get("Email").stream().map(data -> {
+            String newData = " ";
+            if (data.contains("yaho")) {
+                newData = data.replace("yahoo", "gmail");
+            } else if (data.contains("hotmail")) {
+                newData = data.replace("hotmail", "gmail");
+            } else if (data.contains("earthlink")) {
+                newData = data.replace("earthlink.net", "gmail.com");
+            } else {
+                newData = data;
             }
             return newData;
         }).sorted().collect(Collectors.toList());

@@ -68,7 +68,7 @@ public class ProductPage extends BasePage {
     }
 
     public ProductPage addProductToBasketForCount(int count) {
-        for (int i=0; i<count; i++) {
+        for (int i = 0; i < count; i++) {
             click(addToCartBtn);
         }
         return this;
@@ -84,6 +84,7 @@ public class ProductPage extends BasePage {
         clickAll(addToCartBtn);
         return this;
     }
+
     public ProductPage clickFilterBtn() {
         click(filterBtn);
         return this;
@@ -99,22 +100,22 @@ public class ProductPage extends BasePage {
     }
 
     public ProductPage VerifySortNameAtoZ() {
-        Assert.assertEquals(getTexts(allProducts),getSortAscendingByTexts(allProducts));
+        Assert.assertEquals(getTexts(allProducts), getSortAscendingByTexts(allProducts));
         return this;
     }
 
     public ProductPage VerifySortNameZtoA() {
-        Assert.assertEquals(getTexts(allProducts),getSortDescendingByTexts(allProducts));
+        Assert.assertEquals(getTexts(allProducts), getSortDescendingByTexts(allProducts));
         return this;
     }
 
     public ProductPage VerifySortPriceLowToHigh() {
-        Assert.assertEquals(getValues(allProductPrices),getSortAscendingByValues(allProductPrices));
+        Assert.assertEquals(getValues(allProductPrices), getSortAscendingByValues(allProductPrices));
         return this;
     }
 
     public ProductPage VerifySortPriceHighToLow() {
-        Assert.assertEquals(getValues(allProductPrices),getSortDescendingByValues(allProductPrices));
+        Assert.assertEquals(getValues(allProductPrices), getSortDescendingByValues(allProductPrices));
         return this;
     }
 }

@@ -1,6 +1,5 @@
 package lesson11;
 
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.LoginPage;

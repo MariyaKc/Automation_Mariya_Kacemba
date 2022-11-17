@@ -13,12 +13,12 @@ public class TablePage extends BasePage {
     private final By table = By.className("table_sort");
     private By headers = By.xpath("//table[@class='table_sort']//th");
 
-    private By getTableRow(String index){
-        return By.xpath("//table[@class='table_sort']//tbody//tr[" + index +"]");
+    private By getTableRow(String index) {
+        return By.xpath("//table[@class='table_sort']//tbody//tr[" + index + "]");
     }
 
-    public TablePage open(){
-        driver.get("file:///" +System.getProperty("user.dir") +"/files/tableForTest.html");
+    public TablePage open() {
+        driver.get("file:///" + System.getProperty("user.dir") + "/files/tableForTest.html");
         return this;
     }
 
@@ -33,30 +33,31 @@ public class TablePage extends BasePage {
     }
 
     public TablePage doubleClickTableColumn(String columnName) {
-       actions.doubleClick(findElement(headers).findElement(By.xpath("//th[text()='" + columnName + "']"))).build().perform();
+        actions.doubleClick(findElement(headers).findElement(By.xpath("//th[text()='" + columnName + "']"))).build().perform();
         return this;
     }
 
-    public List<List<String>> getTableRowsData(){
+    public List<List<String>> getTableRowsData() {
         Integer rowCount = driver.findElements(getTableRow("..")).size();
         List<List<String>> data = new ArrayList<>();
-        for(int row=0; row<rowCount; row++){
-            List<String> columData=new ArrayList<>();
+        for (int row = 0; row < rowCount; row++) {
+            List<String> columData = new ArrayList<>();
             Integer columnCount = driver.findElement(getTableRow(Integer.toString(row + 1))).findElements(By.xpath(".//td")).size();
-            for(int column=0;column<columnCount;column++){
-                columData.add(driver.findElement(getTableRow(Integer.toString(row+1))).findElement(By.xpath(".//td[" + (column+1)+"]")).getText());
+            for (int column = 0; column < columnCount; column++) {
+                columData.add(driver.findElement(getTableRow(Integer.toString(row + 1))).findElement(By.xpath(".//td[" + (column + 1) + "]")).getText());
             }
             data.add(columData);
-        }return data;
+        }
+        return data;
     }
 
-    public Map<String ,List<String>> getTableData(){
-        Map<String ,List<String>> mapData= new HashMap<>();
+    public Map<String, List<String>> getTableData() {
+        Map<String, List<String>> mapData = new HashMap<>();
         Integer headerCount = driver.findElements(headers).size();
-        List<List<String>> tableData= getTableRowsData();
-        for (int header=0; header<headerCount; header++){
+        List<List<String>> tableData = getTableRowsData();
+        for (int header = 0; header < headerCount; header++) {
             List<String> columnData = new ArrayList<>();
-            for (List<String> data:tableData){
+            for (List<String> data : tableData) {
                 columnData.add(data.get(header));
             }
             mapData.put(driver.findElements(headers).get(header).getText(), columnData);

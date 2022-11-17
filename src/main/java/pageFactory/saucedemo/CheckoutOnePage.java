@@ -1,6 +1,5 @@
 package pageFactory.saucedemo;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -13,22 +12,22 @@ import static driver.SimpleDriver.getWebDriver;
 
 public class CheckoutOnePage extends BasePage {
 
-    @FindBy (id = "first-name")
+    @FindBy(id = "first-name")
     WebElement firstName;
 
-    @FindBy (id = "last-name")
+    @FindBy(id = "last-name")
     WebElement lastName;
 
-    @FindBy (id = "postal-code")
+    @FindBy(id = "postal-code")
     WebElement zipCode;
 
-    @FindBy (id = "continue")
+    @FindBy(id = "continue")
     WebElement continueBtn;
 
-    @FindBy (xpath = "//span[@class='title']")
+    @FindBy(xpath = "//span[@class='title']")
     WebElement title;
 
-    @FindBy (xpath = "//h3[@data-test='error']")
+    @FindBy(xpath = "//h3[@data-test='error']")
     WebElement message;
 
     public CheckoutOnePage() {
@@ -42,9 +41,10 @@ public class CheckoutOnePage extends BasePage {
     }
 
     public CheckoutOnePage verifyCheckoutOne() {
-        Assert.assertTrue(waitVisibilityOfElements(firstName, lastName, zipCode,continueBtn));
+        Assert.assertTrue(waitVisibilityOfElements(firstName, lastName, zipCode, continueBtn));
         return this;
     }
+
     public CheckoutOnePage verifyPageTitle() {
         Assert.assertEquals(getText(title), "CHECKOUT: YOUR INFORMATION");
         return this;
@@ -66,14 +66,14 @@ public class CheckoutOnePage extends BasePage {
         return this;
     }
 
-    public CheckoutOnePage enterData(Checkout_VObject checkout_vObject){
+    public CheckoutOnePage enterData(Checkout_VObject checkout_vObject) {
         enterFirstName(checkout_vObject.getFirstName());
         enterLastName(checkout_vObject.getLastName());
         enterZipCode(checkout_vObject.getZipCode());
         return this;
     }
 
-    public CheckoutOnePage enterData(CheckoutBuilder checkoutBuilder){
+    public CheckoutOnePage enterData(CheckoutBuilder checkoutBuilder) {
         enterFirstName(checkoutBuilder.getFirstName());
         enterLastName(checkoutBuilder.getLastName());
         enterZipCode(checkoutBuilder.getZipCode());

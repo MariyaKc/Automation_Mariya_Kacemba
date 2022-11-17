@@ -26,5 +26,6 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.935 sec
 **Пробросить параметр из mvn command line внутрь теста** (для lesson10.SaucedemoLogin_test)
 **mvn clean test -Dtest=SaucedemoLogin_test -Dusername=standard_user -Dpassword=secret_sauce**
 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.689 s - in lesson10.SaucedemoLogin_test
-**mvn clean test -Dconfig="moodpanda" -DsuiteXml="Lesson_13"** (запуск свита с пробросом проперти через параметр config из командной строки )
+**mvn clean test -Dconfig="moodpanda" -DsuiteXml="Lesson_13"** (запуск свита с пробросом проперти через параметр config
+из командной строки )
 

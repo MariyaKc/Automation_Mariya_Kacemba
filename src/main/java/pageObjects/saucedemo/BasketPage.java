@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static driver.DriverManager.getDriver;
@@ -76,7 +75,7 @@ public class BasketPage extends BasePage {
     }
 
     public BasketPage removeProductForCount(int count) {
-        for (int i=0; i<count; i++) {
+        for (int i = 0; i < count; i++) {
             click(removeBtn);
         }
         return this;

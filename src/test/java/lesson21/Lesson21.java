@@ -4,6 +4,9 @@ import lombok.SneakyThrows;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pageObjects.baseObjects.BaseTest;
+import sql.SelectHelper;
+import sql.TableHelper;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,23 +14,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Lesson21 {
+
+public class Lesson21 extends BaseTest {
 
     Connection connection;
     Statement statement;
+    SelectHelper selectHelper;
 
     @SneakyThrows //позволяет не писать try catch
     @BeforeTest
     public void preconditions() { //создает соединение с БД
         connection = DriverManager.getConnection("jdbc:mysql://db4free.net/testqa07?user=testqa07&password=testqa07");
         statement = connection.createStatement(); //содержит реализации для запросов в БД
-        print(select("SELECT * FROM user")); // значения из всей таблицы
+        get(TableHelper.class).createTable("user");
+        get(TableHelper.class).insert("INSERT INTO user (id, firstname) VALUES (100, 'QA16onl')");
+        print(get(TableHelper.class).select("SELECT * FROM user"));
     }
 
     @Test(priority = 1)
     public void selectLike_Test() {
         String sql = "SELECT * FROM user WHERE last_name LIKE 'test%'";
-        print(select(sql));
+        print(get(TableHelper.class).select(sql));
         select(sql).forEach(row -> {
             Assert.assertTrue(row.get("last_name").contains("test"));
         });
@@ -36,7 +43,7 @@ public class Lesson21 {
     @Test(priority = 2)
     public void selectBetween_Test() {
         String sql = "SELECT * FROM user WHERE age BETWEEN 20 AND 30";
-        print(select(sql));
+        print(get(TableHelper.class).select(sql));
         select(sql).forEach(row -> {
             Assert.assertTrue(Integer.parseInt(row.get("age")) >= 20 && Integer.parseInt(row.get("age")) <= 30);
         });
@@ -84,16 +91,16 @@ public class Lesson21 {
     }
 
     @SneakyThrows
-    private List<Map<String, String>> select(String sql) {
-        ResultSet resultSet = statement.executeQuery(sql); // позволяет выполнить запрос и записать результат в ResultSet, который потом можно переформатировать в необходимый формат
-        ResultSetMetaData resultSetMetaData = resultSet.getMetaData(); //чтобы переиспользовать данные из таблицы, переводим в ResultSetMetaData
-        List<Map<String, String>> data = new ArrayList<>(); //строка(название колонки = значение,...)
-        while (resultSet.next()) { //-заходит на строку; значения будут перебираться до тех пор, пока существуют записи. next() означает перебор, можно обращаться к новому значению по индексу
+    public List<Map<String, String>> select(String sql) {
+        ResultSet resultSet = statement.executeQuery(sql);
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        List<Map<String, String>> data = new ArrayList<>();
+        while (resultSet.next()) {
             Map<String, String> row = new HashMap<>();
-            for (int index = 1; index <= resultSetMetaData.getColumnCount(); index++) { //перебор значений в колонке;индексация с первого значения
-                row.put(resultSetMetaData.getColumnName(index), resultSet.getString(index)); //забираем данные из колонки в текущей строке и помещаем в мапу название колонки и данные из нее (название колонки = значение)
+            for (int index = 1; index <= resultSetMetaData.getColumnCount(); index++) {
+                row.put(resultSetMetaData.getColumnName(index), resultSet.getString(index));
             }
-            data.add(row);//записывает мапу строк в лист
+            data.add(row);
         }
         return data;
     }

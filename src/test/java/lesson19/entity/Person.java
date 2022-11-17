@@ -1,10 +1,17 @@
 package lesson19.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-/**Представление JSON в качестве стандартного джава entity */
+
+/**
+ * Представление JSON в качестве стандартного джава entity
+ */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Person {
     Integer id;
     String name;

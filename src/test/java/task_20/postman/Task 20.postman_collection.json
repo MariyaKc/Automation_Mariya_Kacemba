@@ -1,1239 +1,1239 @@
 {
-	"info": {
-		"_postman_id": "87262701-4951-42f7-b7db-c85bd6c005a0",
-		"name": "Task 20",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24143068"
-	},
-	"item": [
-		{
-			"name": "JSON Schema",
-			"item": [
-				{
-					"name": "Single <Resource> (JSON Schema)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", () => {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const jsonSchema = {",
-									"    \"type\": \"object\",",
-									"    \"required\": [",
-									"        \"data\",",
-									"        \"support\"",
-									"    ],",
-									"    \"additionalProrerties\": false,",
-									"    \"properties\": {",
-									"        \"data\": {",
-									"            \"type\": \"object\",",
-									"            \"required\": [",
-									"                \"id\",",
-									"                \"name\",",
-									"                \"year\",",
-									"                \"color\",",
-									"                \"pantone_value\"",
-									"            ],",
-									"            \"additionalProrerties\": false,",
-									"            \"properties\": {",
-									"                \"id\": {",
-									"                    \"type\": \"integer\",",
-									"                     \"maximum\":10 ",
-									"                },",
-									"                \"name\": {",
-									"                    \"type\": \"string\",",
-									"                    \"pattern\": \"^[A-Za-z\\\\s]+$\"",
-									"                },",
-									"                \"year\": {",
-									"                    \"type\": \"integer\",",
-									"                     \"minimum\":2001",
-									"                },",
-									"                \"color\": {",
-									"                    \"type\": \"string\"",
-									"                },",
-									"                \"pantone_value\": {",
-									"                    \"type\": \"string\"",
-									"                }",
-									"            }",
-									"        },",
-									"        \"support\": {",
-									"            \"type\": \"object\",",
-									"            \"required\": [",
-									"                \"url\",",
-									"                \"text\"",
-									"            ],",
-									"            \"additionalProrerties\": false,",
-									"            \"properties\": {",
-									"                \"url\": {",
-									"                    \"type\": \"string\"",
-									"                },",
-									"                \"text\": {",
-									"                    \"type\": \"string\"",
-									"                }",
-									"            }",
-									"        }",
-									"    }",
-									"}",
-									"",
-									"pm.test('Schema is valid', () => {",
-									"    pm.response.to.have.jsonSchema (jsonSchema)",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}unknown/2",
-							"host": [
-								"{{url}}unknown"
-							],
-							"path": [
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "List <Resource> (JSON schema)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", () => {",
-									"    pm.response.to.have.status(200);",
-									"    pm.response.to.have.jsonBody('data');",
-									"});",
-									"",
-									"const jsonSchema = {",
-									"    \"type\": \"object\",",
-									"    \"required\": [",
-									"        \"page\",",
-									"        \"per_page\",",
-									"        \"total\",",
-									"        \"total_pages\",",
-									"        \"data\",",
-									"        \"support\"",
-									"    ],",
-									"    \"additionalProperties\": false,",
-									"    \"properties\": {",
-									"        \"page\": {",
-									"            \"type\": \"integer\"",
-									"        },",
-									"        \"per_page\": {",
-									"            \"type\": \"integer\"",
-									"        },",
-									"        \"total\": {",
-									"            \"type\": \"integer\"",
-									"        },",
-									"        \"total_pages\": {",
-									"            \"type\": \"integer\"",
-									"        },",
-									"        \"data\": {",
-									"            \"type\": \"array\",",
-									"            \"additionalItems\": true,",
-									"            \"items\": {",
-									"                \"type\": \"object\",",
-									"                \"required\": [",
-									"                    \"id\",",
-									"                    \"name\",",
-									"                    \"year\",",
-									"                    \"color\",",
-									"                    \"pantone_value\"",
-									"                ],",
-									"                \"additionalProperties\": false,",
-									"                \"properties\": {",
-									"                    \"id\": {",
-									"                        \"type\": \"integer\",",
-									"                        \"enum\" : [1,2,3,4,5,6] ",
-									"                    },",
-									"                    \"name\": {",
-									"                        \"type\": \"string\",",
-									"                        \"pattern\": \"^[A-Za-z\\\\s]+$\"",
-									"                    },",
-									"                    \"year\": {",
-									"                        \"type\": \"integer\",",
-									"                        \"minimum\":2000,",
-									"                        \"maximum\":2005 ",
-									"                    },",
-									"                    \"color\": {",
-									"                        \"type\": \"string\"",
-									"                    },",
-									"                    \"pantone_value\": {",
-									"                        \"type\": \"string\"",
-									"                    }",
-									"                }",
-									"            }",
-									"        },",
-									"        \"support\": {",
-									"            \"type\": \"object\",",
-									"            \"required\": [",
-									"                \"url\",",
-									"                \"text\"",
-									"            ],",
-									"            \"additionalProperties\": false,",
-									"            \"properties\": {",
-									"                \"url\": {",
-									"                    \"type\": \"string\"",
-									"                },",
-									"                \"text\": {",
-									"                    \"type\": \"string\"",
-									"                }",
-									"            }",
-									"        }",
-									"    }",
-									"}",
-									"",
-									"pm.test('Schema is valid', () => {",
-									"    pm.response.to.have.jsonSchema (jsonSchema)",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}unknown",
-							"host": [
-								"{{url}}unknown"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delayed Response (JSON Schema)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", () => {",
-									"    pm.response.to.have.status(200);",
-									"    pm.response.to.have.jsonBody('data');",
-									"});",
-									"",
-									"const jsonSchema = {",
-									"    \"type\": \"object\",",
-									"    \"required\": [",
-									"        \"page\",",
-									"        \"per_page\",",
-									"        \"total\",",
-									"        \"total_pages\",",
-									"        \"data\",",
-									"        \"support\"",
-									"    ],",
-									"    \"additionalProperties\": false,",
-									"    \"properties\": {",
-									"        \"page\": {",
-									"            \"type\": \"integer\"",
-									"        },",
-									"        \"per_page\": {",
-									"            \"type\": \"integer\"",
-									"        },",
-									"        \"total\": {",
-									"            \"type\": \"integer\"",
-									"        },",
-									"        \"total_pages\": {",
-									"            \"type\": \"integer\"",
-									"        },",
-									"        \"data\": {",
-									"            \"type\": \"array\",",
-									"            \"additionalItems\": true,",
-									"            \"items\": {",
-									"                \"type\": \"object\",",
-									"                \"required\": [",
-									"                    \"id\",",
-									"                    \"email\",",
-									"                    \"first_name\",",
-									"                    \"last_name\",",
-									"                    \"avatar\"",
-									"                ],",
-									"                \"additionalProperties\": false,",
-									"                \"properties\": {",
-									"                    \"id\": {",
-									"                        \"type\": \"integer\",",
-									"                         \"minimum\":1,",
-									"                         \"maximum\":7 ",
-									"                    },",
-									"                    \"email\": {",
-									"                        \"type\": \"string\"",
-									"                    },",
-									"                    \"first_name\": {",
-									"                        \"type\": \"string\",",
-									"                        \"pattern\": \"^[A-Za-z\\\\s]+$\"",
-									"                    },",
-									"                    \"last_name\": {",
-									"                        \"type\": \"string\",",
-									"                        \"pattern\": \"^[A-Za-z\\\\s]+$\"",
-									"                    },",
-									"                    \"avatar\": {",
-									"                        \"type\": \"string\"",
-									"                    }",
-									"                }",
-									"            }",
-									"        },",
-									"        \"support\": {",
-									"            \"type\": \"object\",",
-									"            \"required\": [",
-									"                \"url\",",
-									"                \"text\"",
-									"            ],",
-									"            \"additionalProperties\": false,",
-									"            \"properties\": {",
-									"                \"url\": {",
-									"                    \"type\": \"string\"",
-									"                },",
-									"                \"text\": {",
-									"                    \"type\": \"string\"",
-									"                }",
-									"            }",
-									"        }",
-									"    }",
-									"}",
-									"",
-									"",
-									"pm.test('Schema is valid', () => {",
-									"    pm.response.to.have.jsonSchema (jsonSchema)",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}users?delay=3",
-							"host": [
-								"{{url}}users"
-							],
-							"query": [
-								{
-									"key": "delay",
-									"value": "3"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update (JSON Schema)",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"name\", \"morpheus\");",
-									"pm.collectionVariables.set(\"job\", \"zion resident\");"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\",() => {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const jsonSchema = {",
-									"    \"type\": \"object\",",
-									"    \"required\": [",
-									"        \"name\",",
-									"        \"job\",",
-									"        \"updatedAt\"",
-									"    ],",
-									"    \"additionalProperties\": false,",
-									"    \"properties\": {",
-									"        \"name\": {",
-									"            \"type\": \"string\",",
-									"            \"pattern\": \"^[A-Za-z\\\\s]+$\"",
-									"        },",
-									"        \"job\": {",
-									"            \"type\": \"string\",",
-									"            \"pattern\": \"^[A-Za-z\\\\s]+$\"",
-									"        },",
-									"        \"updatedAt\": {",
-									"            \"type\": \"string\"",
-									"        }",
-									"    }",
-									"}",
-									"",
-									"pm.test('Schema is valid', () => {",
-									"    pm.response.to.have.jsonSchema (jsonSchema)",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}users/2",
-							"host": [
-								"{{url}}users"
-							],
-							"path": [
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create (JSON Schema)",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"name\", \"morpheus\");",
-									"pm.collectionVariables.set(\"job\", \"leader\");"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\",  () => {",
-									"    pm.response.to.have.status(201);",
-									"});",
-									"",
-									"const jsonSchema = {",
-									"    \"type\": \"object\",",
-									"    \"required\": [",
-									"        \"name\",",
-									"        \"job\",",
-									"        \"id\",",
-									"        \"createdAt\"",
-									"    ],",
-									"    \"additionalProperties\": false,",
-									"    \"properties\": {",
-									"        \"name\": {",
-									"            \"type\": \"string\",",
-									"            \"pattern\": \"^[A-Za-z\\\\s]+$\"",
-									"        },",
-									"        \"job\": {",
-									"            \"type\": \"string\",",
-									"            \"pattern\": \"^[A-Za-z\\\\s]+$\"",
-									"        },",
-									"        \"id\": {",
-									"            \"type\": \"string\"",
-									"        },",
-									"        \"createdAt\": {",
-									"            \"type\": \"string\"",
-									"        }",
-									"    }",
-									"}",
-									"",
-									"pm.test('Schema is valid', () => {",
-									"    pm.response.to.have.jsonSchema (jsonSchema)",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}users",
-							"host": [
-								"{{url}}users"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Get single user",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", () => {",
-							"    pm.response.to.have.status(200);",
-							"    pm.response.to.have.jsonBody('data');",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  pm.expect(jsonData.data.id).to.be.a(\"number\");",
-							"  pm.expect(jsonData.data.email).to.be.a(\"string\");",
-							"  pm.expect(jsonData.data.first_name).to.be.a(\"string\");",
-							"  pm.expect(jsonData.data.last_name).to.be.a(\"string\");",
-							"  pm.expect(jsonData.data.avatar).to.be.a(\"string\");",
-							"",
-							"  pm.expect(jsonData.support.url).to.be.a(\"string\");",
-							"  pm.expect(jsonData.support.text).to.be.a(\"string\");",
-							"});",
-							"",
-							"",
-							"pm.test(\"Check response body\", () => {",
-							"    pm.expect(jsonData.data.id).to.eql(Number(pm.collectionVariables.get('id')));",
-							"    pm.expect(jsonData.data.email).to.eql(pm.collectionVariables.get('email'));",
-							"    pm.expect(jsonData.data.first_name).to.eql(pm.collectionVariables.get('first_name'));",
-							"    pm.expect(jsonData.data.last_name).to.eql(pm.collectionVariables.get('last_name'));",
-							"    pm.expect(jsonData.data.avatar).to.eql(pm.collectionVariables.get('avatar'));",
-							"});",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}users/2",
-					"host": [
-						"{{url}}users"
-					],
-					"path": [
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Single user not found",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 404\", function () {",
-							"    pm.response.to.have.status(404);",
-							"});",
-							"",
-							"pm.test(\"Check response body\", function () {",
-							"    pm.expect(pm.response.text()).to.eql('{}');",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}users/23",
-					"host": [
-						"{{url}}users"
-					],
-					"path": [
-						"23"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Single <Resource>",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", () => {",
-							"    pm.response.to.have.status(200);",
-							"    pm.response.to.have.jsonBody('data');",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  ",
-							"  pm.expect(jsonData.data.id).to.be.a(\"number\");",
-							"  pm.expect(jsonData.data.name).to.be.a(\"string\");",
-							"  pm.expect(jsonData.data.year).to.be.a(\"number\");",
-							"  pm.expect(jsonData.data.color).to.be.a(\"string\");",
-							"  pm.expect(jsonData.data.pantone_value).to.be.a(\"string\");",
-							"",
-							"  pm.expect(jsonData.support).to.be.a(\"object\");",
-							"});",
-							"",
-							"",
-							"pm.test(\"Check response body\", () => {",
-							"    pm.expect(jsonData.data.id).to.eql(Number(pm.collectionVariables.get('id')));",
-							"    pm.expect(jsonData.data.name).to.include(\"rose\");",
-							"    pm.expect(jsonData.data.year).to.eql(2001);",
-							"    pm.expect(jsonData.data.color).to.include(\"C7\");",
-							"    pm.expect(jsonData.data.pantone_value).to.include(\"17\"); ",
-							"",
-							"    pm.expect(jsonData.support.url).to.be.a(\"string\");",
-							"    pm.expect(jsonData.support.text).to.be.a(\"string\");",
-							"});",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}unknown/2",
-					"host": [
-						"{{url}}unknown"
-					],
-					"path": [
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Single <Resource> not found",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 404\", function () {",
-							"    pm.response.to.have.status(404);",
-							"});",
-							"",
-							"pm.test(\"Check response body\", function () {",
-							"    pm.expect(pm.response.text()).to.eql('{}');",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}unknown/23",
-					"host": [
-						"{{url}}unknown"
-					],
-					"path": [
-						"23"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.collectionVariables.set(\"name\", \"morpheus\");",
-							"pm.collectionVariables.set(\"job\", \"leader\");"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201\",  () => {",
-							"    pm.response.to.have.status(201);",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  ",
-							"  pm.expect(jsonData.name).to.be.a(\"string\");",
-							"  pm.expect(jsonData.job).to.be.a(\"string\");",
-							"  pm.expect(jsonData.id).to.be.a(\"string\");",
-							"  pm.expect(jsonData.createdAt).to.be.a(\"string\");",
-							"",
-							"});",
-							"",
-							"pm.test(\"Check response body\",  () => {",
-							"    pm.expect(jsonData.name).to.eql(pm.collectionVariables.get(\"name\"));",
-							"    pm.expect(jsonData.job).to.eql(pm.collectionVariables.get(\"job\"));",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}users",
-					"host": [
-						"{{url}}users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.collectionVariables.set(\"name\", \"morpheus\");",
-							"pm.collectionVariables.set(\"job\", \"zion resident\");"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201\",() => {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  pm.expect(jsonData.name).to.be.a(\"string\");",
-							"  pm.expect(jsonData.job).to.be.a(\"string\");",
-							"",
-							"",
-							"});",
-							"",
-							"pm.test(\"Check response body\",() => {",
-							"    pm.expect(jsonData.name).to.eql(pm.collectionVariables.get(\"name\"));",
-							"    pm.expect(jsonData.job).to.eql(pm.collectionVariables.get(\"job\"));",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}users/2",
-					"host": [
-						"{{url}}users"
-					],
-					"path": [
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.collectionVariables.set(\"name\", \"morpheus\");",
-							"pm.collectionVariables.set(\"job\", \"zion resident\");"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201\", () => {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  pm.expect(jsonData.name).to.be.a(\"string\");",
-							"  pm.expect(jsonData.job).to.be.a(\"string\");",
-							"",
-							"",
-							"});",
-							"",
-							"pm.test(\"Check response body\", () => {",
-							"    pm.expect(jsonData.name).to.eql(pm.collectionVariables.get(\"name\"));",
-							"    pm.expect(jsonData.job).to.eql(pm.collectionVariables.get(\"job\"));",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}users/2",
-					"host": [
-						"{{url}}users"
-					],
-					"path": [
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 404\", function () {",
-							"    pm.response.to.have.status(204);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{url}}users/2",
-					"host": [
-						"{{url}}users"
-					],
-					"path": [
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Register Successful",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.collectionVariables.set(\"email\", \"eve.holt@reqres.in\");",
-							"pm.collectionVariables.set(\"password\", \"pistol\");"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201\",  () => {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  pm.expect(jsonData.id).to.be.a(\"number\");",
-							"  pm.expect(jsonData.token).to.be.a(\"string\");",
-							"});",
-							"",
-							"pm.test(\"Check response body\",  () => {",
-							"    pm.expect(jsonData.id).to.eql(4);",
-							"    pm.expect(jsonData.token).to.eql(\"QpwL5tke4Pnpja7X4\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\":\"{{email}}\",\n    \"password\":\" {{password}}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}register",
-					"host": [
-						"{{url}}register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Register Unsuccessful",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.collectionVariables.set(\"email\", \"sydney@fife\")"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201\", () => {",
-							"    pm.response.to.have.status(400);",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  pm.expect(jsonData.error).to.be.a(\"string\");",
-							"});",
-							"",
-							"pm.test(\"Check response body\", () => {",
-							"    pm.expect(jsonData.error).to.eql(\"Missing password\");",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\": \"{{email}}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}register",
-					"host": [
-						"{{url}}register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login Successful",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.collectionVariables.set(\"email\", \"eve.holt@reqres.in\");",
-							"pm.collectionVariables.set(\"password\", \"cityslicka\");"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201\", () => {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  pm.expect(jsonData.token).to.be.a(\"string\");",
-							"});",
-							"",
-							"pm.test(\"Check response body\", () => {",
-							"    let jsonData = pm.response.json();",
-							"    pm.expect(jsonData.token).to.eql(\"QpwL5tke4Pnpja7X4\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\":\"{{email}}\",\n    \"password\":\" {{password}}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}login",
-					"host": [
-						"{{url}}login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login Unsuccessful",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.collectionVariables.set(\"email\", \"janet.weaver@reqres.in\")"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201\", () => {",
-							"    pm.response.to.have.status(400);",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  pm.expect(jsonData.error).to.be.a(\"string\");",
-							"});",
-							"",
-							"pm.test(\"Check response body\", () => {",
-							"    pm.expect(jsonData.error).to.eql(\"Missing password\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\": \"{{email}}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}login",
-					"host": [
-						"{{url}}login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delayed Response",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", () => {",
-							"    pm.response.to.have.status(200);",
-							"    pm.response.to.have.jsonBody('data');",
-							"});",
-							"",
-							"const jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Test data type of the response\", () => {",
-							"",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  pm.expect(jsonData.page).to.be.a(\"number\");",
-							"  pm.expect(jsonData.per_page).to.be.a(\"number\");",
-							"  pm.expect(jsonData.total).to.be.a(\"number\");",
-							"  pm.expect(jsonData.total_pages).to.be.a(\"number\");",
-							"  pm.expect(jsonData.data).to.be.an(\"array\");",
-							"  ",
-							"",
-							"  pm.expect(jsonData.support.url).to.be.a(\"string\");",
-							"  pm.expect(jsonData.support.text).to.be.a(\"string\");",
-							"});",
-							"",
-							"    ",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}users?delay=3",
-					"host": [
-						"{{url}}users"
-					],
-					"query": [
-						{
-							"key": "delay",
-							"value": "3"
-						}
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "id",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "first_name",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "last_name",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "avatar",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "name",
-			"value": ""
-		},
-		{
-			"key": "job",
-			"value": ""
-		},
-		{
-			"key": "password",
-			"value": ""
-		},
-		{
-			"key": "email",
-			"value": ""
-		}
-	]
+  "info": {
+    "_postman_id": "87262701-4951-42f7-b7db-c85bd6c005a0",
+    "name": "Task 20",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24143068"
+  },
+  "item": [
+    {
+      "name": "JSON Schema",
+      "item": [
+        {
+          "name": "Single <Resource> (JSON Schema)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const jsonSchema = {",
+                  "    \"type\": \"object\",",
+                  "    \"required\": [",
+                  "        \"data\",",
+                  "        \"support\"",
+                  "    ],",
+                  "    \"additionalProrerties\": false,",
+                  "    \"properties\": {",
+                  "        \"data\": {",
+                  "            \"type\": \"object\",",
+                  "            \"required\": [",
+                  "                \"id\",",
+                  "                \"name\",",
+                  "                \"year\",",
+                  "                \"color\",",
+                  "                \"pantone_value\"",
+                  "            ],",
+                  "            \"additionalProrerties\": false,",
+                  "            \"properties\": {",
+                  "                \"id\": {",
+                  "                    \"type\": \"integer\",",
+                  "                     \"maximum\":10 ",
+                  "                },",
+                  "                \"name\": {",
+                  "                    \"type\": \"string\",",
+                  "                    \"pattern\": \"^[A-Za-z\\\\s]+$\"",
+                  "                },",
+                  "                \"year\": {",
+                  "                    \"type\": \"integer\",",
+                  "                     \"minimum\":2001",
+                  "                },",
+                  "                \"color\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"pantone_value\": {",
+                  "                    \"type\": \"string\"",
+                  "                }",
+                  "            }",
+                  "        },",
+                  "        \"support\": {",
+                  "            \"type\": \"object\",",
+                  "            \"required\": [",
+                  "                \"url\",",
+                  "                \"text\"",
+                  "            ],",
+                  "            \"additionalProrerties\": false,",
+                  "            \"properties\": {",
+                  "                \"url\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"text\": {",
+                  "                    \"type\": \"string\"",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "",
+                  "pm.test('Schema is valid', () => {",
+                  "    pm.response.to.have.jsonSchema (jsonSchema)",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}unknown/2",
+              "host": [
+                "{{url}}unknown"
+              ],
+              "path": [
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List <Resource> (JSON schema)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {",
+                  "    pm.response.to.have.status(200);",
+                  "    pm.response.to.have.jsonBody('data');",
+                  "});",
+                  "",
+                  "const jsonSchema = {",
+                  "    \"type\": \"object\",",
+                  "    \"required\": [",
+                  "        \"page\",",
+                  "        \"per_page\",",
+                  "        \"total\",",
+                  "        \"total_pages\",",
+                  "        \"data\",",
+                  "        \"support\"",
+                  "    ],",
+                  "    \"additionalProperties\": false,",
+                  "    \"properties\": {",
+                  "        \"page\": {",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"per_page\": {",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"total\": {",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"total_pages\": {",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"data\": {",
+                  "            \"type\": \"array\",",
+                  "            \"additionalItems\": true,",
+                  "            \"items\": {",
+                  "                \"type\": \"object\",",
+                  "                \"required\": [",
+                  "                    \"id\",",
+                  "                    \"name\",",
+                  "                    \"year\",",
+                  "                    \"color\",",
+                  "                    \"pantone_value\"",
+                  "                ],",
+                  "                \"additionalProperties\": false,",
+                  "                \"properties\": {",
+                  "                    \"id\": {",
+                  "                        \"type\": \"integer\",",
+                  "                        \"enum\" : [1,2,3,4,5,6] ",
+                  "                    },",
+                  "                    \"name\": {",
+                  "                        \"type\": \"string\",",
+                  "                        \"pattern\": \"^[A-Za-z\\\\s]+$\"",
+                  "                    },",
+                  "                    \"year\": {",
+                  "                        \"type\": \"integer\",",
+                  "                        \"minimum\":2000,",
+                  "                        \"maximum\":2005 ",
+                  "                    },",
+                  "                    \"color\": {",
+                  "                        \"type\": \"string\"",
+                  "                    },",
+                  "                    \"pantone_value\": {",
+                  "                        \"type\": \"string\"",
+                  "                    }",
+                  "                }",
+                  "            }",
+                  "        },",
+                  "        \"support\": {",
+                  "            \"type\": \"object\",",
+                  "            \"required\": [",
+                  "                \"url\",",
+                  "                \"text\"",
+                  "            ],",
+                  "            \"additionalProperties\": false,",
+                  "            \"properties\": {",
+                  "                \"url\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"text\": {",
+                  "                    \"type\": \"string\"",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "",
+                  "pm.test('Schema is valid', () => {",
+                  "    pm.response.to.have.jsonSchema (jsonSchema)",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}unknown",
+              "host": [
+                "{{url}}unknown"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delayed Response (JSON Schema)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {",
+                  "    pm.response.to.have.status(200);",
+                  "    pm.response.to.have.jsonBody('data');",
+                  "});",
+                  "",
+                  "const jsonSchema = {",
+                  "    \"type\": \"object\",",
+                  "    \"required\": [",
+                  "        \"page\",",
+                  "        \"per_page\",",
+                  "        \"total\",",
+                  "        \"total_pages\",",
+                  "        \"data\",",
+                  "        \"support\"",
+                  "    ],",
+                  "    \"additionalProperties\": false,",
+                  "    \"properties\": {",
+                  "        \"page\": {",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"per_page\": {",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"total\": {",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"total_pages\": {",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"data\": {",
+                  "            \"type\": \"array\",",
+                  "            \"additionalItems\": true,",
+                  "            \"items\": {",
+                  "                \"type\": \"object\",",
+                  "                \"required\": [",
+                  "                    \"id\",",
+                  "                    \"email\",",
+                  "                    \"first_name\",",
+                  "                    \"last_name\",",
+                  "                    \"avatar\"",
+                  "                ],",
+                  "                \"additionalProperties\": false,",
+                  "                \"properties\": {",
+                  "                    \"id\": {",
+                  "                        \"type\": \"integer\",",
+                  "                         \"minimum\":1,",
+                  "                         \"maximum\":7 ",
+                  "                    },",
+                  "                    \"email\": {",
+                  "                        \"type\": \"string\"",
+                  "                    },",
+                  "                    \"first_name\": {",
+                  "                        \"type\": \"string\",",
+                  "                        \"pattern\": \"^[A-Za-z\\\\s]+$\"",
+                  "                    },",
+                  "                    \"last_name\": {",
+                  "                        \"type\": \"string\",",
+                  "                        \"pattern\": \"^[A-Za-z\\\\s]+$\"",
+                  "                    },",
+                  "                    \"avatar\": {",
+                  "                        \"type\": \"string\"",
+                  "                    }",
+                  "                }",
+                  "            }",
+                  "        },",
+                  "        \"support\": {",
+                  "            \"type\": \"object\",",
+                  "            \"required\": [",
+                  "                \"url\",",
+                  "                \"text\"",
+                  "            ],",
+                  "            \"additionalProperties\": false,",
+                  "            \"properties\": {",
+                  "                \"url\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"text\": {",
+                  "                    \"type\": \"string\"",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "",
+                  "",
+                  "pm.test('Schema is valid', () => {",
+                  "    pm.response.to.have.jsonSchema (jsonSchema)",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}users?delay=3",
+              "host": [
+                "{{url}}users"
+              ],
+              "query": [
+                {
+                  "key": "delay",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update (JSON Schema)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.collectionVariables.set(\"name\", \"morpheus\");",
+                  "pm.collectionVariables.set(\"job\", \"zion resident\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\",() => {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const jsonSchema = {",
+                  "    \"type\": \"object\",",
+                  "    \"required\": [",
+                  "        \"name\",",
+                  "        \"job\",",
+                  "        \"updatedAt\"",
+                  "    ],",
+                  "    \"additionalProperties\": false,",
+                  "    \"properties\": {",
+                  "        \"name\": {",
+                  "            \"type\": \"string\",",
+                  "            \"pattern\": \"^[A-Za-z\\\\s]+$\"",
+                  "        },",
+                  "        \"job\": {",
+                  "            \"type\": \"string\",",
+                  "            \"pattern\": \"^[A-Za-z\\\\s]+$\"",
+                  "        },",
+                  "        \"updatedAt\": {",
+                  "            \"type\": \"string\"",
+                  "        }",
+                  "    }",
+                  "}",
+                  "",
+                  "pm.test('Schema is valid', () => {",
+                  "    pm.response.to.have.jsonSchema (jsonSchema)",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}users/2",
+              "host": [
+                "{{url}}users"
+              ],
+              "path": [
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create (JSON Schema)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.collectionVariables.set(\"name\", \"morpheus\");",
+                  "pm.collectionVariables.set(\"job\", \"leader\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\",  () => {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "const jsonSchema = {",
+                  "    \"type\": \"object\",",
+                  "    \"required\": [",
+                  "        \"name\",",
+                  "        \"job\",",
+                  "        \"id\",",
+                  "        \"createdAt\"",
+                  "    ],",
+                  "    \"additionalProperties\": false,",
+                  "    \"properties\": {",
+                  "        \"name\": {",
+                  "            \"type\": \"string\",",
+                  "            \"pattern\": \"^[A-Za-z\\\\s]+$\"",
+                  "        },",
+                  "        \"job\": {",
+                  "            \"type\": \"string\",",
+                  "            \"pattern\": \"^[A-Za-z\\\\s]+$\"",
+                  "        },",
+                  "        \"id\": {",
+                  "            \"type\": \"string\"",
+                  "        },",
+                  "        \"createdAt\": {",
+                  "            \"type\": \"string\"",
+                  "        }",
+                  "    }",
+                  "}",
+                  "",
+                  "pm.test('Schema is valid', () => {",
+                  "    pm.response.to.have.jsonSchema (jsonSchema)",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}users",
+              "host": [
+                "{{url}}users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Get single user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "    pm.response.to.have.status(200);",
+              "    pm.response.to.have.jsonBody('data');",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  pm.expect(jsonData.data.id).to.be.a(\"number\");",
+              "  pm.expect(jsonData.data.email).to.be.a(\"string\");",
+              "  pm.expect(jsonData.data.first_name).to.be.a(\"string\");",
+              "  pm.expect(jsonData.data.last_name).to.be.a(\"string\");",
+              "  pm.expect(jsonData.data.avatar).to.be.a(\"string\");",
+              "",
+              "  pm.expect(jsonData.support.url).to.be.a(\"string\");",
+              "  pm.expect(jsonData.support.text).to.be.a(\"string\");",
+              "});",
+              "",
+              "",
+              "pm.test(\"Check response body\", () => {",
+              "    pm.expect(jsonData.data.id).to.eql(Number(pm.collectionVariables.get('id')));",
+              "    pm.expect(jsonData.data.email).to.eql(pm.collectionVariables.get('email'));",
+              "    pm.expect(jsonData.data.first_name).to.eql(pm.collectionVariables.get('first_name'));",
+              "    pm.expect(jsonData.data.last_name).to.eql(pm.collectionVariables.get('last_name'));",
+              "    pm.expect(jsonData.data.avatar).to.eql(pm.collectionVariables.get('avatar'));",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}users/2",
+          "host": [
+            "{{url}}users"
+          ],
+          "path": [
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Single user not found",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"Check response body\", function () {",
+              "    pm.expect(pm.response.text()).to.eql('{}');",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}users/23",
+          "host": [
+            "{{url}}users"
+          ],
+          "path": [
+            "23"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Single <Resource>",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "    pm.response.to.have.status(200);",
+              "    pm.response.to.have.jsonBody('data');",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  ",
+              "  pm.expect(jsonData.data.id).to.be.a(\"number\");",
+              "  pm.expect(jsonData.data.name).to.be.a(\"string\");",
+              "  pm.expect(jsonData.data.year).to.be.a(\"number\");",
+              "  pm.expect(jsonData.data.color).to.be.a(\"string\");",
+              "  pm.expect(jsonData.data.pantone_value).to.be.a(\"string\");",
+              "",
+              "  pm.expect(jsonData.support).to.be.a(\"object\");",
+              "});",
+              "",
+              "",
+              "pm.test(\"Check response body\", () => {",
+              "    pm.expect(jsonData.data.id).to.eql(Number(pm.collectionVariables.get('id')));",
+              "    pm.expect(jsonData.data.name).to.include(\"rose\");",
+              "    pm.expect(jsonData.data.year).to.eql(2001);",
+              "    pm.expect(jsonData.data.color).to.include(\"C7\");",
+              "    pm.expect(jsonData.data.pantone_value).to.include(\"17\"); ",
+              "",
+              "    pm.expect(jsonData.support.url).to.be.a(\"string\");",
+              "    pm.expect(jsonData.support.text).to.be.a(\"string\");",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}unknown/2",
+          "host": [
+            "{{url}}unknown"
+          ],
+          "path": [
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Single <Resource> not found",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"Check response body\", function () {",
+              "    pm.expect(pm.response.text()).to.eql('{}');",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}unknown/23",
+          "host": [
+            "{{url}}unknown"
+          ],
+          "path": [
+            "23"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"name\", \"morpheus\");",
+              "pm.collectionVariables.set(\"job\", \"leader\");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\",  () => {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  ",
+              "  pm.expect(jsonData.name).to.be.a(\"string\");",
+              "  pm.expect(jsonData.job).to.be.a(\"string\");",
+              "  pm.expect(jsonData.id).to.be.a(\"string\");",
+              "  pm.expect(jsonData.createdAt).to.be.a(\"string\");",
+              "",
+              "});",
+              "",
+              "pm.test(\"Check response body\",  () => {",
+              "    pm.expect(jsonData.name).to.eql(pm.collectionVariables.get(\"name\"));",
+              "    pm.expect(jsonData.job).to.eql(pm.collectionVariables.get(\"job\"));",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}users",
+          "host": [
+            "{{url}}users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"name\", \"morpheus\");",
+              "pm.collectionVariables.set(\"job\", \"zion resident\");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\",() => {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  pm.expect(jsonData.name).to.be.a(\"string\");",
+              "  pm.expect(jsonData.job).to.be.a(\"string\");",
+              "",
+              "",
+              "});",
+              "",
+              "pm.test(\"Check response body\",() => {",
+              "    pm.expect(jsonData.name).to.eql(pm.collectionVariables.get(\"name\"));",
+              "    pm.expect(jsonData.job).to.eql(pm.collectionVariables.get(\"job\"));",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}users/2",
+          "host": [
+            "{{url}}users"
+          ],
+          "path": [
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"name\", \"morpheus\");",
+              "pm.collectionVariables.set(\"job\", \"zion resident\");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  pm.expect(jsonData.name).to.be.a(\"string\");",
+              "  pm.expect(jsonData.job).to.be.a(\"string\");",
+              "",
+              "",
+              "});",
+              "",
+              "pm.test(\"Check response body\", () => {",
+              "    pm.expect(jsonData.name).to.eql(pm.collectionVariables.get(\"name\"));",
+              "    pm.expect(jsonData.job).to.eql(pm.collectionVariables.get(\"job\"));",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}users/2",
+          "host": [
+            "{{url}}users"
+          ],
+          "path": [
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{url}}users/2",
+          "host": [
+            "{{url}}users"
+          ],
+          "path": [
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register Successful",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"email\", \"eve.holt@reqres.in\");",
+              "pm.collectionVariables.set(\"password\", \"pistol\");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\",  () => {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  pm.expect(jsonData.id).to.be.a(\"number\");",
+              "  pm.expect(jsonData.token).to.be.a(\"string\");",
+              "});",
+              "",
+              "pm.test(\"Check response body\",  () => {",
+              "    pm.expect(jsonData.id).to.eql(4);",
+              "    pm.expect(jsonData.token).to.eql(\"QpwL5tke4Pnpja7X4\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\":\"{{email}}\",\n    \"password\":\" {{password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}register",
+          "host": [
+            "{{url}}register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register Unsuccessful",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"email\", \"sydney@fife\")"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  pm.expect(jsonData.error).to.be.a(\"string\");",
+              "});",
+              "",
+              "pm.test(\"Check response body\", () => {",
+              "    pm.expect(jsonData.error).to.eql(\"Missing password\");",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"{{email}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}register",
+          "host": [
+            "{{url}}register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Successful",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"email\", \"eve.holt@reqres.in\");",
+              "pm.collectionVariables.set(\"password\", \"cityslicka\");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  pm.expect(jsonData.token).to.be.a(\"string\");",
+              "});",
+              "",
+              "pm.test(\"Check response body\", () => {",
+              "    let jsonData = pm.response.json();",
+              "    pm.expect(jsonData.token).to.eql(\"QpwL5tke4Pnpja7X4\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\":\"{{email}}\",\n    \"password\":\" {{password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}login",
+          "host": [
+            "{{url}}login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Unsuccessful",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"email\", \"janet.weaver@reqres.in\")"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  pm.expect(jsonData.error).to.be.a(\"string\");",
+              "});",
+              "",
+              "pm.test(\"Check response body\", () => {",
+              "    pm.expect(jsonData.error).to.eql(\"Missing password\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"{{email}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}login",
+          "host": [
+            "{{url}}login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delayed Response",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "    pm.response.to.have.status(200);",
+              "    pm.response.to.have.jsonBody('data');",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Test data type of the response\", () => {",
+              "",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  pm.expect(jsonData.page).to.be.a(\"number\");",
+              "  pm.expect(jsonData.per_page).to.be.a(\"number\");",
+              "  pm.expect(jsonData.total).to.be.a(\"number\");",
+              "  pm.expect(jsonData.total_pages).to.be.a(\"number\");",
+              "  pm.expect(jsonData.data).to.be.an(\"array\");",
+              "  ",
+              "",
+              "  pm.expect(jsonData.support.url).to.be.a(\"string\");",
+              "  pm.expect(jsonData.support.text).to.be.a(\"string\");",
+              "});",
+              "",
+              "    ",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}users?delay=3",
+          "host": [
+            "{{url}}users"
+          ],
+          "query": [
+            {
+              "key": "delay",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "first_name",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "last_name",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "avatar",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "name",
+      "value": ""
+    },
+    {
+      "key": "job",
+      "value": ""
+    },
+    {
+      "key": "password",
+      "value": ""
+    },
+    {
+      "key": "email",
+      "value": ""
+    }
+  ]
 }

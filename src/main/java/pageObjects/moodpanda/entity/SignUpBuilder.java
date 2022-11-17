@@ -8,43 +8,6 @@ public class SignUpBuilder {
     private String password;
     private Boolean checkbox;
 
-    public static class Builder {
-        private SignUpBuilder signUpBuilder;
-
-        public Builder withFirstName(String firstName) {
-            signUpBuilder.firstName = firstName;
-            return this;
-        }
-
-        public Builder withLastName(String lastName) {
-            signUpBuilder.lastName = lastName;
-            return this;
-        }
-
-        public Builder withEmail(String email) {
-            signUpBuilder.email = email;
-            return this;
-        }
-
-        public Builder withPassword(String password) {
-            signUpBuilder.password = password;
-            return this;
-        }
-
-        public Builder withCheckbox(Boolean checkbox) {
-            signUpBuilder.checkbox = checkbox;
-            return this;
-        }
-
-        public Builder() {
-            this.signUpBuilder = new SignUpBuilder();
-        }
-
-        public SignUpBuilder build() {
-            return signUpBuilder;
-        }
-    }
-
     @Override
     public String toString() {
         return "SignUpBuilder{" +
@@ -74,5 +37,42 @@ public class SignUpBuilder {
 
     public Boolean getCheckbox() {
         return checkbox;
+    }
+
+    public static class Builder {
+        private SignUpBuilder signUpBuilder;
+
+        public Builder() {
+            this.signUpBuilder = new SignUpBuilder();
+        }
+
+        public Builder withFirstName(String firstName) {
+            signUpBuilder.firstName = firstName;
+            return this;
+        }
+
+        public Builder withLastName(String lastName) {
+            signUpBuilder.lastName = lastName;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            signUpBuilder.email = email;
+            return this;
+        }
+
+        public Builder withPassword(String password) {
+            signUpBuilder.password = password;
+            return this;
+        }
+
+        public Builder withCheckbox(Boolean checkbox) {
+            signUpBuilder.checkbox = checkbox;
+            return this;
+        }
+
+        public SignUpBuilder build() {
+            return signUpBuilder;
+        }
     }
 }

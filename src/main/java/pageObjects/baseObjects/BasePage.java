@@ -2,8 +2,8 @@ package pageObjects.baseObjects;
 
 import driver.UIElement;
 import lombok.extern.log4j.Log4j;
-import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -126,6 +126,7 @@ public abstract class BasePage {
         Select select = new Select(findElement(locator));
         select.selectByVisibleText(value);
     }
+
     protected void select(WebElement element, Integer index) {
         log.debug("Select by locator => " + element + " with index => " + index);
         Select select = new Select(element);
@@ -140,7 +141,7 @@ public abstract class BasePage {
 
     protected Integer countFoundElements(By element) {
         log.debug("Count elements :: " + element);
-        int count=  findElements(element).size();
+        int count = findElements(element).size();
         return count;
     }
 
@@ -161,6 +162,7 @@ public abstract class BasePage {
         //через map перебираем каждый элемент и переделываем его с типа webElement -> webElement.getText() в строку
         //map представляет собой стрим,через collect(Collectors.toList() переводим в лист
     }
+
     protected List<String> getTexts(List<WebElement> webElements) {
         log.debug("I'm get texts by  :: " + webElements);
         return webElements.stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
@@ -183,14 +185,14 @@ public abstract class BasePage {
 
     protected List<String> getSortDescendingByTexts(By locator) {
         List<String> sortDescendingList = getTexts(locator);
-        Collections.sort(sortDescendingList,Collections.reverseOrder());
+        Collections.sort(sortDescendingList, Collections.reverseOrder());
         log.debug("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
     }
 
     protected List<String> getSortDescendingByTexts(List<WebElement> webElements) {
         List<String> sortDescendingList = getTexts(webElements);
-        Collections.sort(sortDescendingList,Collections.reverseOrder());
+        Collections.sort(sortDescendingList, Collections.reverseOrder());
         log.debug("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
     }
@@ -306,7 +308,9 @@ public abstract class BasePage {
         }
     }
 
-    /** Для варианта реализации herokuapp.DataTablesPage-> */
+    /**
+     * Для варианта реализации herokuapp.DataTablesPage->
+     */
     protected List<String> sortAscending(By element) {
         List<WebElement> webElementsList = findElements(element);
         List<String> sortAscendingList = new ArrayList<>();

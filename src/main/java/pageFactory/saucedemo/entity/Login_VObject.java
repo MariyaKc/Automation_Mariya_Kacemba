@@ -1,8 +1,8 @@
 package pageFactory.saucedemo.entity;
 
-import pageObjects.baseObjects.BasePage;
-
-/** Value Object  pattern */
+/**
+ * Value Object  pattern
+ */
 public class Login_VObject {
 
     private String username;

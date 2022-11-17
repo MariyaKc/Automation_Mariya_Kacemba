@@ -1,8 +1,8 @@
 package lesson20;
 
+import io.restassured.response.Response;
 import lesson20.entity.request.UserRequest;
 import lesson20.entity.response.UserResponse;
-import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -43,7 +43,8 @@ public class Lesson20 {
         Assert.assertEquals(response.then().extract().response().jsonPath().getString("job"), "leader");
     }
 
-    @Test /** 2 вариант post запроса из файла */
+    @Test
+    /** 2 вариант post запроса из файла */
     public void post_test2() {
         Response response = given().header("Content-Type", "application/json").body(getJsonData("lesson20")).post("/users"); //лучше забирать тело запроса из файла
         response.then().assertThat().statusCode(201);
@@ -51,7 +52,8 @@ public class Lesson20 {
         Assert.assertEquals(response.then().extract().response().jsonPath().getString("job"), "leader");
     }
 
-    @Test /** 3 вариант post запроса POJO Object */
+    @Test
+    /** 3 вариант post запроса POJO Object */
     public void post_test3() {
         UserRequest user = new UserRequest() {{ //создает объект user и передает значения
             setName("morpheus");
@@ -65,7 +67,8 @@ public class Lesson20 {
         Assert.assertEquals(userResponse.getJob(), "leader");
     }
 
-    @Test /** валидация JSON схемы */
+    @Test
+    /** валидация JSON схемы */
     public void get_userList_Test() {
         Response response = given().get("/users?page=2");
         response.then().assertThat().statusCode(200);

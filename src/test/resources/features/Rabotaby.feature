@@ -20,9 +20,9 @@ Feature: RabotaBy tests
     Then I'm go to search page and check search criteria "QA Automation"
     And I'm check search result count more <count>
     Examples:
-      | region | count   |
-      | Брест  |  1      |
-      | Витебск|  1      |
-      | Гомель |  1      |
-      | Гродно |  1      |
-      | Могилев|  1      |
+      | region  | count |
+      | Брест   | 1     |
+      | Витебск | 1     |
+      | Гомель  | 1     |
+      | Гродно  | 1     |
+      | Могилев | 1     |

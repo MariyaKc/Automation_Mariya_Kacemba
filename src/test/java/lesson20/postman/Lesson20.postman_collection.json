@@ -1,323 +1,323 @@
 {
- 	"info": {
- 		"_postman_id": "83a59f1b-cfc2-4a3f-84af-ca4f708dbaa3",
- 		"name": "Lesson20",
- 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
- 		"_exporter_id": "22917201"
- 	},
- 	"item": [
- 		{
- 			"name": "Get user by id",
- 			"event": [
- 				{
- 					"listen": "test",
- 					"script": {
- 						"exec": [
- 							"pm.test(\"Status code is 200\", function () {",
- 							"    pm.response.to.have.status(200);",
- 							"});",
- 							"",
- 							"pm.test(\"Check that id = 2 \", function () {",
- 							"    let jsonData = pm.response.json();",
- 							"    pm.expect(jsonData.data.id).to.eql(Number(pm.collectionVariables.get('id')));",
- 							"});"
- 						],
- 						"type": "text/javascript"
- 					}
- 				}
- 			],
- 			"request": {
- 				"method": "GET",
- 				"header": [],
- 				"url": {
- 					"raw": "{{url}}/users?id={{id}}",
- 					"host": [
- 						"{{url}}"
- 					],
- 					"path": [
- 						"users"
- 					],
- 					"query": [
- 						{
- 							"key": "id",
- 							"value": "{{id}}"
- 						}
- 					]
- 				}
- 			},
- 			"response": []
- 		},
- 		{
- 			"name": "Get list users",
- 			"event": [
- 				{
- 					"listen": "test",
- 					"script": {
- 						"exec": [
- 							"pm.test(\"Status code is 200\", function () {",
- 							"    pm.response.to.have.status(200);",
- 							"});",
- 							"",
- 							"const jsonSchema = {",
- 							"    \"type\": \"object\",",
- 							"    \"required\": [",
- 							"        \"page\",",
- 							"        \"per_page\",",
- 							"        \"total\",",
- 							"        \"total_pages\",",
- 							"        \"data\",",
- 							"        \"support\"",
- 							"    ],",
- 							"    \"additionalProperties\": false,",
- 							"    \"properties\": {",
- 							"        \"page\": {",
- 							"            \"type\": \"integer\"",
- 							"        },",
- 							"        \"per_page\": {",
- 							"            \"type\": \"integer\"",
- 							"        },",
- 							"        \"total\": {",
- 							"            \"type\": \"integer\"",
- 							"        },",
- 							"        \"total_pages\": {",
- 							"            \"type\": \"integer\"",
- 							"        },",
- 							"        \"data\": {",
- 							"            \"type\": \"array\",",
- 							"            \"additionalItems\": true,",
- 							"            \"items\": {",
- 							"                \"type\": \"object\",",
- 							"                \"required\": [",
- 							"                    \"id\",",
- 							"                    \"email\",",
- 							"                    \"first_name\",",
- 							"                    \"last_name\",",
- 							"                    \"avatar\"",
- 							"                ],",
- 							"                \"additionalProperties\": false,",
- 							"                \"properties\": {",
- 							"                    \"id\": {",
- 							"                        \"type\": \"integer\"",
- 							"                    },",
- 							"                    \"email\": {",
- 							"                        \"type\": \"string\"",
- 							"                    },",
- 							"                    \"first_name\": {",
- 							"                        \"type\": \"string\"",
- 							"                    },",
- 							"                    \"last_name\": {",
- 							"                        \"type\": \"string\"",
- 							"                    },",
- 							"                    \"avatar\": {",
- 							"                        \"type\": \"string\"",
- 							"                    }",
- 							"                }",
- 							"            }",
- 							"        },",
- 							"        \"support\": {",
- 							"            \"type\": \"object\",",
- 							"            \"required\": [",
- 							"                \"url\",",
- 							"                \"text\"",
- 							"            ],",
- 							"            \"additionalProperties\": false,",
- 							"            \"properties\": {",
- 							"                \"url\": {",
- 							"                    \"type\": \"string\"",
- 							"                },",
- 							"                \"text\": {",
- 							"                    \"type\": \"string\"",
- 							"                }",
- 							"            }",
- 							"        }",
- 							"    }",
- 							"}",
- 							"",
- 							"pm.test('Schema is valid', function () {",
- 							"    pm.response.to.have.jsonSchema(jsonSchema)",
- 							"});",
- 							""
- 						],
- 						"type": "text/javascript"
- 					}
- 				}
- 			],
- 			"request": {
- 				"method": "GET",
- 				"header": [],
- 				"url": {
- 					"raw": "{{url}}/users?page=1",
- 					"host": [
- 						"{{url}}"
- 					],
- 					"path": [
- 						"users"
- 					],
- 					"query": [
- 						{
- 							"key": "page",
- 							"value": "1"
- 						}
- 					]
- 				}
- 			},
- 			"response": []
- 		},
- 		{
- 			"name": "Get not found user",
- 			"event": [
- 				{
- 					"listen": "test",
- 					"script": {
- 						"exec": [
- 							"pm.test(\"Status code is 404\", function () {",
- 							"    pm.response.to.have.status(404);",
- 							"});",
- 							""
- 						],
- 						"type": "text/javascript"
- 					}
- 				}
- 			],
- 			"request": {
- 				"method": "GET",
- 				"header": [],
- 				"url": {
- 					"raw": "{{url}}/users?id=1000",
- 					"host": [
- 						"{{url}}"
- 					],
- 					"path": [
- 						"users"
- 					],
- 					"query": [
- 						{
- 							"key": "id",
- 							"value": "1000"
- 						}
- 					]
- 				}
- 			},
- 			"response": []
- 		},
- 		{
- 			"name": "Create user",
- 			"event": [
- 				{
- 					"listen": "test",
- 					"script": {
- 						"exec": [
- 							"pm.test(\"Status code is 201\", function () {",
- 							"    pm.response.to.have.status(201);",
- 							"});",
- 							"",
- 							"pm.test(\"Check response body\", function () {",
- 							"    let jsonData = pm.response.json();",
- 							"    pm.expect(jsonData.name).to.eql(pm.collectionVariables.get(\"name\"));",
- 							"    pm.expect(jsonData.job).to.eql(pm.collectionVariables.get(\"job\"));",
- 							"});",
- 							"",
- 							"const jsonSchema = {",
- 							"    \"type\": \"object\",",
- 							"    \"required\": [",
- 							"        \"name\",",
- 							"        \"job\",",
- 							"        \"id\",",
- 							"        \"createdAt\"",
- 							"    ],",
- 							"    \"additionalProperties\": false,",
- 							"    \"properties\": {",
- 							"        \"name\": {",
- 							"            \"type\": \"string\"",
- 							"        },",
- 							"        \"job\": {",
- 							"            \"type\": \"string\"",
- 							"        },",
- 							"        \"id\": {",
- 							"            \"type\": \"string\"",
- 							"        },",
- 							"        \"createdAt\": {",
- 							"            \"type\": \"string\"",
- 							"        }",
- 							"    }",
- 							"}",
- 							"",
- 							"pm.test('Schema is valid', function () {",
- 							"    pm.response.to.have.jsonSchema(jsonSchema)",
- 							"});",
- 							""
- 						],
- 						"type": "text/javascript"
- 					}
- 				},
- 				{
- 					"listen": "prerequest",
- 					"script": {
- 						"exec": [
- 							"pm.collectionVariables.set(\"name\", \"morpheus\")",
- 							"pm.collectionVariables.set(\"job\", \"leader\")"
- 						],
- 						"type": "text/javascript"
- 					}
- 				}
- 			],
- 			"request": {
- 				"method": "POST",
- 				"header": [],
- 				"body": {
- 					"mode": "raw",
- 					"raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
- 					"options": {
- 						"raw": {
- 							"language": "json"
- 						}
- 					}
- 				},
- 				"url": {
- 					"raw": "{{url}}/users",
- 					"host": [
- 						"{{url}}"
- 					],
- 					"path": [
- 						"users"
- 					]
- 				}
- 			},
- 			"response": []
- 		}
- 	],
- 	"event": [
- 		{
- 			"listen": "prerequest",
- 			"script": {
- 				"type": "text/javascript",
- 				"exec": [
- 					""
- 				]
- 			}
- 		},
- 		{
- 			"listen": "test",
- 			"script": {
- 				"type": "text/javascript",
- 				"exec": [
- 					""
- 				]
- 			}
- 		}
- 	],
- 	"variable": [
- 		{
- 			"key": "id",
- 			"value": "",
- 			"type": "string"
- 		},
- 		{
- 			"key": "name",
- 			"value": ""
- 		},
- 		{
- 			"key": "job",
- 			"value": ""
- 		}
- 	]
+  "info": {
+    "_postman_id": "83a59f1b-cfc2-4a3f-84af-ca4f708dbaa3",
+    "name": "Lesson20",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22917201"
+  },
+  "item": [
+    {
+      "name": "Get user by id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Check that id = 2 \", function () {",
+              "    let jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.id).to.eql(Number(pm.collectionVariables.get('id')));",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/users?id={{id}}",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "users"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "{{id}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get list users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const jsonSchema = {",
+              "    \"type\": \"object\",",
+              "    \"required\": [",
+              "        \"page\",",
+              "        \"per_page\",",
+              "        \"total\",",
+              "        \"total_pages\",",
+              "        \"data\",",
+              "        \"support\"",
+              "    ],",
+              "    \"additionalProperties\": false,",
+              "    \"properties\": {",
+              "        \"page\": {",
+              "            \"type\": \"integer\"",
+              "        },",
+              "        \"per_page\": {",
+              "            \"type\": \"integer\"",
+              "        },",
+              "        \"total\": {",
+              "            \"type\": \"integer\"",
+              "        },",
+              "        \"total_pages\": {",
+              "            \"type\": \"integer\"",
+              "        },",
+              "        \"data\": {",
+              "            \"type\": \"array\",",
+              "            \"additionalItems\": true,",
+              "            \"items\": {",
+              "                \"type\": \"object\",",
+              "                \"required\": [",
+              "                    \"id\",",
+              "                    \"email\",",
+              "                    \"first_name\",",
+              "                    \"last_name\",",
+              "                    \"avatar\"",
+              "                ],",
+              "                \"additionalProperties\": false,",
+              "                \"properties\": {",
+              "                    \"id\": {",
+              "                        \"type\": \"integer\"",
+              "                    },",
+              "                    \"email\": {",
+              "                        \"type\": \"string\"",
+              "                    },",
+              "                    \"first_name\": {",
+              "                        \"type\": \"string\"",
+              "                    },",
+              "                    \"last_name\": {",
+              "                        \"type\": \"string\"",
+              "                    },",
+              "                    \"avatar\": {",
+              "                        \"type\": \"string\"",
+              "                    }",
+              "                }",
+              "            }",
+              "        },",
+              "        \"support\": {",
+              "            \"type\": \"object\",",
+              "            \"required\": [",
+              "                \"url\",",
+              "                \"text\"",
+              "            ],",
+              "            \"additionalProperties\": false,",
+              "            \"properties\": {",
+              "                \"url\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"text\": {",
+              "                    \"type\": \"string\"",
+              "                }",
+              "            }",
+              "        }",
+              "    }",
+              "}",
+              "",
+              "pm.test('Schema is valid', function () {",
+              "    pm.response.to.have.jsonSchema(jsonSchema)",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/users?page=1",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "users"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get not found user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/users?id=1000",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "users"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1000"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(\"Check response body\", function () {",
+              "    let jsonData = pm.response.json();",
+              "    pm.expect(jsonData.name).to.eql(pm.collectionVariables.get(\"name\"));",
+              "    pm.expect(jsonData.job).to.eql(pm.collectionVariables.get(\"job\"));",
+              "});",
+              "",
+              "const jsonSchema = {",
+              "    \"type\": \"object\",",
+              "    \"required\": [",
+              "        \"name\",",
+              "        \"job\",",
+              "        \"id\",",
+              "        \"createdAt\"",
+              "    ],",
+              "    \"additionalProperties\": false,",
+              "    \"properties\": {",
+              "        \"name\": {",
+              "            \"type\": \"string\"",
+              "        },",
+              "        \"job\": {",
+              "            \"type\": \"string\"",
+              "        },",
+              "        \"id\": {",
+              "            \"type\": \"string\"",
+              "        },",
+              "        \"createdAt\": {",
+              "            \"type\": \"string\"",
+              "        }",
+              "    }",
+              "}",
+              "",
+              "pm.test('Schema is valid', function () {",
+              "    pm.response.to.have.jsonSchema(jsonSchema)",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"name\", \"morpheus\")",
+              "pm.collectionVariables.set(\"job\", \"leader\")"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/users",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "name",
+      "value": ""
+    },
+    {
+      "key": "job",
+      "value": ""
+    }
+  ]

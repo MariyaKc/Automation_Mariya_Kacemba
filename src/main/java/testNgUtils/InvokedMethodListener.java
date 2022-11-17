@@ -8,7 +8,10 @@ import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
 import static driver.DriverManager.getDriver;
-/**Listener для скриншотов в Allure Reports*/
+
+/**
+ * Listener для скриншотов в Allure Reports
+ */
 public class InvokedMethodListener implements IInvokedMethodListener {
 
     @Override

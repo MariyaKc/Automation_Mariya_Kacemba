@@ -1,6 +1,5 @@
 package pageFactory.saucedemo;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,25 +10,25 @@ import static driver.SimpleDriver.getWebDriver;
 
 public class HeaderPage extends BasePage {
 
-    @FindBy (className = "shopping_cart_link")
+    @FindBy(className = "shopping_cart_link")
     WebElement basketBtn;
 
-    @FindBy (id = "react-burger-menu-btn")
+    @FindBy(id = "react-burger-menu-btn")
     WebElement navigationBtn;
 
-    @FindBy (id = "inventory_sidebar_link")
+    @FindBy(id = "inventory_sidebar_link")
     WebElement allItemsBtn;
 
-    @FindBy (id = "about_sidebar_link")
+    @FindBy(id = "about_sidebar_link")
     WebElement aboutBtn;
 
-    @FindBy (id = "logout_sidebar_link")
+    @FindBy(id = "logout_sidebar_link")
     WebElement logoutBtn;
 
-    @FindBy (id = "reset_sidebar_link")
+    @FindBy(id = "reset_sidebar_link")
     WebElement resetAppBtn;
 
-    public HeaderPage(){
+    public HeaderPage() {
         PageFactory.initElements(driver, this);
     }
 

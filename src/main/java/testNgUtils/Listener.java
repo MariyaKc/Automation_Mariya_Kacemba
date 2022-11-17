@@ -7,7 +7,9 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 import propertyHelper.PropertyReader;
 
-/**Listener для TestNG Report и для получения параметра для работы с property*/
+/**
+ * Listener для TestNG Report и для получения параметра для работы с property
+ */
 public class Listener implements ITestListener {
 
     @SneakyThrows

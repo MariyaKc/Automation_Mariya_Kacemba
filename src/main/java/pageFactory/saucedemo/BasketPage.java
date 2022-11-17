@@ -15,13 +15,13 @@ import static driver.SimpleDriver.getWebDriver;
 
 public class BasketPage extends BasePage {
 
-    @FindBy (id ="checkout")
+    @FindBy(id = "checkout")
     WebElement checkoutBtn;
 
-    @FindBy (id ="continue-shopping")
+    @FindBy(id = "continue-shopping")
     WebElement continueShoppingBtn;
 
-    @FindBy (xpath ="//span[@class='title']")
+    @FindBy(xpath = "//span[@class='title']")
     WebElement title;
 
     @FindBys({
@@ -29,7 +29,7 @@ public class BasketPage extends BasePage {
     })
     List<WebElement> allProductName;
 
-    @FindBy (xpath ="//button[contains(text(),'Remove')]")
+    @FindBy(xpath = "//button[contains(text(),'Remove')]")
     WebElement removeBtn;
 
     public BasketPage() {

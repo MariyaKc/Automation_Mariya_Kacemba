@@ -12,8 +12,8 @@ public class SignUp {
     private String password;
     private Boolean checkbox;
 
-    public static class SignUpBuilder{
-        public SignUpBuilder(){
+    public static class SignUpBuilder {
+        public SignUpBuilder() {
         }
     }
 }

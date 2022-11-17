@@ -10,7 +10,7 @@ public class Checkout_test extends BaseTest {
     @BeforeClass
     public void login() {
         new LoginPage()
-                .open()
+                .open("https://www.saucedemo.com/")
                 .enterUsername("standard_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();

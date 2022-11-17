@@ -1,6 +1,5 @@
 package lesson13;
 
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageFactory.moodpanda.HomePage;
 import pageObjects.baseObjects.BaseTest;
@@ -8,6 +7,7 @@ import pageObjects.moodpanda.NavigationPage;
 import pageObjects.moodpanda.SignUpPage;
 import pageObjects.moodpanda.entity.SignUp;
 import pageObjects.moodpanda.entity.SignUpBuilder;
+
 public class SignUpValueObject_Test extends BaseTest {
 
     @Test

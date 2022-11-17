@@ -1,4 +1,5 @@
 package lesson20.entity.response;
+
 import lombok.Data;
 
 @Data

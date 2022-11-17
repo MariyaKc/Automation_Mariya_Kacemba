@@ -1,8 +1,6 @@
 package task_11_12_14;
 
-import io.qameta.allure.Step;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.FooterPage;
@@ -11,7 +9,7 @@ import task_11_12_14.steps.LoginSteps;
 public class SD_SocialMedia_Test extends BaseTest {
 
     @BeforeMethod
-    public void preconditions(){
+    public void preconditions() {
         get(LoginSteps.class).login();
     }
 

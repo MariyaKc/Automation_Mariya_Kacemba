@@ -11,7 +11,7 @@ public class Lesson7_1 extends BaseTest {
     public void loginTest1() {
         //авторизация
         LoginPage loginPage = new LoginPage(); //объект класса LoginPage
-        loginPage.open();
+        loginPage.open("https://www.saucedemo.com/");
         loginPage.enterUsername("standard_user");
         loginPage.enterPassword("secret_sauce");
         loginPage.clickLoginBtn();

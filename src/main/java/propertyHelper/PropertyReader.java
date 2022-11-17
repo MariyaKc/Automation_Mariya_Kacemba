@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+
 @Log4j
 public class PropertyReader {
     private static Properties properties;

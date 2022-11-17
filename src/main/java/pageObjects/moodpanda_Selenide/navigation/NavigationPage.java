@@ -11,13 +11,13 @@ public class NavigationPage extends SelenideBasePage {
     private final SelenideElement loginBtn = $(By.partialLinkText("Login"));
     private final SelenideElement title = $(By.xpath("//p[contains(@class,'title is-size-1')]"));
 
-    public NavigationPage clickSignUp(){
-       click(signUpBtn);
+    public NavigationPage clickSignUp() {
+        click(signUpBtn);
         return this;
     }
 
-    public NavigationPage clickLogin(){
-       click(loginBtn);
+    public NavigationPage clickLogin() {
+        click(loginBtn);
         return this;
     }
 
@@ -32,7 +32,7 @@ public class NavigationPage extends SelenideBasePage {
     }
 
     public NavigationPage verifyTitle(String title) {
-        if(this.title.exists()==true) {
+        if (this.title.exists() == true) {
             verifyText(this.title, title);
         }
         return this;
@@ -41,9 +41,9 @@ public class NavigationPage extends SelenideBasePage {
     public NavigationPage goToItemAndVerify(LinksEnum sort) {
         switch (sort) {
             case Home:
-               clickNavigationItem(LinksEnum.Home);
-               verifyPageUri("moodpanda.com");
-               verifyTitle("MoodPanda");
+                clickNavigationItem(LinksEnum.Home);
+                verifyPageUri("moodpanda.com");
+                verifyTitle("MoodPanda");
                 break;
             case What:
                 clickNavigationItem(LinksEnum.What);
@@ -69,7 +69,9 @@ public class NavigationPage extends SelenideBasePage {
     }
 
 
-    /**for cucumber test */
+    /**
+     * for cucumber test
+     */
 
     private SelenideElement getNavigationLink(String linkText) {
         return $(By.partialLinkText(linkText));

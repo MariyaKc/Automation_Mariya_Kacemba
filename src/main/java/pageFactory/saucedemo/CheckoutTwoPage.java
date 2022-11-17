@@ -1,6 +1,5 @@
 package pageFactory.saucedemo;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -34,6 +33,7 @@ public class CheckoutTwoPage extends BasePage {
         Assert.assertTrue(waitVisibilityOfElements(finishBtn, cancelBtn));
         return this;
     }
+
     public CheckoutTwoPage verifyPageTitle() {
         Assert.assertEquals(getText(title), "CHECKOUT: OVERVIEW");
         return this;

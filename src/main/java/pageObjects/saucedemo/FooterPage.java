@@ -48,7 +48,7 @@ public class FooterPage extends BasePage {
     }
 
     public FooterPage verifyPageLinkedin() {
-        Assert.assertTrue(getDriver().getCurrentUrl().contains("linkedin.com"),"You must be logged in Linkedin to view this page.");
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("linkedin.com"), "You must be logged in Linkedin to view this page.");
         Assert.assertEquals(getText(title), "Join LinkedIn");
         return this;
     }

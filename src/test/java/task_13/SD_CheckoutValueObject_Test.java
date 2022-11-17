@@ -13,16 +13,16 @@ public class SD_CheckoutValueObject_Test extends BaseTest {
 
     @BeforeMethod
     @Parameters("url")
-    public void precondition(String url){
-        loginPage= new LoginPage();
+    public void precondition(String url) {
+        loginPage = new LoginPage();
         loginPage.open(url);
     }
 
     @Test(description = "Test (Value Object) with standard user data {username}, {password}")
     @Parameters({"username", "password", "firstname", "lastname", "zipcode"})
-    public void CheckoutTest(String username, String password, String firstname, String lastname, String zipcode){
+    public void CheckoutTest(String username, String password, String firstname, String lastname, String zipcode) {
 
-        Login_VObject login_VObject = new Login_VObject(){{
+        Login_VObject login_VObject = new Login_VObject() {{
             setUsername(username);
             setPassword(password);
         }};
@@ -35,7 +35,7 @@ public class SD_CheckoutValueObject_Test extends BaseTest {
         new HeaderPage().clickBasketBtn();
         new BasketPage().clickCheckout();
 
-        Checkout_VObject checkout_vObject  = new Checkout_VObject() {{
+        Checkout_VObject checkout_vObject = new Checkout_VObject() {{
             setFirstName(firstname);
             setLastName(lastname);
             setZipCode(zipcode);

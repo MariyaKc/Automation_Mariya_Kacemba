@@ -1,9 +1,10 @@
 package pageFactory.saucedemo.entity;
 
-import pageObjects.baseObjects.BasePage;
-/** Value Object pattern */
+/**
+ * Value Object pattern
+ */
 public class Checkout_VObject {
-    private String  firstName;
+    private String firstName;
     private String lastName;
     private String zipCode;
 

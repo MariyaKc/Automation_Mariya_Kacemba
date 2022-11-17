@@ -19,7 +19,7 @@
       "properties": {
         "id": {
           "type": "integer",
-          "maximum":10
+          "maximum": 10
         },
         "name": {
           "type": "string",
@@ -27,7 +27,7 @@
         },
         "year": {
           "type": "integer",
-          "minimum":2001
+          "minimum": 2001
         },
         "color": {
           "type": "string"

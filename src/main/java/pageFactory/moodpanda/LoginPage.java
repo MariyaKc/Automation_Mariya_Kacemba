@@ -22,7 +22,7 @@ public class LoginPage extends BasePage {
     WebElement notification;
 
     public LoginPage() {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
     public LoginPage enterPassword(String password) {
@@ -40,7 +40,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage verifyErrorMessage(String message){
+    public LoginPage verifyErrorMessage(String message) {
         Assert.assertEquals(getText(notification), message);
         return this;
     }

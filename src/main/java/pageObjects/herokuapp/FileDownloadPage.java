@@ -8,6 +8,7 @@ import pageObjects.baseObjects.BasePage;
 
 import java.io.File;
 import java.util.List;
+
 @Log4j
 public class FileDownloadPage extends BasePage {
 

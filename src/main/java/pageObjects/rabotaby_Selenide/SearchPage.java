@@ -5,7 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import pageObjects.baseObjects.SelenideBasePage;
-import static com.codeborne.selenide.Selenide.*;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
 
@@ -29,8 +31,8 @@ public class SearchPage extends SelenideBasePage {
     }
 
     public SearchPage verifySearchCount(int countForFeature) {
-        if (headerCountOfSearch.getText().isEmpty()==false) {
-        int count = Integer.parseInt(headerCountOfSearch.getText().substring(1, 4).trim());
+        if (headerCountOfSearch.getText().isEmpty() == false) {
+            int count = Integer.parseInt(headerCountOfSearch.getText().substring(1, 4).trim());
             Assert.assertTrue(count >= countForFeature, "The number of vacancies is less than transferred from the feature file");
             System.out.println("I'm count :: " + count);
         } else {

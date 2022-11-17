@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Lesson 12" thread-count="2" parallel="tests">
 
-    <test name="Product Test lesson 12" >
+    <test name="Product Test lesson 12">
         <classes>
             <class name="lesson11.Login_Test"/>
             <class name="lesson12.Lesson12_Test"/>

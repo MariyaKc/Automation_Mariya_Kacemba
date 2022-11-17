@@ -26,9 +26,10 @@ public class CheckoutOnePage extends BasePage {
     }
 
     public CheckoutOnePage verifyCheckoutOne() {
-        waitVisibilityOfElements(firstName, lastName, zipCode,continueBtn);
+        waitVisibilityOfElements(firstName, lastName, zipCode, continueBtn);
         return this;
     }
+
     public CheckoutOnePage verifyPageTitle() {
         Assert.assertEquals(getText(title), "CHECKOUT: YOUR INFORMATION");
         return this;
@@ -50,7 +51,7 @@ public class CheckoutOnePage extends BasePage {
         return this;
     }
 
-    public CheckoutOnePage enterData(Checkout checkout){
+    public CheckoutOnePage enterData(Checkout checkout) {
         enterFirstName(checkout.getFirstName());
         enterLastName(checkout.getLastName());
         enterZipCode(checkout.getZipCode());
